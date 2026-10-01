@@ -7,10 +7,10 @@
 <meta name="description" content="سعي، مساحة لاكتشاف الفرص وجهات التعلم وتجارب الطلاب.">
 <title>سعي | مساحة لخطوتك القادمة</title>
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="styles.css">
-<script defer src="content.js">
+<link rel="stylesheet" href="styles.css?v=20261001-opportunities">
+<script defer src="content.js?v=20261001-opportunities">
 </script>
-<script defer src="app.js">
+<script defer src="app.js?v=20261001-opportunities">
 </script>
 </head>
 <body>
@@ -77,19 +77,24 @@
 <span class="overline">خطوة خارج قاعة الدراسة</span>
 <h1 tabindex="-1">فرص تستحق الاستكشاف</h1>
 </div>
-<button class="text-link" data-action="all">عرض كل المجالات <span data-icon="arrow">
-</span>
-</button>
 </div>
-<section class="interests" aria-label="استكشف باهتمامك">
-<span>ما الذي يلهمك؟</span>
-<div id="interest-chips" class="chips">
+<p class="opportunity-intro">كل الفرص أمامك. استكشفها بحرية، أو اختر المجال ونوع المشاركة الذي يناسبك.</p>
+<div class="opportunity-tools">
+<label class="opportunity-search">ابحث عن فرصة<input id="opportunity-search" type="search" placeholder="مثل: هدر الغذاء، تصميم، بحث…" autocomplete="off"></label>
+<label>نوع الفرصة<select id="opportunity-type"><option value="">جميع الأنواع</option></select></label>
+<label>طريقة المشاركة<select id="opportunity-mode"><option value="">جميع الطرق</option></select></label>
 </div>
+<section class="interests" aria-label="تصفية حسب المجال">
+<span>المجال</span><div id="interest-chips" class="chips"></div>
 </section>
-<p class="demo-note">محتوى توضيحي لتجربة التصميم؛ هذه البطاقات ليست إعلانات مفتوحة للتسجيل.</p>
-<div class="card-grid" id="opportunity-grid">
-</div>
-<p class="empty" id="empty-opportunities" hidden>لا يوجد مثال بهذا الاهتمام الآن. جرّب مجالًا آخر أو اعرض الجميع.</p>
+<aside class="opportunity-assistant" aria-labelledby="assistant-title">
+<div><h2 id="assistant-title">تحتاج مساعدة في الاختيار؟ <span class="badge">قريبًا</span></h2><p>أخبر المساعد باهتماماتك وأهدافك ليقترح فرصًا ويشرح لك سبب اختيارها. تظل جميع الفرص متاحة لاستكشافك.</p></div>
+<button class="button outline" data-action="opportunity-assistant">ساعدني أختار <span data-icon="spark"></span></button>
+</aside>
+<div class="opportunity-results"><p id="opportunity-count" role="status" aria-live="polite" aria-atomic="true"></p><button class="text-link" data-action="all">مسح الفلاتر وعرض الجميع</button></div>
+<p class="demo-note">محتوى توضيحي لتجربة التصميم؛ هذه البطاقات ليست إعلانات مفتوحة للتسجيل. قد تنتمي الفرصة إلى أكثر من مجال؛ راجع شروط المشاركة في تفاصيلها.</p>
+<div class="card-grid" id="opportunity-grid"></div>
+<p class="empty" id="empty-opportunities" hidden>لا توجد فرص تطابق بحثك والفلاتر المختارة. جرّب كلمات أخرى أو امسح الفلاتر لعرض الجميع.</p>
 </section>
 </div>
 <div id="learning-page" data-page="learning" class="content-area directory-page" hidden>

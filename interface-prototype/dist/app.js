@@ -8,17 +8,33 @@ const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
 document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));
 let previewAccount=false;
 let saved = new Set(); let activeInterest='الكل'; let toastTimer;
+const searchInput=document.querySelector('#opportunity-search');
+const typeInput=document.querySelector('#opportunity-type');
+const modeInput=document.querySelector('#opportunity-mode');
+const normalizeSearch=value=>String(value).normalize('NFKC').replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').toLowerCase();
+function resetOpportunityFilters(){activeInterest='الكل';searchInput.value='';typeInput.value='';modeInput.value='';renderOpportunities();}
 function toast(message){const el=document.querySelector('#toast');el.textContent=message;el.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.hidden=true,2800)}
 function renderOpportunities(){
- const items=data.opportunities.filter(o=>activeInterest==='الكل'||o.category===activeInterest||(activeInterest==='التقنية'&&o.id==='health')||(activeInterest==='التصميم'&&o.id==='health'));
- document.querySelector('#opportunity-grid').innerHTML=items.map(o=>`<article class="card"><div class="card-top"><span class="category-icon ${esc(o.color)}">${icon(o.icon)}</span><button disabled title="معاينة فقط — الحفظ غير متاح" class="icon-button save-button ${saved.has(o.id)?'saved':''}" data-save="${esc(o.id)}" aria-label="${saved.has(o.id)?'إلغاء حفظ':'حفظ'} ${esc(o.title)}" aria-pressed="${saved.has(o.id)}">${icon('bookmark')}</button></div><span class="badge">${esc(o.category)}</span><h3>${esc(o.title)}</h3><p>${esc(o.description)}</p><div class="card-meta"><span>${icon('globe')}${esc(o.mode)}</span><span>${esc(o.type)}</span></div><div class="card-bottom"><span>مثال عرض · بلا موعد فعلي</span><button class="text-link" data-detail="${esc(o.id)}">التفاصيل ${icon('arrow')}</button></div></article>`).join('');
+ const words=normalizeSearch(searchInput.value).trim().split(/\s+/).filter(Boolean);
+ const items=data.opportunities.filter(o=>{
+  const fields=o.fields||[o.category];
+  const text=normalizeSearch([o.title,o.description,...fields,o.type,o.mode].join(' '));
+  return (activeInterest==='الكل'||fields.includes(activeInterest))&&(!typeInput.value||o.type===typeInput.value)&&(!modeInput.value||o.mode===modeInput.value)&&words.every(word=>text.includes(word));
+ });
+ document.querySelector('#opportunity-count').textContent='عرض '+items.length+' من '+data.opportunities.length+' فرص توضيحية';
+ document.querySelector('#opportunity-grid').innerHTML=items.map(o=>`<article class="card"><div class="card-top"><span class="category-icon ${esc(o.color)}">${icon(o.icon)}</span><button disabled title="معاينة فقط — الحفظ غير متاح" class="icon-button save-button ${saved.has(o.id)?'saved':''}" data-save="${esc(o.id)}" aria-label="${saved.has(o.id)?'إلغاء حفظ':'حفظ'} ${esc(o.title)}" aria-pressed="${saved.has(o.id)}">${icon('bookmark')}</button></div><div class="opportunity-tags">${(o.fields||[o.category]).map(field=>`<span class="badge">${esc(field)}</span>`).join('')}</div><h3>${esc(o.title)}</h3><p>${esc(o.description)}</p><div class="card-meta"><span>${icon('globe')}${esc(o.mode)}</span><span>${esc(o.type)}</span></div><div class="card-bottom"><span>مثال عرض · بلا موعد فعلي</span><button class="text-link" data-detail="${esc(o.id)}">التفاصيل ${icon('arrow')}</button></div></article>`).join('');
  document.querySelector('#empty-opportunities').hidden=items.length>0;
  const count=document.querySelector('#saved-count');count.textContent=saved.size;count.hidden=saved.size===0;
  document.querySelectorAll('.chip').forEach(c=>{c.classList.toggle('active',c.dataset.interest===activeInterest);c.setAttribute('aria-pressed',String(c.dataset.interest===activeInterest))});
 }
-document.querySelector('#interest-chips').innerHTML=data.interests.map(t=>`<button class="chip" data-interest="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join('');
+document.querySelector('#interest-chips').innerHTML=data.interests.map(t=>`<button class="chip" data-interest="${esc(t)}" aria-pressed="false">${esc(t==='الكل'?'جميع المجالات':t)}</button>`).join('');
 document.querySelector('#provider-grid').innerHTML=data.providers.map(p=>`<article class="provider-card"><span class="provider-monogram">${esc(p.mark)}</span><div><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><button class="text-link" data-provider="${esc(p.id)}">عن الجهة ${icon('arrow')}</button></div></article>`).join('');
 document.querySelector('#experience-grid').innerHTML=data.experiences.map(e=>`<article class="card experience-card"><div class="quote" aria-hidden="true">“</div><h3>${esc(e.title)}</h3><p>${esc(e.description)}</p><div class="experience-author"><span class="avatar">${esc(e.initial)}</span><span>${esc(e.field)} · نص توضيحي</span></div><button class="text-link" data-experience="${esc(e.id)}">اقرأ التجربة ${icon('arrow')}</button></article>`).join('');
+for(const [input,key] of [[typeInput,'type'],[modeInput,'mode']]){
+ [...new Set(data.opportunities.map(o=>o[key]))].forEach(value=>input.add(new Option(value,value)));
+ input.addEventListener('change',renderOpportunities);
+}
+searchInput.addEventListener('input',renderOpportunities);
 const dialog=document.querySelector('#detail-dialog');
 function show(title,body){document.querySelector('#dialog-title').textContent=title;document.querySelector('#dialog-body').innerHTML=body;if(!dialog.open)dialog.showModal();}
 function showText(title,text){show(title,text.split('\n\n').map(p=>`<p>${esc(p)}</p>`).join(''))}
@@ -42,7 +58,8 @@ document.addEventListener('click',event=>{
  const action=el.dataset.action;
  if(action==='preview-account'){setPreviewAccount(true);location.hash='home';route();return;}
  if(action==='exit-preview'){setPreviewAccount(false);location.hash='home';route();return;}
- if(action==='all'){activeInterest='الكل';renderOpportunities();}
+ if(action==='all')resetOpportunityFilters();
+ if(action==='opportunity-assistant')showText('ساعدني أختار — قريبًا','المساعد الذكي غير متاح بعد. عند تفعيله ستصف اهتماماتك وأهدافك، ويقترح فرصًا من دليل سعي مع توضيح السبب وشروط المشاركة.\n\nيمكنك الآن استخدام البحث والفلاتر، أو استكشاف جميع الفرص بنفسك.');
  if(action==='saved')savedDialog();
  if(action==='contribute')showText('لكل تجربة مساحة','ستتمكن هنا من كتابة تجربتك أو تسجيلها صوتيًا عبر أسئلة موجهة، ثم مراجعة النص واعتماده قبل النشر.\n\nهذه النسخة لتجربة شكل الصفحات فقط، ولا تسجل صوتًا أو تنشر محتوى.');
  if(action==='signup')showText('إنشاء حساب','صفحة إنشاء الحساب تأتي في مرحلة ربط المنصة بالحسابات. حاليًا يمكنك استكشاف الرئيسية وتجربة البطاقات دون تسجيل.');
