@@ -1,0 +1,16 @@
+/* غيّري هذه القيم لتغيير هوية الموقع كلها. */
+:root {
+  --green: #174d3c;
+  --green-dark: #113b2f;
+  --green-soft: #eaf2ec;
+  --accent: #b7cf94;
+  --paper: #fbfcf9;
+  --white: #fff;
+  --ink: #213d32;
+  --muted: #6b786f;
+  --line: #e3e9e2;
+  --peach: #f4eadc;
+  --radius: 20px;
+  --font: "Tahoma", "Arial", sans-serif;
+  --width: 1180px;
+}

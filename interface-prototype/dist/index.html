@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#174d3c">
+<meta name="description" content="تصور تجريبي لسعي، مبادرة طلابية مستقلة لاكتشاف الفرص وجهات التعلم وتجارب الطلاب.">
+<title>سعي | مساحة لخطوتك القادمة</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="styles.css">
+<script defer src="content.js">
+</script>
+<script defer src="wheel.js"></script>
+<script defer src="app.js">
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="header">
+<div class="container header-inner">
+<a href="#home" class="brand" aria-label="سعي الرئيسية">سعي<span class="brand-dot">
+</span>
+</a>
+<nav class="desktop-nav" aria-label="التنقل الرئيسي">
+<a href="#home" data-nav="home">الرئيسية</a>
+<a href="#opportunities" data-nav="opportunities">الفرص</a>
+<a href="#learning" data-nav="learning">جهات التعلم</a>
+<a href="#experiences" data-nav="experiences">تجارب الطلاب</a>
+</nav>
+<div class="header-actions">
+<button class="icon-button" data-action="saved" aria-label="المحفوظات">
+<span data-icon="bookmark">
+</span>
+<span id="saved-count" class="count" hidden>0</span>
+</button>
+<a href="#profile" data-nav="profile" id="profile-link" class="profile-link" hidden><span class="profile-mini-avatar" aria-hidden="true">أ</span><span>أحمد · ملفي</span></a>
+<button class="text-link preview-entry" data-action="preview-account" data-guest-only>معاينة حساب طالب</button>
+<a class="button small outline" data-guest-only href="#login">تسجيل الدخول <span data-icon="arrow">
+</span>
+</a>
+</div>
+</div>
+</header>
+<div id="account-preview-notice" class="account-preview-notice" hidden role="status">
+<div class="container preview-notice-inner"><p>معاينة حساب طالب · بيانات توضيحية ثابتة · التعديل والحفظ غير متاحين</p><button class="text-link" data-action="exit-preview">العودة لوضع الزائر</button></div>
+</div>
+<main id="main" tabindex="-1">
+<div id="home-page" data-page="home">
+<section class="hero container" aria-labelledby="hero-title">
+<div class="hero-copy">
+
+<h1 id="hero-title" tabindex="-1">كل خطوة صغيرة،<br>تفتح لك <span>فرصة أكبر.</span>
+</h1>
+<p id="hero-description">اكتشف فرصًا تلهمك، وجهات تساعدك على التعلم، وتجارب طلاب سبقوك بخطوة. هنا تبدأ رحلتك مع سعي.</p>
+<div class="hero-buttons">
+<a href="#opportunities" class="button">استكشف الفرص <span data-icon="arrow">
+</span>
+</a>
+<a href="#experiences" class="text-link">اقرأ تجارب الطلاب <span data-icon="arrow">
+</span>
+</a>
+</div>
+
+</div>
+<section class="hero-art discovery-wheel" aria-labelledby="wheel-title">
+<div class="art-grid" aria-hidden="true"></div>
+<h2 id="wheel-title">خطوتك القادمة</h2>
+<p class="wheel-intro">لفّ العجلة، واكتشف من أين تبدأ.</p>
+<div class="wheel-stage">
+<span class="wheel-pointer" aria-hidden="true"></span>
+<div class="wheel-disc" id="discovery-wheel" aria-hidden="true">
+<span class="wheel-label wheel-label-top"><span class="wheel-label-content"><span data-icon="compass"></span><span>اكتشف<br>فرصة</span></span></span>
+<span class="wheel-label wheel-label-right"><span class="wheel-label-content"><span data-icon="book"></span><span>تعلّم</span></span></span>
+<span class="wheel-label wheel-label-bottom"><span class="wheel-label-content"><span data-icon="chat"></span><span>استلهم</span></span></span>
+<span class="wheel-label wheel-label-left"><span class="wheel-label-content"><span data-icon="spark"></span><span>مجال<br>جديد</span></span></span>
+</div>
+<button type="button" id="spin-wheel" class="wheel-spin" aria-describedby="wheel-note">وش خطوتي<br>اليوم؟</button>
+</div>
+<div class="wheel-result">
+<p id="wheel-status" role="status" aria-live="polite" aria-atomic="true">أربع بدايات ممكنة، اختر بداية عشوائية.</p>
+<a id="wheel-destination" class="button small" hidden>استكشف</a>
+</div>
+<p id="wheel-note" class="wheel-note">اختيار عشوائي للاستكشاف</p>
+</section>
+</section>
+</div>
+<div id="opportunities-page" data-page="opportunities" class="content-area directory-page" hidden>
+<section id="opportunities" class="container section">
+<div class="section-heading">
+<div>
+<span class="overline">خطوة خارج قاعة الدراسة</span>
+<h1 tabindex="-1">فرص تستحق الاستكشاف</h1>
+</div>
+<button class="text-link" data-action="all">عرض كل المجالات <span data-icon="arrow">
+</span>
+</button>
+</div>
+<section class="interests" aria-label="استكشف باهتمامك">
+<span>ما الذي يلهمك؟</span>
+<div id="interest-chips" class="chips">
+</div>
+</section>
+<p class="demo-note">محتوى توضيحي لتجربة التصميم؛ هذه البطاقات ليست إعلانات مفتوحة للتسجيل.</p>
+<div class="card-grid" id="opportunity-grid">
+</div>
+<p class="empty" id="empty-opportunities" hidden>لا يوجد مثال بهذا الاهتمام الآن. جرّب مجالًا آخر أو اعرض الجميع.</p>
+</section>
+</div>
+<div id="learning-page" data-page="learning" class="content-area directory-page" hidden>
+<section id="learning" class="container section">
+<div class="section-heading">
+<div>
+<span class="overline">المعرفة أقرب مما تتخيل</span>
+<h1 tabindex="-1">جهات تفتح لك باب التعلّم</h1>
+</div>
+<span class="section-caption">اختر البداية التي تناسب فضولك</span>
+</div>
+<div class="provider-grid" id="provider-grid">
+</div>
+</section>
+</div>
+<div id="experiences-page" data-page="experiences" class="content-area directory-page" hidden>
+<section id="experiences" class="container section">
+<div class="section-heading">
+<div>
+<span class="overline">من طالب إلى طالب</span>
+<h1 tabindex="-1">بدايات تشبه بدايتك</h1>
+</div>
+<button class="text-link" data-action="contribute">شارك تجربتك <span data-icon="plus">
+</span>
+</button>
+</div>
+<div class="card-grid" id="experience-grid">
+</div>
+</section>
+<section class="container invitation">
+<div class="invitation-icon" data-icon="spark">
+</div>
+<div>
+<h2>تجربتك البسيطة قد تصنع فرقًا.</h2>
+<p>خطوة تعلمتها، أو تحدٍ تجاوزته. هناك طالب يحتاج أن يسمع عنها.</p>
+</div>
+<button class="button" data-action="contribute">شارك خطوتك <span data-icon="arrow">
+</span>
+</button>
+</section>
+</div>
+<section id="profile-page" data-page="profile" class="profile-page container" hidden aria-labelledby="profile-title">
+<div class="profile-page-heading"><div><span class="overline">مساحتك وإنجازاتك</span><h1 id="profile-title" tabindex="-1">ملفي</h1></div><span class="preview-pill">معاينة فقط — التعديل غير متاح</span></div>
+<div class="profile-layout">
+<aside class="profile-summary" aria-label="بطاقة الطالب">
+<div class="profile-avatar" aria-hidden="true">أ</div><h2>أحمد محمد</h2><p class="muted">طالب افتراضي لتوضيح شكل الملف</p>
+<p>جامعة جازان</p><dl class="profile-facts"><div><dt>الكلية</dt><dd>كلية علوم الحاسب وتقنية المعلومات</dd></div><div><dt>التخصص</dt><dd>علوم الحاسب</dd></div><div><dt>المرحلة الدراسية</dt><dd>السنة الثانية</dd></div></dl>
+<button class="button outline full" disabled>تعديل بياناتي</button><p class="profile-privacy">الشهادات والمرفقات خاصة افتراضيًا. تختار لاحقًا ما ترغب في مشاركته.</p>
+</aside>
+<div class="profile-content">
+<section class="profile-panel" aria-labelledby="about-profile"><h2 id="about-profile">نبذة عني</h2><p>أهتم بتحليل البيانات وبناء حلول تساعد الطلاب. أتعلم بايثون وأستكشف فرص المشاركة في مشاريع طلابية.</p><h3>اهتماماتي</h3><ul class="profile-tags"><li>تحليل البيانات</li><li>الذكاء الاصطناعي</li><li>التطوع</li></ul><h3>مهارات أتعلمها</h3><ul class="profile-tags subtle"><li>Python</li><li>NumPy</li><li>العمل الجماعي</li></ul></section>
+<section class="profile-panel" aria-labelledby="profile-achievements"><div class="profile-panel-heading"><h2 id="profile-achievements">مشروعاتي ومشاركاتي</h2><button class="text-link" disabled>إضافة إنجاز</button></div><p class="muted">أمثلة توضيحية، وليست إنجازات لطالب حقيقي.</p>
+<article class="profile-record"><span class="badge">مشروع تعلّم</span><h3>استكشاف البيانات باستخدام بايثون</h3><p>تجربة لتنظيم بيانات نموذجية واستخدام NumPy لإجراء عمليات حسابية بسيطة.</p><p class="profile-record-note">دوري: إعداد البيانات وتلخيص النتائج</p></article>
+<article class="profile-record"><span class="badge">مشاركة تطوعية</span><h3>المساعدة في تنظيم لقاء طلابي</h3><p>مثال لتوثيق الدور الذي قام به الطالب وما تعلمه من المشاركة.</p><p class="profile-record-note">دوري: تنسيق الاستقبال ومساعدة المشاركين</p></article></section>
+<section class="profile-panel" aria-labelledby="profile-files"><div class="profile-panel-heading"><h2 id="profile-files">شهاداتي ومرفقاتي</h2><button class="text-link" disabled>رفع ملف</button></div><div class="profile-file"><span data-icon="lock"></span><div><h3>شهادة مشاركة توضيحية</h3><p>خاص · مثال عرض فقط، لا يوجد ملف مرفوع</p></div></div><p class="muted">هذه المساحة مخصصة لاحقًا لشهاداتك وملفات مشروعاتك.</p></section>
+</div></div>
+</section>
+<section id="login-page" data-page="login" hidden class="login-page container">
+<div class="login-story">
+<span class="eyebrow light">مساحتك للنمو والاكتشاف</span>
+<h1>خطوتك القادمة<br>تبدأ <span>من هنا.</span>
+</h1>
+<p>فرصة جديدة، معرفة تلهمك، وتجربة تختصر عليك الطريق.</p>
+<div class="login-plant">
+<span data-icon="sprout">
+</span>
+<div class="plant-ring">
+</div>
+</div>
+<div class="login-story-footer">سعي <span>تعلّم. جرّب. شارك.</span>
+</div>
+</div>
+<div class="login-form-wrap">
+<span class="overline">أهلًا بك في سعي</span>
+<h2>سعداء بعودتك.</h2>
+<p class="muted">مساحة تجمع اهتماماتك وخطواتك القادمة.</p>
+<div class="prototype-label">
+<span data-icon="info">
+</span> معاينة تصميم فقط؛ لا تدخلي بيانات حقيقية.</div>
+<form id="login-form">
+<label for="email">البريد الإلكتروني</label>
+<div class="field">
+<span data-icon="mail">
+</span>
+<input id="email" type="email" dir="ltr" placeholder="student@example.com" autocomplete="off" readonly aria-describedby="form-note">
+</div>
+<div class="password-label">
+<label for="password">كلمة المرور</label>
+<button class="text-link" type="button" data-action="forgot">نسيت كلمة المرور؟</button>
+</div>
+<div class="field">
+<span data-icon="lock">
+</span>
+<input id="password" type="password" value="previewonly" readonly autocomplete="off">
+<button type="button" id="toggle-password" class="icon-button" aria-label="إظهار كلمة المرور" aria-pressed="false">
+<span data-icon="eye">
+</span>
+</button>
+</div>
+<button type="submit" class="button full">تسجيل الدخول <span data-icon="arrow">
+</span>
+</button>
+<p id="form-note" class="form-note">حقول توضيحية غير متصلة بنظام حسابات.</p>
+</form>
+<p class="signup">جديد في سعي؟ <button class="text-link" data-action="signup">أنشئ حسابك</button>
+</p>
+<div class="divider">
+<span>أو ألقِ نظرة أولًا</span>
+</div>
+<a href="#home" class="button outline full">استكشف النسخة التجريبية <span data-icon="arrow">
+</span>
+</a>
+
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer-inner">
+<div class="footer-brand">
+<a class="brand" href="#home">سعي<span class="brand-dot">
+</span>
+</a>
+<p>مساحة لخطوتك القادمة.</p>
+</div>
+
+<span class="preview-pill">نموذج واجهة تجريبي</span>
+</div>
+</footer>
+<nav class="mobile-nav" aria-label="التنقل على الجوال">
+<a href="#home" data-nav="home">
+<span data-icon="home">
+</span>الرئيسية</a>
+<a href="#opportunities" data-nav="opportunities">
+<span data-icon="compass">
+</span>الفرص</a>
+<a href="#learning" data-nav="learning">
+<span data-icon="book">
+</span>التعلم</a>
+<a href="#experiences" data-nav="experiences">
+<span data-icon="chat">
+</span>التجارب</a>
+<a href="#login" data-nav="login" id="mobile-account-link">
+<span data-icon="user">
+</span><span id="mobile-account-label">حسابي</span></a>
+</nav>
+<dialog id="detail-dialog" aria-labelledby="dialog-title">
+<button id="close-dialog" class="icon-button close-dialog" aria-label="إغلاق">
+<span data-icon="close">
+</span>
+</button>
+<span class="overline">سعي · معاينة تجريبية</span>
+<h2 id="dialog-title">
+</h2>
+<div id="dialog-body">
+</div>
+</dialog>
+<div class="toast" id="toast" role="status" hidden>
+</div>
+</body>
+</html>
