@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#174d3c">
-<meta name="description" content="تصور تجريبي لسعي، مبادرة طلابية مستقلة لاكتشاف الفرص وجهات التعلم وتجارب الطلاب.">
+<meta name="description" content="سعي، مساحة لاكتشاف الفرص وجهات التعلم وتجارب الطلاب.">
 <title>سعي | مساحة لخطوتك القادمة</title>
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="styles.css">
 <script defer src="content.js">
 </script>
-<script defer src="wheel.js"></script>
 <script defer src="app.js">
 </script>
 </head>
@@ -62,26 +61,13 @@
 </div>
 
 </div>
-<section class="hero-art discovery-wheel" aria-labelledby="wheel-title">
-<div class="art-grid" aria-hidden="true"></div>
-<h2 id="wheel-title">خطوتك القادمة</h2>
-<p class="wheel-intro">لفّ العجلة، واكتشف من أين تبدأ.</p>
-<div class="wheel-stage">
-<span class="wheel-pointer" aria-hidden="true"></span>
-<div class="wheel-disc" id="discovery-wheel" aria-hidden="true">
-<span class="wheel-label wheel-label-top"><span class="wheel-label-content"><span data-icon="compass"></span><span>اكتشف<br>فرصة</span></span></span>
-<span class="wheel-label wheel-label-right"><span class="wheel-label-content"><span data-icon="book"></span><span>تعلّم</span></span></span>
-<span class="wheel-label wheel-label-bottom"><span class="wheel-label-content"><span data-icon="chat"></span><span>استلهم</span></span></span>
-<span class="wheel-label wheel-label-left"><span class="wheel-label-content"><span data-icon="spark"></span><span>مجال<br>جديد</span></span></span>
-</div>
-<button type="button" id="spin-wheel" class="wheel-spin" aria-describedby="wheel-note">وش خطوتي<br>اليوم؟</button>
-</div>
-<div class="wheel-result">
-<p id="wheel-status" role="status" aria-live="polite" aria-atomic="true">أربع بدايات ممكنة، اختر بداية عشوائية.</p>
-<a id="wheel-destination" class="button small" hidden>استكشف</a>
-</div>
-<p id="wheel-note" class="wheel-note">اختيار عشوائي للاستكشاف</p>
-</section>
+<aside class="step-scene" aria-labelledby="step-label">
+<div class="step-back step-back-one" aria-hidden="true"></div><div class="step-back step-back-two" aria-hidden="true"></div>
+<div class="step-card">
+<div class="step-top"><span class="step-label" id="step-label">خطوتك اليوم</span><span class="step-symbol" data-icon="spark" aria-hidden="true"></span></div>
+<div class="step-message"><p id="step-description">مو لازم تعرف الطريق كله؛ يكفي تكتشف اليوم شيئًا يثير فضولك.</p></div>
+</div><div class="step-caption" aria-hidden="true">تعلّم. جرّب. شارك.</div>
+</aside>
 </section>
 </div>
 <div id="opportunities-page" data-page="opportunities" class="content-area directory-page" hidden>
@@ -229,7 +215,6 @@
 <p>مساحة لخطوتك القادمة.</p>
 </div>
 
-<span class="preview-pill">نموذج واجهة تجريبي</span>
 </div>
 </footer>
 <nav class="mobile-nav" aria-label="التنقل على الجوال">

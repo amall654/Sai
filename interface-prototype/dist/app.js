@@ -87,3 +87,11 @@ if(document.modelContext?.registerTool){
  },{signal:lifecycle.signal})).catch(()=>{});}catch{}
  window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true});
 }
+
+// جملة واحدة ثابتة أثناء القراءة، تختار عند فتح الصفحة.
+const dailySteps = [
+ 'مو لازم تعرف الطريق كله؛ يكفي تكتشف اليوم شيئًا يثير فضولك.',
+ 'قد تبدأ رحلتك من فكرة بسيطة تفتح لك بابًا لم تتوقعه.',
+ 'تجارب الآخرين تلهمك، وخطوتك أنت تأخذ شكل اهتماماتك وطموحك.'
+];
+document.querySelector('#step-description').textContent = dailySteps[Math.floor(Math.random() * dailySteps.length)];
