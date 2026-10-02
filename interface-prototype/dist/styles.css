@@ -535,9 +535,8 @@ padding:35px 0}
 .footer-inner{
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:space-between;
 gap:30px}
-.footer-brand{text-align:center}
 .footer .brand{
 font-size:31px}
 .footer p{
@@ -955,7 +954,7 @@ top:10px}
   padding-bottom:30px}
   .footer-inner{
     flex-direction:column;
-    align-items:center;
+    align-items:flex-start;
   gap:17px}
   .footer{
   padding:27px 0}
