@@ -18,11 +18,11 @@ function renderOpportunities(){
  const words=normalizeSearch(searchInput.value).trim().split(/\s+/).filter(Boolean);
  const items=data.opportunities.filter(o=>{
   const fields=o.fields||[o.category];
-  const text=normalizeSearch([o.title,o.description,...fields,o.type,o.mode].join(' '));
+  const text=normalizeSearch([o.title,o.description,o.audience||'',...fields,o.type,o.mode].join(' '));
   return (activeInterest==='الكل'||fields.includes(activeInterest))&&(!typeInput.value||o.type===typeInput.value)&&(!modeInput.value||o.mode===modeInput.value)&&words.every(word=>text.includes(word));
  });
  document.querySelector('#opportunity-count').textContent='الفرص المعروضة: '+items.length+' من '+data.opportunities.length;
- document.querySelector('#opportunity-grid').innerHTML=items.map(o=>`<article class="card"><div class="card-top"><span class="category-icon ${esc(o.color)}">${icon(o.icon)}</span><button disabled title="معاينة فقط — الحفظ غير متاح" class="icon-button save-button ${saved.has(o.id)?'saved':''}" data-save="${esc(o.id)}" aria-label="${saved.has(o.id)?'إلغاء حفظ':'حفظ'} ${esc(o.title)}" aria-pressed="${saved.has(o.id)}">${icon('bookmark')}</button></div><div class="opportunity-tags">${(o.fields||[o.category]).map(field=>`<span class="badge">${esc(field)}</span>`).join('')}</div><h3>${esc(o.title)}</h3><p>${esc(o.description)}</p><div class="card-meta"><span>${icon('globe')}${esc(o.mode)}</span><span>${esc(o.type)}</span></div><div class="card-bottom"><span>مثال عرض · بلا موعد فعلي</span><button class="text-link" data-detail="${esc(o.id)}">التفاصيل ${icon('arrow')}</button></div></article>`).join('');
+ document.querySelector('#opportunity-grid').innerHTML=items.map(o=>`<article class="card"><div class="card-top"><span class="category-icon ${esc(o.color)}">${icon(o.icon)}</span><button disabled title="معاينة فقط — الحفظ غير متاح" class="icon-button save-button ${saved.has(o.id)?'saved':''}" data-save="${esc(o.id)}" aria-label="${saved.has(o.id)?'إلغاء حفظ':'حفظ'} ${esc(o.title)}" aria-pressed="${saved.has(o.id)}">${icon('bookmark')}</button></div><div class="opportunity-tags">${(o.fields||[o.category]).map(field=>`<span class="badge">${esc(field)}</span>`).join('')}</div><h3>${esc(o.title)}</h3><p>${esc(o.description)}</p>${o.audience?`<p class="opportunity-audience"><strong>لمن؟</strong> ${esc(o.audience)}</p>`:''}<div class="card-meta"><span>${icon('globe')}${esc(o.mode)}</span><span>${esc(o.type)}</span></div><div class="card-bottom"><span>مثال عرض · بلا موعد فعلي</span><button class="text-link" data-detail="${esc(o.id)}">التفاصيل ${icon('arrow')}</button></div></article>`).join('');
  document.querySelector('#empty-opportunities').hidden=items.length>0;
  const count=document.querySelector('#saved-count');count.textContent=saved.size;count.hidden=saved.size===0;
  document.querySelectorAll('.chip').forEach(c=>{c.classList.toggle('active',c.dataset.interest===activeInterest);c.setAttribute('aria-pressed',String(c.dataset.interest===activeInterest))});
@@ -31,7 +31,7 @@ document.querySelector('#interest-chips').innerHTML=data.interests.map(t=>`<butt
 document.querySelector('#provider-grid').innerHTML=data.providers.map(p=>`<article class="provider-card"><span class="provider-monogram">${esc(p.mark)}</span><div><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><button class="text-link" data-provider="${esc(p.id)}">عن الجهة ${icon('arrow')}</button></div></article>`).join('');
 document.querySelector('#experience-grid').innerHTML=data.experiences.map(e=>`<article class="card experience-card"><div class="quote" aria-hidden="true">“</div><h3>${esc(e.title)}</h3><p>${esc(e.description)}</p><div class="experience-author"><span class="avatar">${esc(e.initial)}</span><span>${esc(e.field)} · نص توضيحي</span></div><button class="text-link" data-experience="${esc(e.id)}">اقرأ التجربة ${icon('arrow')}</button></article>`).join('');
 for(const [input,key] of [[typeInput,'type'],[modeInput,'mode']]){
- [...new Set(data.opportunities.map(o=>o[key]))].forEach(value=>input.add(new Option(value,value)));
+ (key==='type'?data.opportunityTypes:[...new Set(data.opportunities.map(o=>o[key]))]).forEach(value=>input.add(new Option(value,value)));
  input.addEventListener('change',renderOpportunities);
 }
 searchInput.addEventListener('input',renderOpportunities);
