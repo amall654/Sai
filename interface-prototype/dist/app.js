@@ -45,7 +45,10 @@ function contributionDialog(){
  <textarea id="experience-draft" rows="7" placeholder="كيف بدأت؟ ما التحدّي الذي واجهته؟ وما الذي تعلّمته؟" aria-label="نص التجربة"></textarea>
  <button type="button" class="experience-mic" data-action="experience-record" aria-label="تسجيل تجربتك صوتيًا — قريبًا" title="تسجيل صوتي — قريبًا"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg><span>بالصوت</span></button>
  </div>
- <div class="experience-editor-actions"><button type="button" class="button" data-action="experience-rewrite">${icon('spark')} إعادة صياغة تجربتي</button></div>
+ <div class="experience-editor-actions">
+ <label class="experience-rewrite-option"><input type="checkbox" id="experience-rewrite"> إعادة صياغة تجربتي</label>
+ <button type="button" class="button" data-action="experience-publish">نشر</button>
+ </div>
  <p class="experience-feedback" id="experience-feedback" role="status" hidden></p>
  </div>`);
  dialog.classList.add('contribution-dialog');
@@ -74,9 +77,9 @@ document.addEventListener('click',event=>{
  if(action==='opportunity-assistant')showText('ساعدني أختار — قريبًا','المساعد الذكي غير متاح بعد. عند تفعيله ستصف اهتماماتك وأهدافك، ويقترح فرصًا من دليل سعي مع توضيح السبب وشروط المشاركة.\n\nيمكنك الآن استخدام البحث والفلاتر، أو استكشاف جميع الفرص بنفسك.');
  if(action==='saved')savedDialog();
  if(action==='contribute')contributionDialog();
- if(action==='experience-record'||action==='experience-rewrite'){
+ if(action==='experience-record'||action==='experience-publish'){
   const feedback=document.querySelector('#experience-feedback');
-  feedback.textContent=action==='experience-record'?'التسجيل الصوتي سيكون متاحًا لاحقًا. يمكنك الآن كتابة تجربتك.':'إعادة الصياغة ستكون متاحة لاحقًا. نصّك كما كتبته دون تغيير.';
+  feedback.textContent=action==='experience-record'?'التسجيل الصوتي سيكون متاحًا لاحقًا. يمكنك الآن كتابة تجربتك.':'النشر غير مفعّل بعد. لم تُرسل تجربتك أو تُحفظ، ولم تُعَد صياغتها.';
   feedback.hidden=false;
  }
  if(action==='signup')showText('إنشاء حساب','صفحة إنشاء الحساب تأتي في مرحلة ربط المنصة بالحسابات. حاليًا يمكنك استكشاف الرئيسية وتجربة البطاقات دون تسجيل.');

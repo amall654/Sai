@@ -741,7 +741,9 @@ margin-bottom:12px}
 .experience-input-row textarea:focus-visible{outline:3px solid #9db976;outline-offset:3px}
 .experience-mic{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0;width:64px;min-height:78px;border:1px solid var(--line);border-radius:16px;background:var(--paper);font-size:12px}
 .experience-mic:hover{background:#edf3e7}
-.experience-editor-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px}
+.experience-editor-actions{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:20px}
+.experience-editor .experience-rewrite-option{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:400;cursor:pointer}
+.experience-rewrite-option input{width:18px;height:18px;margin:0;accent-color:var(--ink)}
 .experience-editor-actions>span{font-size:12px;color:var(--muted)}
 dialog .experience-preview-note{font-size:12px;line-height:1.9;margin:16px 0 0}
 dialog .experience-feedback{font-size:13px;padding:12px 14px;border-radius:12px;background:#edf3e7;margin:12px 0 0}
