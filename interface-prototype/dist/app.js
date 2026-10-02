@@ -36,8 +36,22 @@ for(const [input,key] of [[typeInput,'type'],[modeInput,'mode']]){
 }
 searchInput.addEventListener('input',renderOpportunities);
 const dialog=document.querySelector('#detail-dialog');
-function show(title,body){document.querySelector('#dialog-title').textContent=title;document.querySelector('#dialog-body').innerHTML=body;if(!dialog.open)dialog.showModal();}
+function show(title,body){dialog.classList.remove('contribution-dialog');document.querySelector('#dialog-title').textContent=title;document.querySelector('#dialog-body').innerHTML=body;if(!dialog.open)dialog.showModal();}
 function showText(title,text){show(title,text.split('\n\n').map(p=>`<p>${esc(p)}</p>`).join(''))}
+function contributionDialog(){
+ show('شارك تجربتك',`<div class="experience-editor">
+ <p class="experience-intro">احكِ لنا عن بدايتك، وما تعلّمته في الطريق.</p>
+ <label for="experience-draft">تجربتك بكلماتك</label>
+ <div class="experience-input-row">
+ <textarea id="experience-draft" rows="7" placeholder="كيف بدأت؟ ما التحدّي الذي واجهته؟ وما الذي تعلّمته؟" aria-describedby="experience-preview-note"></textarea>
+ <button type="button" class="experience-mic" data-action="experience-record" aria-label="تسجيل تجربتك صوتيًا — قريبًا" title="تسجيل صوتي — قريبًا"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg><span>بالصوت</span></button>
+ </div>
+ <div class="experience-editor-actions"><button type="button" class="button" data-action="experience-rewrite">${icon('spark')} إعادة صياغة تجربتي</button><span>خطوة اختيارية</span></div>
+ <p id="experience-preview-note" class="experience-preview-note">يمكنك تجربة الكتابة هنا. التسجيل وإعادة الصياغة غير مفعّلين بعد، ولن يُحفظ النص أو يُنشر.</p>
+ <p class="experience-feedback" id="experience-feedback" role="status" hidden></p>
+ </div>`);
+ dialog.classList.add('contribution-dialog');
+}
 function savedDialog(){showText('المحفوظات','معاينة فقط — الحفظ غير متاح. ستظهر هنا فرصك المحفوظة عند تفعيل الحسابات الحقيقية.');}
 function setPreviewAccount(enabled){
  previewAccount=enabled;
@@ -61,7 +75,12 @@ document.addEventListener('click',event=>{
  if(action==='all')resetOpportunityFilters();
  if(action==='opportunity-assistant')showText('ساعدني أختار — قريبًا','المساعد الذكي غير متاح بعد. عند تفعيله ستصف اهتماماتك وأهدافك، ويقترح فرصًا من دليل سعي مع توضيح السبب وشروط المشاركة.\n\nيمكنك الآن استخدام البحث والفلاتر، أو استكشاف جميع الفرص بنفسك.');
  if(action==='saved')savedDialog();
- if(action==='contribute')showText('لكل تجربة مساحة','ستتمكن هنا من كتابة تجربتك أو تسجيلها صوتيًا عبر أسئلة موجهة، ثم مراجعة النص واعتماده قبل النشر.\n\nهذه النسخة لتجربة شكل الصفحات فقط، ولا تسجل صوتًا أو تنشر محتوى.');
+ if(action==='contribute')contributionDialog();
+ if(action==='experience-record'||action==='experience-rewrite'){
+  const feedback=document.querySelector('#experience-feedback');
+  feedback.textContent=action==='experience-record'?'التسجيل الصوتي سيكون متاحًا لاحقًا. يمكنك الآن كتابة تجربتك.':'إعادة الصياغة ستكون متاحة لاحقًا. نصّك كما كتبته دون تغيير.';
+  feedback.hidden=false;
+ }
  if(action==='signup')showText('إنشاء حساب','صفحة إنشاء الحساب تأتي في مرحلة ربط المنصة بالحسابات. حاليًا يمكنك استكشاف الرئيسية وتجربة البطاقات دون تسجيل.');
  if(action==='forgot')showText('استعادة كلمة المرور','هذا نموذج تصميم غير متصل بخدمة بريد أو حسابات. لم تُرسل رسالة استعادة.');
 });
