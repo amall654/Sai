@@ -1089,7 +1089,7 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .step-card::after{content:"";position:absolute;inset:-70%;pointer-events:none;background:linear-gradient(110deg,transparent 43%,#ffffff0c 49%,#ffffff14 50%,transparent 57%);transform:translateX(-70%);animation:step-light 2.4s 1s ease-in-out both}
 .step-top{display:flex;align-items:center;justify-content:center;gap:16px}
 .step-label{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:170px;min-height:54px;padding:10px 25px;font-size:17px;font-weight:bold;color:#173d2e;isolation:isolate}
-.step-brush{position:absolute;inset:0;width:100%;height:100%;z-index:-1;transform:rotate(-2deg);pointer-events:none}
+.step-brush{position:absolute;inset:0;width:100%;height:100%;z-index:-1;transform:rotate(-1deg);filter:blur(.45px);pointer-events:none}
 .step-brush path{stroke:none}
 .step-symbol{display:grid;place-items:center;width:40px;height:40px;color:#d4e8ae;animation:step-spark 1.6s .35s ease-out both}
 .step-symbol svg{width:30px;height:30px}
