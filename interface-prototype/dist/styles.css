@@ -733,6 +733,7 @@ dialog p{
   color:var(--muted);
 margin-bottom:12px}
 .contribution-dialog{width:min(660px,calc(100% - 32px))}
+.contribution-dialog>.overline{display:none}
 .experience-editor label{display:block;font-weight:700;margin-bottom:10px}
 .experience-input-row{display:flex;align-items:flex-start;gap:12px}
 .experience-input-row textarea{flex:1;min-width:0;width:100%;resize:vertical;min-height:180px;max-height:40vh;border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--paper);color:var(--ink);font:inherit;line-height:1.9}
