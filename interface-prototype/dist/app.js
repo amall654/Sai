@@ -39,7 +39,7 @@ function show(title,body){dialog.classList.remove('contribution-dialog');documen
 function showText(title,text){show(title,text.split('\n\n').map(p=>`<p>${esc(p)}</p>`).join(''))}
 function contributionDialog(){
  show('شارك تجربتك',`<div class="experience-editor">
- <p class="experience-intro">يكفي أن تجيب باختصار: كيف بدأت؟ ما الذي كان صعبًا؟ وما النصيحة التي تود مشاركتها؟</p>
+ <p class="experience-intro"><strong>كيف بدأت؟</strong> ما التحدّي الذي واجهته؟ وما النصيحة التي تود مشاركتها؟</p>
  <div class="experience-input-row">
  <textarea id="experience-draft" rows="7" placeholder="كيف بدأت؟ ما التحدّي الذي واجهته؟ وما النصيحة التي تود مشاركتها؟" aria-label="نص التجربة"></textarea>
  <button type="button" class="experience-mic" data-action="experience-record" aria-label="تسجيل تجربتك صوتيًا — قريبًا" title="تسجيل صوتي — قريبًا"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg><span>بالصوت</span></button>
