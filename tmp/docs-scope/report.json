@@ -1,0 +1,28 @@
+[
+  {
+    "file": "doc\\التصور التأسيسي\\سعي - التصور التأسيسي.docx",
+    "source_changes": 18,
+    "exact_paragraph_matches": 16,
+    "unmatched": [
+      "",
+      ""
+    ]
+  },
+  {
+    "file": "doc\\خطة التنفيذ لفريق من ثلاثة\\سعي - خطة التنفيذ لفريق من ثلاثة.docx",
+    "source_changes": 15,
+    "exact_paragraph_matches": 15,
+    "unmatched": []
+  },
+  {
+    "file": "doc\\دليل التنفيذ التقني\\سعي - دليل التنفيذ التقني.docx",
+    "source_changes": 28,
+    "exact_paragraph_matches": 24,
+    "unmatched": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  }
+]
