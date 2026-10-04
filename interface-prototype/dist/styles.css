@@ -102,6 +102,20 @@ background:var(--green)}
   display:flex;
   gap:20px;
 align-items:center}
+.language-toggle{
+  min-height:40px;
+  padding:8px 12px;
+  border:1px solid var(--green);
+  border-radius:10px;
+  background:transparent;
+  color:var(--green);
+  font:inherit;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.language-toggle:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:600px){.header-actions{gap:8px}.language-toggle{padding:8px;font-size:12px}}
 .button{
   display:inline-flex;
   align-items:center;
@@ -1159,3 +1173,16 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 button:disabled{opacity:.6;cursor:wait}
 @media(max-width:600px){.platform-form{gap:14px}.platform-form input:not([type="checkbox"]),.platform-form select,.platform-form textarea,.directory-search input{font-size:16px}.detail-actions .button{width:100%}.profile-page-heading{flex-wrap:wrap;gap:14px}}
+/* Keep the language control beside saved items and sign-in on narrow screens. */
+@media(max-width:760px){
+  .header-inner{flex-wrap:nowrap;gap:8px}
+  .header-actions{flex-wrap:nowrap;gap:6px}
+  .header-actions .button{gap:5px;padding-inline:8px}
+}
+[dir="ltr"] .login-story h1 span::before{content:" "}
+@media(max-width:380px){
+  .header-inner .brand{font-size:26px}
+  .header-actions .button{white-space:nowrap;font-size:11px}
+  .header-actions .button svg{display:none}
+  .header-actions{gap:4px}
+}

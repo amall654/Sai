@@ -19,17 +19,16 @@
  ['research','Starting in scientific research','Learn to develop a research question and analyze results in a student research project.','Science and mathematics students and anyone interested in research'],
  ['business','Financial solutions challenge','Analyze a financial case and propose solutions for managing resources and making decisions.','Finance, accounting, economics and business students'],
  ['health','Healthcare innovation hackathon','Collaborate on technical solutions to improve patient experiences and healthcare services.','Health, programming, engineering and design students'],
- ['language','Translation and writing competition','Develop your language and writing skills through translation and creative writing.','Language, translation and literature students'],
+ ['translation','Translation and writing competition','Develop your language and writing skills through translation and creative writing.','Language, translation and literature students'],
  ['lab','Laboratory skills training','Develop laboratory, safety and scientific observation skills.','Science, health and laboratory students'],
  ['volunteer','Community health awareness initiative','Help prepare awareness content and organize activities that serve the community.','Health, media and design students and anyone interested in awareness'],
  ['education','Designing learning activities workshop','Try designing a learning activity that considers different learner needs.','Education and psychology students and anyone interested in teaching'],
  ['conference','Student research forum','Present your research idea or learn from other student research projects.','Students interested in scientific research'],
- ['sustainability','Reducing food waste hackathon','Develop solutions to reduce food waste and support sustainable resource use.','Students interested in environment, agriculture, technology and business'],
- ['humanities','Digital heritage challenge','Use digital tools to explore and share cultural heritage.','Humanities, technology, design and media students']
+ ['food','Reducing food waste hackathon','Develop solutions to reduce food waste and support sustainable resource use.','Students interested in environment, agriculture, technology and business'],
+ ['islamic','Digital solutions for Islamic knowledge','Collaborate on an idea that makes Islamic knowledge easier to access and presents it clearly.','Sharia, Islamic studies, programming and design students']
  ];
  // Use explicit reviewed English copy for the existing illustrative catalog only.
  opportunities.forEach(([id,title,description,audience])=>{const item=window.SAI_CONTENT?.opportunities.find(o=>o.id===id);if(!item)return;en[item.title]=title;en[item.description]=description;en[item.audience]=audience;String(item.details||'').split('\n\n').forEach((part,index)=>{if(index===0)en[part]='An illustrative opportunity, not an announcement open for registration.';else if(index===1)en[part]=description;else if(index===2)en[part]='Example audience: '+audience+'.';else en[part]='For actual opportunities, eligibility, deadlines, location and registration links come from the organizer. A field describes the topic; it does not establish eligibility.';});});
- const reverse = Object.fromEntries(Object.entries(en).map(([ar,value])=>[value,ar]));
  let language='ar';try{if(localStorage.getItem('sai-language')==='en')language='en';}catch{}
  const originals=new WeakMap();const attrs=new WeakMap();
  function translate(text){const trimmed=text.trim();if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}
