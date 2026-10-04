@@ -7,10 +7,12 @@
 <meta name="description" content="سعي، مساحة لاكتشاف الفرص وجهات التعلم وتجارب الطلاب.">
 <title>سعي | مساحة لخطوتك القادمة</title>
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="styles.css?v=20261003-experience-dialog">
-<script defer src="content.js?v=20261003-experience-dialog">
+<link rel="stylesheet" href="styles.css?v=20261004-platform">
+<script defer src="content.js?v=20261004-platform">
 </script>
-<script defer src="app.js?v=20261003-experience-dialog">
+<script defer src="services.js?v=20261004-platform"></script>
+<script defer src="app.js?v=20261004-platform"></script>
+<script defer src="ui.js?v=20261004-platform">
 </script>
 </head>
 <body>
@@ -32,17 +34,15 @@
 </span>
 <span id="saved-count" class="count" hidden>0</span>
 </button>
-<a href="#profile" data-nav="profile" id="profile-link" class="profile-link" hidden><span class="profile-mini-avatar" aria-hidden="true">أ</span><span>أحمد · ملفي</span></a>
-<button class="text-link preview-entry" data-action="preview-account" data-guest-only>معاينة حساب طالب</button>
+<a href="#profile" data-nav="profile" id="profile-link" class="profile-link" hidden><span class="profile-mini-avatar" aria-hidden="true">أ</span><span>ملفي</span></a>
+
 <a class="button small outline" data-guest-only href="#login">تسجيل الدخول <span data-icon="arrow">
 </span>
 </a>
 </div>
 </div>
 </header>
-<div id="account-preview-notice" class="account-preview-notice" hidden role="status">
-<div class="container preview-notice-inner"><p>معاينة حساب طالب · بيانات توضيحية ثابتة · التعديل والحفظ غير متاحين</p><button class="text-link" data-action="exit-preview">العودة لوضع الزائر</button></div>
-</div>
+
 <main id="main" tabindex="-1">
 <div id="home-page" data-page="home">
 <section class="hero container" aria-labelledby="hero-title">
@@ -83,7 +83,7 @@
 <section class="interests" aria-label="تصفية حسب المجال">
 <span>المجال</span><div id="interest-chips" class="chips"></div>
 </section>
-<div class="card-grid" id="opportunity-grid"></div>
+<div id="opportunity-state" role="status"></div><div class="card-grid" id="opportunity-grid"></div>
 <p class="empty" id="empty-opportunities" hidden>لا توجد فرص تطابق بحثك والفلاتر المختارة. جرّب كلمات أخرى أو غيّر خيارات التصفية.</p>
 </section>
 </div>
@@ -94,6 +94,7 @@
 <h1 tabindex="-1">جهات تفتح لك باب التعلّم</h1>
 </div>
 </div>
+<div class="directory-search"><label for="provider-search">ابحث عن جهة تعلّم</label><input id="provider-search" type="search" placeholder="اسم الجهة، المجال أو نوع المحتوى"></div><div id="provider-state" role="status"></div>
 <div class="provider-grid" id="provider-grid">
 </div>
 </section>
@@ -108,26 +109,13 @@
 </span>
 </button>
 </div>
-<div class="card-grid" id="experience-grid">
+<div id="experience-state" role="status"></div><div class="card-grid" id="experience-grid">
 </div>
 </section>
 </div>
-<section id="profile-page" data-page="profile" class="profile-page container" hidden aria-labelledby="profile-title">
-<div class="profile-page-heading"><div><span class="overline">مساحتك وإنجازاتك</span><h1 id="profile-title" tabindex="-1">ملفي</h1></div><span class="preview-pill">معاينة فقط — التعديل غير متاح</span></div>
-<div class="profile-layout">
-<aside class="profile-summary" aria-label="بطاقة الطالب">
-<div class="profile-avatar" aria-hidden="true">أ</div><h2>أحمد محمد</h2><p class="muted">طالب افتراضي لتوضيح شكل الملف</p>
-<p>جامعة جازان</p><dl class="profile-facts"><div><dt>الكلية</dt><dd>كلية علوم الحاسب وتقنية المعلومات</dd></div><div><dt>التخصص</dt><dd>علوم الحاسب</dd></div><div><dt>المرحلة الدراسية</dt><dd>السنة الثانية</dd></div></dl>
-<button class="button outline full" disabled>تعديل بياناتي</button><p class="profile-privacy">الشهادات والمرفقات خاصة افتراضيًا. تختار لاحقًا ما ترغب في مشاركته.</p>
-</aside>
-<div class="profile-content">
-<section class="profile-panel" aria-labelledby="about-profile"><h2 id="about-profile">نبذة عني</h2><p>أهتم بتحليل البيانات وبناء حلول تساعد الطلاب. أتعلم بايثون وأستكشف فرص المشاركة في مشاريع طلابية.</p><h3>اهتماماتي</h3><ul class="profile-tags"><li>تحليل البيانات</li><li>الذكاء الاصطناعي</li><li>التطوع</li></ul><h3>مهارات أتعلمها</h3><ul class="profile-tags subtle"><li>Python</li><li>NumPy</li><li>العمل الجماعي</li></ul></section>
-<section class="profile-panel" aria-labelledby="profile-achievements"><div class="profile-panel-heading"><h2 id="profile-achievements">مشروعاتي ومشاركاتي</h2><button class="text-link" disabled>إضافة إنجاز</button></div><p class="muted">أمثلة توضيحية، وليست إنجازات لطالب حقيقي.</p>
-<article class="profile-record"><span class="badge">مشروع تعلّم</span><h3>استكشاف البيانات باستخدام بايثون</h3><p>تجربة لتنظيم بيانات نموذجية واستخدام NumPy لإجراء عمليات حسابية بسيطة.</p><p class="profile-record-note">دوري: إعداد البيانات وتلخيص النتائج</p></article>
-<article class="profile-record"><span class="badge">مشاركة تطوعية</span><h3>المساعدة في تنظيم لقاء طلابي</h3><p>مثال لتوثيق الدور الذي قام به الطالب وما تعلمه من المشاركة.</p><p class="profile-record-note">دوري: تنسيق الاستقبال ومساعدة المشاركين</p></article></section>
-<section class="profile-panel" aria-labelledby="profile-files"><div class="profile-panel-heading"><h2 id="profile-files">شهاداتي ومرفقاتي</h2><button class="text-link" disabled>رفع ملف</button></div><div class="profile-file"><span data-icon="lock"></span><div><h3>شهادة مشاركة توضيحية</h3><p>خاص · مثال عرض فقط، لا يوجد ملف مرفوع</p></div></div><p class="muted">هذه المساحة مخصصة لاحقًا لشهاداتك وملفات مشروعاتك.</p></section>
-</div></div>
-</section>
+<section id="profile-page" data-page="profile" class="profile-page container" hidden aria-labelledby="profile-title"><div class="profile-page-heading"><h1 id="profile-title">ملفي</h1><button class="text-link" data-action="logout">تسجيل الخروج</button></div><div id="profile-content"></div></section>
+<section data-page="saved" class="container section directory-page" hidden><div class="section-heading"><h1>المحفوظات</h1></div><div id="saved-content"></div></section>
+<section data-page="admin" class="container section directory-page" hidden><div class="section-heading"><h1>إدارة المحتوى</h1></div><div id="admin-content"></div></section>
 <section id="login-page" data-page="login" hidden class="login-page container">
 <div class="login-story">
 <span class="eyebrow light">مساحتك للنمو والاكتشاف</span>
@@ -144,46 +132,17 @@
 </div>
 </div>
 <div class="login-form-wrap">
-<span class="overline">أهلًا بك في سعي</span>
-<h2>سعداء بعودتك.</h2>
-<p class="muted">مساحة تجمع اهتماماتك وخطواتك القادمة.</p>
-<div class="prototype-label">
-<span data-icon="info">
-</span> معاينة تصميم فقط؛ لا تدخلي بيانات حقيقية.</div>
-<form id="login-form">
-<label for="email">البريد الإلكتروني</label>
-<div class="field">
-<span data-icon="mail">
-</span>
-<input id="email" type="email" dir="ltr" placeholder="student@example.com" autocomplete="off" readonly aria-describedby="form-note">
-</div>
-<div class="password-label">
-<label for="password">كلمة المرور</label>
-<button class="text-link" type="button" data-action="forgot">نسيت كلمة المرور؟</button>
-</div>
-<div class="field">
-<span data-icon="lock">
-</span>
-<input id="password" type="password" value="previewonly" readonly autocomplete="off">
-<button type="button" id="toggle-password" class="icon-button" aria-label="إظهار كلمة المرور" aria-pressed="false">
-<span data-icon="eye">
-</span>
-</button>
-</div>
-<button type="submit" class="button full">تسجيل الدخول <span data-icon="arrow">
-</span>
-</button>
-<p id="form-note" class="form-note">حقول توضيحية غير متصلة بنظام حسابات.</p>
-</form>
-<p class="signup">جديد في سعي؟ <button class="text-link" data-action="signup">أنشئ حسابك</button>
-</p>
-<div class="divider">
-<span>أو ألقِ نظرة أولًا</span>
-</div>
-<a href="#home" class="button outline full">استكشف النسخة التجريبية <span data-icon="arrow">
-</span>
-</a>
-
+<span class="overline">أهلًا بك في سعي</span><h2 id="auth-title">سعداء بعودتك.</h2>
+<p class="muted" id="auth-intro">سجّل دخولك لحفظ ما يهمك ومشاركة تجربتك.</p>
+<form id="login-form" class="platform-form">
+<div id="signup-name" hidden><label for="display-name">الاسم</label><input id="display-name" name="name" autocomplete="name" maxlength="80"></div>
+<label for="email">البريد الإلكتروني</label><input id="email" name="email" type="email" dir="ltr" autocomplete="email" required placeholder="name@example.com">
+<div id="auth-password"><div class="password-label"><label for="password">كلمة المرور</label><button type="button" class="text-link" data-action="forgot">نسيت كلمة المرور؟</button></div>
+<div class="field"><input id="password" name="password" type="password" autocomplete="current-password" required><button type="button" id="toggle-password" class="icon-button" aria-label="إظهار كلمة المرور" aria-pressed="false"><span data-icon="eye"></span></button></div></div>
+<p id="auth-feedback" class="form-feedback" role="status" hidden></p>
+<button type="submit" class="button full" id="auth-submit">تسجيل الدخول</button></form>
+<p class="signup"><button class="text-link" data-action="signup" id="auth-mode-link">جديد في سعي؟ أنشئ حسابك</button></p>
+<div class="divider"><span>أو استكشف أولًا</span></div><a href="#home" class="button outline full">تصفح سعي</a>
 </div>
 </section>
 </main>
@@ -220,7 +179,7 @@
 <span data-icon="close">
 </span>
 </button>
-<span class="overline">سعي · معاينة تجريبية</span>
+
 <h2 id="dialog-title">
 </h2>
 <div id="dialog-body">
