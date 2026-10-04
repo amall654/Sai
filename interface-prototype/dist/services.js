@@ -13,7 +13,6 @@ window.SaiServices = (() => {
   login: values => call('login', values), signup: values => call('signup', values),
   resetPassword: email => call('resetPassword', email), logout: () => call('logout'),
   profile: () => call('profile'), updateProfile: values => call('updateProfile', values),
-  addProfileRecord: values => call('addProfileRecord', values),
   saved: () => call('saved'), setSaved: (kind,id,value) => call('setSaved', {kind,id,value}),
   submitExperience: values => call('submitExperience', values),
   myExperiences: () => call('myExperiences'),
