@@ -1,5 +1,7 @@
 # سعي — تسليم واجهات تجربة المستخدم
 
+مرجع العقد الحالي: [الإصدار الأول](../../doc/RELEASE-1.md)، بتاريخ 5 أكتوبر 2026. يحدد القيود والصلاحيات والنتائج والدوال الإضافية المطلوبة. الجدول أدناه يصف حد الربط الموجود؛ دوال الإدارة الإضافية واستكمال الاستعادة ليست منفذة بعد.
+
 القرار التقني المعتمد بتاريخ 4 أكتوبر 2026: Supabase وحده للحسابات والبيانات والصلاحيات، باستخدام Auth وPostgreSQL وRLS. تصنيف الفرص يستدعي مزود ذكاء اصطناعي منفصلًا عبر Edge Function. استضافة الواجهة منفصلة وتحدد قبل النشر. هذا قرار تنفيذ؛ لا يعني أن الخدمات رُبطت بالفعل.
 
 
@@ -25,10 +27,10 @@
 | logout | لا شيء | نجاح إنهاء الجلسة |
 | saved | لا شيء | [{kind:'opportunity' أو 'provider',id}] للمستخدم الحالي |
 | setSaved | {kind,id,value:boolean} | نجاح العملية |
-| profile | لا شيء | {name,college,major,year,bio,interests:[],skills:[]} |
-| updateProfile | بيانات الملف نفسها | نجاح الحفظ |
+| profile | لا شيء | {name,interests:[]} للحساب البسيط |
+| updateProfile | {name,interests:[]} | نجاح الحفظ |
 | myExperiences | لا شيء | [{id,title,body,status:'pending' أو 'published' أو 'rejected'}] |
-| submitExperience | {title,body,field} | نجاح الإرسال للمراجعة |
+| submitExperience | {title,body,field,consent:true} بعد تحديث تحويل نموذج الموافقة | {id,status:'pending'} |
 | addContent | {kind,title,sourceName,originalText,sourceUrl,attachmentUrl,fields:[],type,mode,deadline,status} | نجاح الإضافة |
 
 تتحقق الخلفية من الجلسة والصلاحيات في كل عملية. فحص admin في الواجهة لإظهار النموذج فقط وليس حماية أمنية. submitExperience يجب أن يفرض pending، وألا يقبل نشر الطالب مباشرة. لا تُرجع catalog مسودات أو محتوى خاصًا. لا تُمرر كلمات المرور إلى سجلات الأخطاء.
