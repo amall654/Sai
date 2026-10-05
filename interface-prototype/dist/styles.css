@@ -1186,3 +1186,9 @@ button:disabled{opacity:.6;cursor:wait}
   .header-actions .button svg{display:none}
   .header-actions{gap:4px}
 }
+
+/* Gateway identity: a static mark, with no motion or duplicate wordmark. */
+.brand-mark{width:32px;height:32px;object-fit:contain;flex-shrink:0}
+.hero-emblem{display:flex;align-items:center;justify-content:center;min-width:0}
+.hero-emblem img{display:block;width:min(100%,400px);height:auto}
+@media(max-width:760px){.hero-emblem img{width:min(75vw,290px)}.brand-mark{width:25px;height:25px}.brand{gap:3px}}

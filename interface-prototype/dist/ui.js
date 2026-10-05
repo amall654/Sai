@@ -73,6 +73,4 @@ $('#opportunity-search').addEventListener('input',renderOpportunities);
 ['opportunity-type','opportunity-mode'].forEach(id=>$('#'+id).addEventListener('change',renderOpportunities));
 $('.skip').onclick=event=>{event.preventDefault();$('#main').focus();};
 document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));
-const dailySteps=['مو لازم تعرف الطريق كله؛ يكفي تكتشف اليوم شيئًا يثير فضولك.','قد تبدأ رحلتك من فكرة بسيطة تفتح لك بابًا لم تتوقعه.','تجارب الآخرين تلهمك، وخطوتك أنت تأخذ شكل اهتماماتك وطموحك.'];
-$('#step-description').textContent=dailySteps[Math.floor(Math.random()*dailySteps.length)];
 (async()=>{await loadCatalog();try{user=await api.session();if(user)savedItems=await api.saved();}catch{notice('تعذّر التحقق من الحساب. يمكنك متابعة التصفح والمحاولة مجددًا.');}syncAccount();if(catalogReady){renderOpportunities();renderProviders();}window.addEventListener('hashchange',route);route();})();
