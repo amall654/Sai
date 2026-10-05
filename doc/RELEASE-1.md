@@ -36,7 +36,7 @@
 | user_roles | user_id فريد، role = student أو admin | ينشئ الخادم دور student؛ ترقية admin بعملية إدارية موثوقة، لا من نموذج التسجيل أو updateProfile |
 | fields | id ثابت، label_ar، label_en، active، sort_order | «الكل» فلتر عرض وليس مجالًا مخزنًا |
 | opportunity_types | id ثابت، label_ar، label_en، active | استخدام معرفات ثابتة في التخزين، وتحويلها إلى قيم العرض الحالية في المحول |
-| opportunities | id، title، description، original_text، source_name، source_url، status، created_by، created_at، updated_at | registration_url، deadline_at، deadline_text، mode، published_at؛ النوع والمجالات يمكن أن يبقيا غير محددين بدل تخمينهما |
+| opportunities | id، title، description، original_text، source_name، source_url، status، created_by، created_at، updated_at | registration_url، deadline_at، deadline_text، mode، published_at؛ المجالات يمكن أن تبقى غير محددة بدل تخمينها؛ نوع الفرصة مطلوب من القائمة المحددة |
 | opportunity_fields | opportunity_id، field_id | زوج فريد وعلاقات مرجعية سليمة؛ نوع الفرصة مرجع إلى opportunity_types |
 | providers | id، name، description، official_url، status، created_by، created_at، updated_at | details، language، cost، content_types، published_at؛ غياب اللغة أو التكلفة يعني «تحقق من الموقع الرسمي» |
 | provider_fields | provider_id، field_id | زوج فريد |
@@ -45,7 +45,9 @@
 | saved_providers | user_id، provider_id، created_at | الزوج فريد؛ يحول المحول الجدولين إلى قائمة saved الموحدة |
 | moderation_events | id، actor_id، entity_kind، entity_id، action، created_at | سجل إداري غير عام لتغييرات النشر والمراجعة؛ لا كلمات مرور ولا نسخ غير ضرورية من نص الطالب |
 
-لكل فرصة نوع واحد اختياري ومجالات متعددة. إذا لم يُعرف الموعد يبقى deadline_at فارغًا ويعرض deadline_text الأصلي؛ لا يحول نص غامض إلى تاريخ تخميني. إذا كان الموعد تاريخ يوم فقط يحدد المسؤول المنطقة الزمنية ووقت الإغلاق قبل حفظه كوقت دقيق. انتهاء الموعد الدقيق يستبعد الفرصة من القائمة النشطة ولو لم تعمل مهمة دورية.
+نوع الفرصة في النموذج الأولي محصور في هاكاثون أو مسابقة، بمعرفي hackathon وcompetition؛ لا تنشر أنواع تدريب أو ورش أو تطوع أو ملتقيات. هذا القيد يخص الفرص ولا يحد أنواع المحتوى التعليمي لدى الجهات.
+
+لكل فرصة نوع واحد مطلوب ومجالات متعددة. إذا لم يُعرف الموعد يبقى deadline_at فارغًا ويعرض deadline_text الأصلي؛ لا يحول نص غامض إلى تاريخ تخميني. إذا كان الموعد تاريخ يوم فقط يحدد المسؤول المنطقة الزمنية ووقت الإغلاق قبل حفظه كوقت دقيق. انتهاء الموعد الدقيق يستبعد الفرصة من القائمة النشطة ولو لم تعمل مهمة دورية.
 
 حدود تحقق الإصدار: العنوان 160 حرفًا، وصف البطاقة 500، نص الفرصة وتفاصيل الجهة 20000، تجربة الطالب 30–10000، ملاحظة المراجعة 1000. الروابط العامة http أو https فقط حتى إن تجاوز المستخدم تحقق الواجهة. تطبق الخلفية الحدود أولًا وتطابقها الواجهة عند الربط.
 
