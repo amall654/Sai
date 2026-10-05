@@ -8,6 +8,25 @@ const url = pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href;
  try {
   const page = await browser.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto(url);await page.waitForSelector('#opportunity-grid .card',{state:'attached'});
+  const pilot = await page.evaluate(()=>window.SAI_CONTENT);
+  const fields = pilot.interests.filter(field=>field!=='الكل');
+  assert.equal(fields.length,6);
+  for(const item of [...pilot.opportunities,...pilot.providers]){
+   assert.ok(item.fields.length>0);
+   assert.ok(item.fields.every(field=>fields.includes(field)));
+  }
+  await page.evaluate(()=>location.hash='opportunities');
+  for(const field of fields){
+   await page.locator('[data-interest]').filter({hasText:field}).click();
+   assert.ok(await page.locator('#opportunity-grid .card').count()>0);
+  }
+  await page.locator('[data-interest="الكل"]').click();
+  await page.locator('#language-toggle').click();
+  await page.locator('#opportunity-search').fill('cybersecurity');
+  assert.ok(await page.locator('#opportunity-grid .card').count()>0);
+  assert.equal(await page.locator('#opportunity-grid').evaluate(el=>/[\u0600-\u06ff]/.test(el.innerText)),false);
+  await page.locator('#opportunity-search').fill('');
+  await page.locator('#language-toggle').click();
   assert.equal(await page.locator('[data-action="preview-account"]').count(),0);
   for(const route of ['opportunities','learning','experiences','home']){await page.evaluate(r=>location.hash=r,route);await page.locator(`[data-page="${route}"]`).waitFor({state:'visible'});assert.equal(await page.locator('[data-page]:visible').count(),1);}
   await page.evaluate(()=>location.hash='opportunities');await page.locator('#opportunity-search').fill('zzzz-no-match');await page.locator('#empty-opportunities').waitFor({state:'visible'});await page.locator('#opportunity-search').fill('');
