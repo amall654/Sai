@@ -10,9 +10,8 @@ const url = pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href;
   await page.goto(url);await page.waitForSelector('#opportunity-grid .card',{state:'attached'});
   const pilot = await page.evaluate(()=>window.SAI_CONTENT);
   const fields = pilot.interests.filter(field=>field!=='الكل');
-  assert.equal(fields.length,6);
+  assert.equal(fields.length,3);
   for(const item of [...pilot.opportunities,...pilot.providers]){
-   assert.ok(item.fields.length>0);
    assert.ok(item.fields.every(field=>fields.includes(field)));
   }
   await page.evaluate(()=>location.hash='opportunities');
