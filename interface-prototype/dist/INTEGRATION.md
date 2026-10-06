@@ -68,7 +68,7 @@
 ## فصل عمل العضوين — 6 أكتوبر 2026
 
 - مسؤول الفرص: `features/opportunities/data.js` و`features/opportunities/ui.js`، على `ux-amal`.
-- مسؤول جهات التعلم: `features/learning/data.js` و`features/learning/ui.js`، على `codex/learning`.
+- مسؤول جهات التعلم: `features/learning/data.js` و`features/learning/ui.js`، على `jojolearning_part`.
 - ملفات `index.html` و`styles.css` و`i18n.js` و`content.js` و`services.js` و`ui.js` مشتركة. يراجع مسؤول الأساس تعديلها؛ لم تفصل قوالب HTML أو الترجمة بعد.
 - عقد `SaiServices.catalog()` لم يتغير. يجمع الفرص والجهات والتجارب؛ ملفات كل قسم مسؤولة عن بطاقاته وبحثه وتفاصيله.
 - يجب تحميل بيانات القسمين قبل `content.js`، ودوال العرض قبل `ui.js`. تستخدم دوال الأقسام أدوات العرض والحالة المشتركة دون نسخها.
