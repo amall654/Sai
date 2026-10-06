@@ -7,6 +7,7 @@ const url = pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href;
  const browser = await chromium.launch({channel:'msedge',headless:true});
  try {
   const page = await browser.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  await page.addInitScript(()=>{window.SAI_CATALOG={catalog:async()=>window.SAI_CONTENT};});
   await page.goto(url);await page.waitForSelector('#opportunity-grid .card',{state:'attached'});
   const pilot = await page.evaluate(()=>window.SAI_CONTENT);
   const fields = pilot.interests.filter(field=>field!=='الكل');

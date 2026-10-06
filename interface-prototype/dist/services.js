@@ -9,7 +9,7 @@ window.SaiServices = (() => {
  return {
   connected: !!backend,
   session: () => backend ? call('session') : Promise.resolve(null),
-  catalog: () => backend ? call('catalog') : Promise.resolve(window.SAI_CONTENT),
+  catalog: () => backend ? call('catalog') : window.SAI_CATALOG ? window.SAI_CATALOG.catalog() : Promise.resolve(window.SAI_CONTENT),
   login: values => call('login', values), signup: values => call('signup', values),
   resetPassword: email => call('resetPassword', email), logout: () => call('logout'),
   profile: () => call('profile'), updateProfile: values => call('updateProfile', values),
