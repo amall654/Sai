@@ -1,6 +1,8 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+ 'لا تقف عند ما تعرفه.':'Go beyond what you know.',
+ 'امنح نفسك مساحة لتكون مبتدئًا من جديد؛ تسأل، وتحاول، وتكتشف ما يستحق أن تواصل فيه.':'Give yourself room to be a beginner again: to ask, to try, and to discover what is worth pursuing.',
  'الموعد':'Deadline','تفاصيل المشاركة':'Participation details','حضوري وعن بُعد':'Hybrid',
  'سعي':'Sai','سعي الرئيسية':'Sai home','الرئيسية':'Home','الفرص':'Opportunities','جهات التعلم':'Learning providers','تجارب الطلاب':'Student stories','التجارب':'Stories','التعلم':'Learn','حسابي':'Account','ملفي':'My account','المحفوظات':'Saved items','تسجيل الدخول':'Sign in','تسجيل الخروج':'Sign out','انتقل إلى المحتوى':'Skip to content','التنقل الرئيسي':'Main navigation','التنقل على الجوال':'Mobile navigation','إغلاق':'Close',
  'كل خطوة صغيرة،':'Every small step','تفتح لك':'opens a','فرصة أكبر.':'bigger opportunity.','اكتشف فرصًا تلهمك، وجهات تساعدك على التعلم، وتجارب طلاب سبقوك بخطوة. هنا تبدأ رحلتك مع سعي.':'Discover inspiring opportunities, places to learn, and stories from students who took the first step. Your journey starts with Sai.','استكشف الفرص':'Explore opportunities','خطوتك اليوم':'Your step today','مساحة لخطوتك القادمة':'Space for your next step','اكتشف ما يلهمك، واختر خطوتك التالية.':'Find what inspires you and choose your next step.',

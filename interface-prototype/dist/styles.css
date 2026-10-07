@@ -590,7 +590,7 @@ align-items:stretch}
   display:flex;
 flex-direction:column}
 .login-story h1{
-  font-size:43px;
+  font-size:46px;
   line-height:1.7;
 margin-top:20px}
 .login-story h1 span{
@@ -598,27 +598,27 @@ color:#c3d89a}
 .login-story p{
   font-size:16px;
   color:#d2dfd5;
-  max-width:310px;
+  max-width:360px;
 margin-top:20px}
 .eyebrow.light{
 color:#d4e1bd}
 .login-plant{
   position:relative;
-  height:240px;
+  height:180px;
   display:grid;
   place-items:center;
 color:#bfd19d}
 .login-plant svg{
-  width:120px;
-  height:120px;
+  width:86px;
+  height:86px;
   stroke-width:.8;
 transform:rotate(-13deg)}
 .plant-ring{
   position:absolute;
   border:1px solid #527763;
   border-radius:50%;
-  width:220px;
-height:220px}
+  width:150px;
+height:150px}
 .plant-ring:after{
   content:"";
   position:absolute;
