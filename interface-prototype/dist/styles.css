@@ -592,7 +592,7 @@ flex-direction:column}
 .login-story h1{
   font-size:46px;
   line-height:1.7;
-margin-top:20px}
+margin-top:52px}
 .login-story h1 span{
 color:#c3d89a}
 .login-story p{
@@ -605,6 +605,9 @@ color:#d4e1bd}
 .login-plant{
   position:relative;
   height:180px;
+  flex-shrink:0;
+  margin-top:auto;
+  margin-bottom:20px;
   display:grid;
   place-items:center;
 color:#bfd19d}
@@ -627,7 +630,7 @@ height:150px}
   border-radius:50%;
 transform:scaleX(1.5) rotate(25deg)}
 .login-story-footer{
-  margin-top:auto;
+  margin-top:0;
   font-size:29px;
   font-weight:bold;
   display:flex;
