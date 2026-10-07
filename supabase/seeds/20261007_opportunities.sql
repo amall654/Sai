@@ -61,4 +61,3 @@ insert into public.opportunity_fields(opportunity_id,field_id) values ('93d28d06
 commit;
 
 select title,status from public.opportunities order by created_at;
-
