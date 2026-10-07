@@ -26,7 +26,7 @@ async function loadCatalog(){
   for(const key of ['opportunities','providers','experiences'])catalog[key]=catalog[key].filter(item=>!item.status||item.status==='published');
   catalog.interests=['الكل',...new Set([...(catalog.interests||[]).filter(x=>x!=='الكل'),...catalog.opportunities.flatMap(o=>o.fields||[])])];
   $('#interest-chips').innerHTML=catalog.interests.map(t=>`<button class="chip" data-interest="${esc(t)}" aria-pressed="false">${esc(t==='الكل'?'جميع المجالات':t)}</button>`).join('');
-  for(const [id,key,label] of [['opportunity-type','type','جميع الأنواع'],['opportunity-mode','mode','جميع الطرق']]){const select=$('#'+id),value=select.value;select.replaceChildren(new Option(label,''));[...new Set(catalog.opportunities.map(o=>o[key]).filter(Boolean))].forEach(v=>select.add(new Option(v,v)));select.value=value;if(select.selectedIndex<0)select.value='';}
+  for(const [id,key,label] of [['opportunity-type','type','جميع الأنواع'],['opportunity-mode','mode','الكل']]){const select=$('#'+id),value=select.value;select.replaceChildren(new Option(label,''));(key==='mode'?['عن بُعد','حضوري','حضوري وعن بُعد']:[...new Set(catalog.opportunities.map(o=>o[key]).filter(Boolean))]).forEach(v=>select.add(new Option(v,v)));select.value=value;if(select.selectedIndex<0)select.value='';}
   ['opportunity','provider','experience'].forEach(k=>status('#'+k+'-state',''));
   renderOpportunities();renderProviders();renderExperiences();
  }catch{if(version!==catalogVersion)return;$('#empty-opportunities').hidden=true;['opportunity','provider','experience'].forEach(k=>{$('#'+k+'-state').innerHTML='<div class="empty">تعذّر تحميل المحتوى. <button class="text-link" data-action="retry">إعادة المحاولة</button></div>';});}
