@@ -590,35 +590,38 @@ align-items:stretch}
   display:flex;
 flex-direction:column}
 .login-story h1{
-  font-size:43px;
+  font-size:46px;
   line-height:1.7;
-margin-top:20px}
+margin-top:52px}
 .login-story h1 span{
 color:#c3d89a}
 .login-story p{
   font-size:16px;
   color:#d2dfd5;
-  max-width:310px;
+  max-width:360px;
 margin-top:20px}
 .eyebrow.light{
 color:#d4e1bd}
 .login-plant{
   position:relative;
-  height:240px;
+  height:180px;
+  flex-shrink:0;
+  margin-top:auto;
+  margin-bottom:20px;
   display:grid;
   place-items:center;
 color:#bfd19d}
 .login-plant svg{
-  width:120px;
-  height:120px;
+  width:86px;
+  height:86px;
   stroke-width:.8;
 transform:rotate(-13deg)}
 .plant-ring{
   position:absolute;
   border:1px solid #527763;
   border-radius:50%;
-  width:220px;
-height:220px}
+  width:150px;
+height:150px}
 .plant-ring:after{
   content:"";
   position:absolute;
@@ -627,7 +630,7 @@ height:220px}
   border-radius:50%;
 transform:scaleX(1.5) rotate(25deg)}
 .login-story-footer{
-  margin-top:auto;
+  margin-top:0;
   font-size:29px;
   font-weight:bold;
   display:flex;
@@ -1192,3 +1195,25 @@ button:disabled{opacity:.6;cursor:wait}
 .hero-emblem{display:flex;align-items:center;justify-content:center;min-width:0}
 .hero-emblem img{display:block;width:min(100%,400px);height:auto}
 @media(max-width:760px){.hero-emblem img{width:min(75vw,290px)}.brand-mark{width:25px;height:25px}.brand{gap:3px}}
+
+/* Opportunity cards and details: scoped to preserve other sections. */
+.opportunity-card{display:flex;flex-direction:column;gap:15px;padding:24px}
+.opportunity-card .card-top{margin:0}
+.opportunity-kind{display:flex;align-items:center;gap:12px;color:var(--green);font-weight:700;font-size:14px}
+.opportunity-kind .category-icon{flex-shrink:0}
+.opportunity-card h3{font-size:21px;font-weight:800;line-height:1.65;margin:0;color:var(--ink);overflow-wrap:anywhere}
+.opportunity-card .opportunity-source,.opportunity-detail .opportunity-source{font-size:13px;line-height:1.7;margin:0;color:var(--muted)}
+.opportunity-card .opportunity-description{margin:0;font-size:15px;line-height:1.95;color:var(--ink)}
+.opportunity-facts{display:grid;gap:14px;background:var(--green-soft);padding:16px;border-radius:14px;margin:0}
+.opportunity-facts div{min-width:0}
+.opportunity-facts dt{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:5px}
+.opportunity-facts svg{width:18px;height:18px;flex-shrink:0}
+.opportunity-facts dd{margin:0;font-size:14px;font-weight:700;line-height:1.85;color:var(--ink);overflow-wrap:anywhere}
+.opportunity-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--line);margin-top:auto}
+.opportunity-actions .button{flex:1;min-height:46px;justify-content:center;padding:11px 12px;font-size:14px;text-align:center}
+.opportunity-actions a.button{background:var(--green);border-color:var(--green);color:white}
+.opportunity-actions .button:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.opportunity-detail{display:grid;gap:22px}
+.opportunity-detail .opportunity-copy{background:var(--green-soft);padding:20px;border-radius:14px;overflow-wrap:anywhere}
+.opportunity-detail .opportunity-copy p{font-size:16px;line-height:2;color:var(--ink);margin:0 0 16px}.opportunity-detail .opportunity-copy p:last-child{margin-bottom:0}
+@media(max-width:450px){.opportunity-card{padding:20px}.opportunity-card h3{font-size:20px}.opportunity-actions{flex-direction:column}.opportunity-actions .button{width:100%}}
