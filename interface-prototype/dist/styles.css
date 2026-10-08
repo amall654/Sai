@@ -1163,6 +1163,8 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .platform-form .check-label{display:flex;align-items:flex-start;gap:10px;font-weight:400;line-height:1.8}
 .check-label input{width:18px;height:18px;flex-shrink:0;margin-top:4px;accent-color:var(--green)}
 .platform-form input:focus-visible,.platform-form textarea:focus-visible,.platform-form select:focus-visible,.directory-search input:focus-visible{outline:3px solid #9db976;outline-offset:3px}
+#login-form #password:focus-visible{outline:none}
+#auth-password .field:focus-within{border-color:#6b756c}
 .directory-search{max-width:600px;margin-bottom:28px}
 .provider-actions,.detail-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}
 .provider-card>div{min-width:0}
