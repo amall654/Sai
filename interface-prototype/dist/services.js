@@ -12,6 +12,8 @@ window.SaiServices = (() => {
   catalog: () => backend ? call('catalog') : window.SAI_CATALOG ? window.SAI_CATALOG.catalog() : Promise.resolve(window.SAI_CONTENT),
   login: values => call('login', values), signup: values => call('signup', values),
   resetPassword: email => call('resetPassword', email), logout: () => call('logout'),
+  recoveryRequired: () => backend?.recoveryRequired ? call('recoveryRequired') : Promise.resolve(false),
+  changePassword: password => call('changePassword',password),
   profile: () => call('profile'), updateProfile: values => call('updateProfile', values),
   saved: () => call('saved'), setSaved: (kind,id,value) => call('setSaved', {kind,id,value}),
   submitExperience: values => call('submitExperience', values),
