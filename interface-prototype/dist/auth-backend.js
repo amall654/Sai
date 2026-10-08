@@ -49,7 +49,7 @@
    return this.session();
   },
   async signup({name,email,password}){
-   if(password.length<12)throw new Error('استخدم كلمة مرور من 12 حرفًا على الأقل.');
+   if(password.length<8)throw new Error('استخدم كلمة مرور من 8 خانات على الأقل.');
    const {data,error}=await client.auth.signUp({email,password,options:{data:{name:name.trim().slice(0,100)},emailRedirectTo:redirect()}});
    fail(error,'تعذّر إكمال التسجيل. تحقق من المدخلات أو حاول لاحقًا.');
    if(data.session)await client.auth.signOut({scope:'local'});
@@ -61,7 +61,7 @@
   async recoveryRequired(){return recovering && !!(await current());},
   async changePassword(password){
    if(!recovering || !(await current()))throw new Error('افتح رابط الاستعادة المرسل إلى بريدك.');
-   if(password.length<12)throw new Error('استخدم كلمة مرور من 12 حرفًا على الأقل.');
+   if(password.length<8)throw new Error('استخدم كلمة مرور من 8 خانات على الأقل.');
    const {error}=await client.auth.updateUser({password});
    fail(error,'تعذّر تغيير كلمة المرور. جرّب كلمة مرور قوية أخرى أو اطلب رابطًا جديدًا.');
    recovering=false;await client.auth.signOut();
