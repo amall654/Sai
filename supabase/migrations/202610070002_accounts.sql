@@ -33,7 +33,7 @@ alter table public.profiles enable row level security;
 alter table public.saved_opportunities enable row level security;
 alter table public.saved_providers enable row level security;
 alter table public.experiences enable row level security;
-revoke all on public.profiles,public.saved_opportunities,public.saved_providers,public.experiences from anon,authenticated;
+revoke all on public.profiles,public.saved_opportunities,public.saved_providers,public.experiences from public,anon,authenticated;
 grant select on public.profiles,public.saved_opportunities,public.saved_providers,public.experiences to authenticated;
 grant insert(id,name,interests),update(name,interests) on public.profiles to authenticated;
 grant insert(opportunity_id),delete on public.saved_opportunities to authenticated;

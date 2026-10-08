@@ -4,9 +4,16 @@
  */
 (() => {
  if (window.SAI_BACKEND || !['http:','https:'].includes(location.protocol)) return;
+ // Email links can open a new tab. Only the temporary PKCE verifier is shared;
+ // access and refresh tokens remain scoped to the current tab.
+ const storage={
+  getItem:key=>(key.endsWith('-code-verifier')?localStorage:sessionStorage).getItem(key),
+  setItem:(key,value)=>(key.endsWith('-code-verifier')?localStorage:sessionStorage).setItem(key,value),
+  removeItem:key=>(key.endsWith('-code-verifier')?localStorage:sessionStorage).removeItem(key)
+ };
  const client=window.supabase?.createClient('https://xzdhyccemkndxabwbrpe.supabase.co',
   'sb_publishable_s4IBiCHXNUIB2YkJnaV_LQ_Wm-K_02h', {
-   auth:{storage:sessionStorage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}
+   auth:{storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}
   });
  if(!client)return;
  let recovering=new URLSearchParams(location.search).get('auth')==='recovery';

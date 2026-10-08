@@ -1214,6 +1214,6 @@ button:disabled{opacity:.6;cursor:wait}
 .opportunity-actions a.button{background:var(--green);border-color:var(--green);color:white}
 .opportunity-actions .button:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .opportunity-detail{display:grid;gap:22px}
-.opportunity-detail .opportunity-copy h3{font-size:18px;margin:0 0 12px}
-.opportunity-detail .opportunity-copy p{font-size:16px;line-height:2;color:var(--ink)}
+.opportunity-detail .opportunity-copy{background:var(--green-soft);padding:20px;border-radius:14px;overflow-wrap:anywhere}
+.opportunity-detail .opportunity-copy p{font-size:16px;line-height:2;color:var(--ink);margin:0 0 16px}.opportunity-detail .opportunity-copy p:last-child{margin-bottom:0}
 @media(max-width:450px){.opportunity-card{padding:20px}.opportunity-card h3{font-size:20px}.opportunity-actions{flex-direction:column}.opportunity-actions .button{width:100%}}
