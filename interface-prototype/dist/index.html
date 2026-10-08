@@ -8,7 +8,7 @@
 <title>سعي | مساحة لخطوتك القادمة</title>
 <link rel="icon" type="image/png" href="assets/sai-gateway.png">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="styles.css?v=20261008-login-focus">
+<link rel="stylesheet" href="styles.css?v=20261008-password-eye">
 <script defer src="features/opportunities/data.js?v=20261006"></script>
 <script defer src="features/learning/data.js?v=20261006"></script>
 <script defer src="content.js?v=20261006-split">
@@ -20,11 +20,11 @@
 <script defer src="vendor/supabase-2.117.3.js"></script>
 <script defer src="auth-backend.js?v=20261008-pw8"></script>
 <script defer src="services.js?v=20261008-auth"></script>
-<script defer src="app.js?v=20261004-platform"></script>
+<script defer src="app.js?v=20261008-password-eye"></script>
 <script defer src="i18n.js?v=20261007-login-copy"></script>
 <script defer src="features/opportunities/ui.js?v=20261008-simple-cards-3"></script>
 <script defer src="features/learning/ui.js?v=20261006"></script>
-<script defer src="ui.js?v=20261008-pw8">
+<script defer src="ui.js?v=20261008-password-eye">
 </script>
 </head>
 <body>
@@ -142,7 +142,7 @@
 <div id="signup-name" hidden><label for="display-name">الاسم</label><input id="display-name" name="name" autocomplete="name" maxlength="80"></div>
 <label for="email">البريد الإلكتروني</label><input id="email" name="email" type="email" dir="ltr" autocomplete="email" required placeholder="name@example.com">
 <div id="auth-password"><div class="password-label"><label for="password">كلمة المرور</label><button type="button" class="text-link" data-action="forgot">نسيت كلمة المرور؟</button></div>
-<div class="field"><input id="password" name="password" type="password" autocomplete="current-password" required><button type="button" id="toggle-password" class="icon-button" aria-label="إظهار كلمة المرور" aria-pressed="false"><span data-icon="eye"></span></button></div></div>
+<div class="field"><input id="password" name="password" type="password" autocomplete="current-password" required><button type="button" id="toggle-password" class="icon-button" aria-label="إظهار كلمة المرور" aria-pressed="false"><span data-icon="eyeOff"></span></button></div></div>
 <p id="auth-feedback" class="form-feedback" role="status" hidden></p>
 <button type="submit" class="button full" id="auth-submit">تسجيل الدخول</button></form>
 <p class="signup"><button class="text-link" data-action="signup" id="auth-mode-link">جديد في سعي؟ أنشئ حسابك</button></p>

@@ -1165,6 +1165,7 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .platform-form input:focus-visible,.platform-form textarea:focus-visible,.platform-form select:focus-visible,.directory-search input:focus-visible{outline:3px solid #9db976;outline-offset:3px}
 #login-form input:focus-visible{outline:none;border-color:#6b756c}
 #auth-password .field:focus-within{border-color:#6b756c}
+#password::-ms-reveal{display:none}
 .directory-search{max-width:600px;margin-bottom:28px}
 .provider-actions,.detail-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}
 .provider-card>div{min-width:0}

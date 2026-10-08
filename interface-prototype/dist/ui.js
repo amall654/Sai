@@ -53,7 +53,7 @@ document.addEventListener('submit',async event=>{const form=event.target;if(!['e
  if(form.id==='content-form'&&user.role==='admin')await formRequest(form,'#content-feedback',async()=>{if(!safeURL(values.sourceUrl)||(values.attachmentUrl&&!safeURL(values.attachmentUrl)))throw new Error('أدخل رابطًا يبدأ بـ https:// أو http://.');if(!values.title.trim()||!values.originalText.trim())throw new Error('أدخل العنوان والنص.');const {kind,...rest}=values;await api.addContent(kind,{...rest,fields:split(values.fields)});form.reset();status('#content-feedback','تم حفظ المحتوى.');await loadCatalog();});
 });
 $('#login-form').addEventListener('submit',authenticate);
-$('#toggle-password').onclick=function(){const visible=$('#password').type==='password';$('#password').type=visible?'text':'password';this.setAttribute('aria-pressed',String(visible));this.setAttribute('aria-label',visible?'إخفاء كلمة المرور':'إظهار كلمة المرور');};
+$('#toggle-password').onclick=function(){const visible=$('#password').type==='password';$('#password').type=visible?'text':'password';this.innerHTML=icon(visible?'eye':'eyeOff');this.setAttribute('aria-pressed',String(visible));this.setAttribute('aria-label',visible?'إخفاء كلمة المرور':'إظهار كلمة المرور');};
 $('#close-dialog').onclick=()=>dialog.close();
 dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
 $('.skip').onclick=event=>{event.preventDefault();$('#main').focus();};
