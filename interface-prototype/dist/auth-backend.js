@@ -51,6 +51,9 @@
   async signup({name,email,password}){
    if(password.length<8)throw new Error('استخدم كلمة مرور من 8 خانات على الأقل.');
    const {data,error}=await client.auth.signUp({email,password,options:{data:{name:name.trim().slice(0,100)},emailRedirectTo:redirect()}});
+   if(error?.code==='weak_password')throw new Error('استخدم 8 خانات على الأقل، تشمل حرفًا إنجليزيًا كبيرًا وصغيرًا ورقمًا ورمزًا.');
+   if(['over_email_send_rate_limit','over_request_rate_limit'].includes(error?.code))throw new Error('تم بلوغ حد المحاولات أو رسائل البريد مؤقتًا. انتظر قليلًا ثم حاول مجددًا.');
+   if(error?.code==='email_address_not_authorized')throw new Error('خدمة البريد التجريبية لا تسمح بإرسال التحقق لهذا العنوان بعد. تواصل مع مسؤول المنصة.');
    fail(error,'تعذّر إكمال التسجيل. تحقق من المدخلات أو حاول لاحقًا.');
    if(data.session)await client.auth.signOut({scope:'local'});
   },
