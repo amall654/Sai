@@ -1220,3 +1220,20 @@ button:disabled{opacity:.6;cursor:wait}
 .opportunity-detail .opportunity-copy{background:var(--green-soft);padding:20px;border-radius:14px;overflow-wrap:anywhere}
 .opportunity-detail .opportunity-copy p{font-size:16px;line-height:2;color:var(--ink);margin:0 0 16px}.opportunity-detail .opportunity-copy p:last-child{margin-bottom:0}
 @media(max-width:450px){.opportunity-card{padding:20px}.opportunity-card h3{font-size:20px}.opportunity-actions{flex-direction:column}.opportunity-actions .button{width:100%}}
+
+/* Let wrapped navigation occupy its own space at tablet widths. */
+@media (min-width:761px) and (max-width:1000px){
+  .header-inner{height:auto;min-height:88px;flex-wrap:wrap;gap:12px 24px;padding-block:14px}
+  .desktop-nav a{padding-block:10px}
+  .desktop-nav a.active:after{bottom:2px}
+  .header-actions{flex-wrap:nowrap}
+}
+@media (min-width:761px) and (max-width:900px){
+  .login-page{grid-template-columns:minmax(0,1fr);gap:24px;padding-top:28px}
+  .login-story{min-height:0;padding:28px}
+  .login-story h1{margin-top:0;font-size:32px}
+  .login-story p{max-width:none;margin-top:12px}
+  .login-plant{display:none}
+  .login-form-wrap{padding:8px 0;max-width:480px}
+}
+.login-page>*{min-width:0}
