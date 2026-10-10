@@ -1244,7 +1244,7 @@ button:disabled{opacity:.6;cursor:wait}
 .member-home .hero-copy{text-align:center;min-width:0}
 .member-home #hero-title{font-size:clamp(36px,4.8vw,64px);overflow-wrap:anywhere}
 .member-home #hero-title span{color:var(--green)}
-.member-home #member-home-description{font-size:clamp(19px,2.1vw,28px);max-width:none;margin:22px 0 32px}
+.member-home #member-home-description{font-size:clamp(17px,1.45vw,21px);line-height:1.95;max-width:540px;margin:22px auto 32px}
 .member-home .hero-buttons{justify-content:center}
 .member-daily-card{position:relative;isolation:isolate;padding:0 0 0 28px;min-width:0}
 .member-sheet{position:absolute;inset:14px 18px 14px 12px;background:#c8d9b0;border-radius:22px;z-index:-1}
