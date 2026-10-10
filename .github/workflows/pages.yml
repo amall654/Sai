@@ -2,7 +2,7 @@ name: Publish Sai
 
 on:
   push:
-    branches: ["ux-amal"]
+    branches: ["main"]
 
 permissions:
   contents: read
