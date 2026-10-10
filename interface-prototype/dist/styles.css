@@ -1268,3 +1268,7 @@ button:disabled{opacity:.6;cursor:wait}
 .experience-detail-copy{background:var(--green-soft);padding:20px;border-radius:14px;overflow-wrap:anywhere}
 .experience-detail-copy p{font-size:16px;line-height:2;color:var(--ink);margin:0 0 16px}
 .experience-detail-copy p:last-child{margin-bottom:0}
+
+/* Preview cards use the same reading colors as the full experience. */
+.experience-card>h3{display:table;max-width:100%;padding:10px 18px;border-radius:12px;background:#eeeeee;color:#454545;overflow-wrap:anywhere;margin-bottom:16px}
+.experience-card>p{background:var(--green-soft);padding:20px;border-radius:14px;color:var(--ink);line-height:2;overflow-wrap:anywhere}
