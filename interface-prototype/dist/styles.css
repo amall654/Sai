@@ -1258,3 +1258,7 @@ button:disabled{opacity:.6;cursor:wait}
 @media(max-width:760px){.member-home .hero{grid-template-columns:minmax(0,1fr);gap:38px;padding-block:36px}.member-daily-card{width:100%;max-width:500px;justify-self:center}.member-card-face{min-height:260px}.member-home #hero-title{font-size:38px}}
 
 #guest-home-title{color:inherit}
+
+#profile-display-name{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.profile-mini-avatar{flex-shrink:0}
+@media(max-width:760px){#profile-display-name{max-width:90px}}
