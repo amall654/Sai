@@ -10,7 +10,7 @@ window.SaiServices = (() => {
   connected: !!backend,
   session: () => backend ? call('session') : Promise.resolve(null),
   catalog: () => backend ? call('catalog') : window.SAI_CATALOG ? window.SAI_CATALOG.catalog() : Promise.resolve(window.SAI_CONTENT),
-  login: values => call('login', values), signup: values => call('signup', values),
+  loginGoogle: () => call('loginGoogle'), login: values => call('login', values), signup: values => call('signup', values),
   resetPassword: email => call('resetPassword', email), logout: () => call('logout'),
   recoveryRequired: () => backend?.recoveryRequired ? call('recoveryRequired') : Promise.resolve(false),
   changePassword: password => call('changePassword',password),
@@ -18,6 +18,8 @@ window.SaiServices = (() => {
   saved: () => call('saved'), setSaved: (kind,id,value) => call('setSaved', {kind,id,value}),
   submitExperience: values => call('submitExperience', values),
   myExperiences: () => call('myExperiences'),
-  addContent: (kind, values) => call('addContent', {kind, ...values})
+  ownerCatalog:()=>call('ownerCatalog'),
+  ownerSaveOpportunity:payload=>call('ownerSaveOpportunity',payload),
+  ownerReviewExperience:(id,decision,expected)=>call('ownerReviewExperience',id,decision,expected)
  };
 })();

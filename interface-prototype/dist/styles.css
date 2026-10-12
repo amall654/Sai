@@ -1272,3 +1272,15 @@ button:disabled{opacity:.6;cursor:wait}
 /* Preview cards use the same reading colors as the full experience. */
 .experience-card>h3{display:table;max-width:100%;padding:10px 18px;border-radius:12px;background:#eeeeee;color:#454545;overflow-wrap:anywhere;margin-bottom:16px}
 .experience-card>p{background:var(--green-soft);padding:20px;border-radius:14px;color:var(--ink);line-height:2;overflow-wrap:anywhere}
+
+.owner-section{margin-block:32px}.owner-section>h2{margin-bottom:16px}
+.owner-list{display:grid;gap:12px;margin-top:18px}
+.owner-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;border:1px solid var(--line);border-radius:14px;background:white}
+.owner-row>div{min-width:0}.owner-row h3{font-size:17px;overflow-wrap:anywhere;margin-bottom:8px}
+.owner-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+#owner-opportunity-form fieldset{border:1px solid var(--line);border-radius:12px;padding:16px}
+#owner-opportunity-form input:focus-visible{outline:2px solid #6b756c;outline-offset:2px}
+@media(max-width:600px){.owner-row{align-items:flex-start;flex-direction:column}.owner-section .section-heading{flex-wrap:wrap;gap:12px}}
+
+.auth-divider{text-align:center;margin:16px 0;font-size:.9rem}
+#google-login{margin-top:8px}

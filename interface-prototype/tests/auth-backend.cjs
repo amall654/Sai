@@ -3,9 +3,10 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const source=fs.readFileSync(require('node:path').join(__dirname,'../dist/auth-backend.js'),'utf8');
 function storage(){const m=new Map();return {getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)};}
-let session=null,options,authHandler,inserted,failInsert=false;
+let session=null,options,authHandler,inserted,failInsert=false,owner=false,oauthOptions;
 const verified={id:'student-a',email_confirmed_at:'2026-10-08',user_metadata:{name:'طالب',role:'admin'}};
-const client={auth:{
+const client={rpc:async()=>({data:owner,error:null}),auth:{
+ signInWithOAuth:async values=>{oauthOptions=values;return {data:{url:'https://xzdhyccemkndxabwbrpe.supabase.co/auth/v1/authorize?provider=google'},error:null};},
  getSession:async()=>({data:{session}}),getUser:async()=>({data:{user:session?.user},error:null}),
  onAuthStateChange:fn=>{authHandler=fn;},
  signInWithPassword:async()=>{session={user:verified};return {error:null};},
@@ -14,14 +15,16 @@ const client={auth:{
  resetPasswordForEmail:async()=>({error:null}),updateUser:async()=>({error:null})
  },from:table=>({insert:async values=>{inserted={table,values};return {error:failInsert?{code:'42501'}:null};}})};
 const local=storage(),tab=storage(),events=[];
-const context={window:{supabase:{createClient:(url,key,o)=>{options=o;return client;}},dispatchEvent:e=>events.push(e.type)},location:{protocol:'https:',origin:'https://sai.example',pathname:'/',search:''},localStorage:local,sessionStorage:tab,URLSearchParams,Event,history:{replaceState(){}}};
+const context={window:{supabase:{createClient:(url,key,o)=>{options=o;return client;}},dispatchEvent:e=>events.push(e.type)},location:{protocol:'https:',origin:'https://sai.example',pathname:'/',search:'',assign:url=>events.push(url)},localStorage:local,sessionStorage:tab,URL,URLSearchParams,Event,history:{replaceState(){}}};
 vm.runInNewContext(source,context);
 (async()=>{
  const api=context.window.SAI_BACKEND;
  assert.equal(await api.session(),null);
+ await api.loginGoogle();assert.equal(oauthOptions.provider,'google');assert.equal(oauthOptions.options.redirectTo,'https://sai.example/');assert.ok(events.some(e=>e.includes('/auth/v1/authorize')));
  await assert.rejects(()=>api.submitExperience({title:'',body:'x'.repeat(30),field:''}),/سجّل الدخول/);
  const u=await api.login({email:'example@example.com',password:'placeholder'});
  assert.equal(u.role,'student','metadata must never grant administrator privileges');
+ owner=true;assert.equal((await api.session()).role,'admin');owner=false;
  await api.submitExperience({title:'تجربة',body:'x'.repeat(30),field:'تقنية',status:'published',user_id:'student-b'});
  assert.deepEqual(Object.keys(inserted.values).sort(),['body','field','title']);
  assert.equal(inserted.table,'experiences');

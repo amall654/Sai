@@ -1,6 +1,6 @@
 /* Supabase SDK handles authentication; only the public publishable key is shipped.
  * Tokens stay in sessionStorage (this tab), passwords are never stored by Sai.
- * Database RLS is the authority. All app accounts are students, never UI admins.
+ * Database RLS is the authority. Owner role is verified by a database RPC, never user metadata.
  */
 (() => {
  if (window.SAI_BACKEND || !['http:','https:'].includes(location.protocol)) return;
@@ -36,12 +36,25 @@
   }
  });
  window.SAI_BACKEND={
-  async session(){const u=await current();return u?{id:u.id,name:u.user_metadata?.name||'طالب',role:'student'}:null;},
+  async session(){
+   const u=await current();if(!u)return null;
+   const {data:owner,error}=await client.rpc('sai_is_owner');
+   // A missing owner migration must never break student login or grant authority.
+   return {id:u.id,name:u.user_metadata?.name||'طالب',role:!error&&owner===true?'admin':'student'};
+  },
   async catalog(){
    const base=await window.SAI_CATALOG.catalog();
    const {data,error}=await client.rpc('sai_published_experiences');
    fail(error,'تعذّر تحميل تجارب الطلاب. حاول مرة أخرى.');
    return {...base,experiences:data.map(e=>({...e,publishedAt:e.published_at?new Date(e.published_at).toLocaleDateString('ar-SA'):''}))};
+  },
+  async loginGoogle(){
+   const {data,error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:redirect(),skipBrowserRedirect:true,queryParams:{prompt:'select_account'}}});
+   fail(error,'تعذّر بدء الدخول بجوجل. تحقق من تفعيل الخدمة وحاول مجددًا.');
+   if(!data?.url)throw new Error('تعذّر بدء الدخول بجوجل.');
+   const destination=new URL(data.url);
+   if(destination.origin!=='https://xzdhyccemkndxabwbrpe.supabase.co'||destination.pathname!=='/auth/v1/authorize')throw new Error('رابط تسجيل الدخول غير صالح.');
+   location.assign(destination.href);
   },
   async login({email,password}){
    const {error}=await client.auth.signInWithPassword({email,password});
@@ -88,6 +101,9 @@
   },
   async submitExperience({title,body,field}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||''});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
   async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,status').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
-  async addContent(){throw new Error('إدارة المحتوى متاحة حاليًا من لوحة Supabase فقط.');}
+  async ownerCatalog(){await requireUser();const {data,error}=await client.rpc('sai_owner_catalog');fail(error,'تعذّر تحميل إدارة المحتوى.');return data;},
+  async ownerSaveOpportunity(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_opportunity',{payload});fail(error,error?.code==='40001'?'تم تعديل الفرصة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ الفرصة. تحقق من الحقول وصلاحية الحساب.');return data;},
+  async ownerReviewExperience(target,decision,expected_status){await requireUser();const {error}=await client.rpc('sai_owner_review_experience',{target,decision,expected_status});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}
+
  };
 })();
