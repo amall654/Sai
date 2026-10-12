@@ -1,4 +1,4 @@
-/* Catalog only: authentication, saves and submissions remain unconnected. */
+/* Public catalog; auth-backend.js supplies accounts, saves and moderated stories. */
 window.SAI_CATALOG = window.SAI_CATALOG || {
  async catalog() {
   const [fields, types] = await Promise.all([

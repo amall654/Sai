@@ -61,6 +61,50 @@
 });
  Object.assign(en, {"مسابقة البحث الهندسي": "Engineering research competition", "قدّم فكرة بحثية واختبر حلًا هندسيًا ضمن منافسة طلابية.": "Present a research idea and test an engineering solution in a student competition.", "مسابقة الأنظمة المدمجة": "Embedded systems competition", "طوّر نموذجًا باستخدام الحساسات والمتحكمات للمشاركة في مسابقة تقنية.": "Build a prototype using sensors and microcontrollers for a technical competition.", "مسابقة التوعية بالأمان الرقمي": "Digital safety awareness competition", "صمّم مشروعًا توعويًا مبتكرًا عن حماية الحسابات والخصوصية الرقمية.": "Design an innovative awareness project about account security and digital privacy.", "مسابقة التصميم الهندسي": "Engineering design competition", "تنافس بتصميم نموذج هندسي واختبره وفق متطلبات واضحة.": "Compete by designing an engineering prototype and testing it against clear requirements.", "مسابقة الأبحاث الهندسية والحاسوبية": "Engineering and computing research competition", "شارك بفكرة أو ملصق بحثي في منافسة للمشروعات الهندسية والحاسوبية.": "Enter a research idea or poster in an engineering and computing project competition.", "هاكاثون": "Hackathon", "مسابقة": "Competition", "اختر نوع الفرصة": "Choose an opportunity type"});
  Object.assign(en,{'أهلًا،':'Hello,','في سعي، تقدر تكتشف فرصة تناسبك، وتلقى مكان تتعلّم منه، وتقرأ تجارب طلاب مرّوا بأسئلة تشبه أسئلتك. خذ وقتك، ويمكن تلقى هنا بداية ما كانت على بالك.':'At Sai, you can discover an opportunity that suits you, find a place to learn, and read stories from students who have faced questions like yours. Take your time—you might find a beginning you had not considered.','جرّب شيئًا لم تفعله من قبل.':'Try something you have never done before.','خطوتك اليوم':'Your step today'});
+ Object.assign(en,{
+ 'الدخول باستخدام Google':'Sign in with Google','المتابعة باستخدام Google':'Continue with Google','أو':'or',
+ 'جارٍ الانتقال إلى Google…':'Redirecting to Google…','لم يكتمل الدخول بجوجل. يمكنك المحاولة مجددًا.':'Google sign-in was not completed. Please try again.',
+ 'تعذّر الدخول بجوجل. حاول مجددًا.':'Google sign-in failed. Please try again.',
+ 'تعذّر بدء الدخول بجوجل. تحقق من تفعيل الخدمة وحاول مجددًا.':'Unable to start Google sign-in. Please try again later.',
+ 'انتهت الجلسة أو تعذّر التحقق منها. سجّل الدخول مجددًا.':'Your session expired or could not be verified. Please sign in again.',
+ 'تحقّق من بريدك قبل تسجيل الدخول.':'Verify your email before signing in.','سجّل الدخول أولًا.':'Please sign in first.',
+ 'تعذّر تسجيل الدخول. تحقق من البريد وكلمة المرور وتأكيد البريد، ثم حاول مجددًا.':'Unable to sign in. Check your email, password and email verification, then try again.',
+ 'استخدم كلمة مرور من 8 خانات على الأقل.':'Use a password with at least 8 characters.',
+ 'استخدم 8 خانات على الأقل، تشمل حرفًا إنجليزيًا كبيرًا وصغيرًا ورقمًا ورمزًا.':'Use at least 8 characters, including an uppercase letter, a lowercase letter, a number and a symbol.',
+ 'تم بلوغ حد المحاولات أو رسائل البريد مؤقتًا. انتظر قليلًا ثم حاول مجددًا.':'The request or email limit has been reached. Please wait and try again.',
+ 'خدمة البريد التجريبية لا تسمح بإرسال التحقق لهذا العنوان بعد. تواصل مع مسؤول المنصة.':'The email service cannot send verification to this address yet. Please contact the platform owner.',
+ 'تعذّر إكمال التسجيل. تحقق من المدخلات أو حاول لاحقًا.':'Unable to create your account. Check your details or try again later.',
+ 'تعذّر إرسال طلب الاستعادة. حاول لاحقًا.':'Unable to send the reset request. Please try again later.',
+ 'افتح رابط الاستعادة المرسل إلى بريدك.':'Open the password reset link sent to your email.',
+ 'تعيين كلمة مرور جديدة':'Set a new password','كلمة المرور الجديدة':'New password','تأكيد كلمة المرور':'Confirm password','حفظ كلمة المرور':'Save password',
+ 'كلمتا المرور غير متطابقتين.':'Passwords do not match.',
+ 'تم تغيير كلمة المرور. سجّل الدخول بكلمة المرور الجديدة.':'Password changed. Sign in with your new password.',
+ 'تعذّر تغيير كلمة المرور. جرّب كلمة مرور قوية أخرى أو اطلب رابطًا جديدًا.':'Unable to change your password. Try another strong password or request a new reset link.',
+ 'تعذّر التحقق من رابط الاستعادة. اطلب رابطًا جديدًا من تسجيل الدخول.':'Unable to verify the reset link. Request a new one from the sign-in page.',
+ 'تعذّر تسجيل الخروج. تحقق من الاتصال وحاول مجددًا.':'Unable to sign out. Check your connection and try again.',
+ 'تعذّر حفظ التغيير.':'Unable to save the change.','تعذّر حفظ بيانات الحساب.':'Unable to save account details.',
+ 'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.':'Unable to confirm your story was saved. Please try again.',
+ 'هذه المساحة متاحة لمالك المنصة فقط.':'This area is available only to the platform owner.',
+ 'جارٍ تحميل لوحة الإدارة…':'Loading the management panel…',
+ 'إدارة الفرص ومراجعة تجارب الطلاب. التعديلات المحفوظة تنعكس على المنصة.':'Manage opportunities and review student stories. Saved changes appear on the platform.',
+ 'إضافة فرصة':'Add opportunity','تعديل الفرصة':'Edit opportunity','تعديل':'Edit','مخفية':'Hidden',
+ 'لا توجد فرص بعد.':'No opportunities yet.','حالة التجربة':'Story status','جميع التجارب':'All stories',
+ 'قراءة ومراجعة':'Read and review','لا توجد تجارب بهذه الحالة.':'No stories with this status.',
+ 'تعذّر تحميل لوحة المالك. تحقق من صلاحية الحساب والاتصال.':'Unable to load the owner panel. Check your permissions and connection.',
+ 'عنوان الفرصة':'Opportunity title','الجهة المقدمة':'Organizer','غير معلنة':'Not announced',
+ 'وقت إغلاق التسجيل الدقيق (اختياري)':'Exact registration deadline (optional)',
+ 'نبذة قصيرة':'Short description','نص الإعلان والتفاصيل':'Announcement and details',
+ 'رابط التسجيل (اختياري)':'Registration link (optional)','المجالات (اختياري)':'Fields (optional)',
+ 'تم حفظ الفرصة.':'Opportunity saved.','اعتماد ونشر':'Approve and publish','إعادة للمراجعة / إخفاء':'Return to review / hide','تم حفظ قرار المراجعة.':'Review decision saved.',
+ 'استخدم روابط تبدأ بـ https:// أو http://.':'Use links starting with https:// or http://.',
+ 'تعذّر تحميل الحساب.':'Unable to load your account.','تعذّر تحميل تجاربك.':'Unable to load your stories.',
+ 'تعذّر تحميل تجارب الطلاب. حاول مرة أخرى.':'Unable to load student stories. Please try again.',
+ 'تعذّر تحميل إدارة المحتوى.':'Unable to load content management.',
+ 'تم تعديل الفرصة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'This opportunity was edited elsewhere. Close the form and reload the panel before trying again.',
+ 'تعذّر حفظ الفرصة. تحقق من الحقول وصلاحية الحساب.':'Unable to save the opportunity. Check the fields and account permissions.',
+ 'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'The story status changed. Reload the panel.',
+ 'تعذّر حفظ قرار المراجعة.':'Unable to save the review decision.'
+ });
  let language='ar';try{if(localStorage.getItem('sai-language')==='en')language='en';}catch{}
  const originals=new WeakMap();const attrs=new WeakMap();
  function translate(text){const trimmed=text.trim();if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}

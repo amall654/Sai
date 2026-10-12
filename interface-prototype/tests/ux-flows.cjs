@@ -58,8 +58,17 @@ const url = pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href;
   await account.evaluate(()=>location.hash='admin');await account.locator('[data-owner-new]').click();await account.locator('#owner-opportunity-form').waitFor();
   await account.locator('[name="title"]').fill('فرصة اختبار');await account.locator('[name="source_name"]').fill('جهة اختبار');await account.locator('textarea[name="description"]').fill('نبذة');await account.locator('[name="original_text"]').fill('نص المنشور الأصلي');await account.locator('[name="source_url"]').fill('https://example.com');await account.locator('#owner-opportunity-form [type="submit"]').click();await account.waitForFunction(()=>document.querySelector('#owner-feedback')?.textContent==='تم حفظ الفرصة.');
   assert.equal(await account.locator('[data-action="opportunity-assistant"]').count(),0);
+  await account.locator('#language-toggle').click();
+  await account.waitForFunction(()=>document.querySelector('#owner-story-filter').closest('label').textContent.includes('Story status'));
+  assert.equal(await account.locator('#owner-story-filter').inputValue(),'pending');
+  await account.locator('#owner-story-filter').selectOption('all');
+  await account.waitForFunction(()=>document.querySelector('#owner-stories').textContent.includes('No stories with this status.'));
+  await account.locator('#language-toggle').click();
+  await account.waitForFunction(()=>document.querySelector('#owner-story-filter').closest('label').textContent.includes('حالة التجربة'));
 
   await account.evaluate(()=>location.hash='profile');await account.locator('#profile-form').waitFor();await account.locator('[data-action="logout"]').click();await account.locator('[data-page="home"]').waitFor({state:'visible'});await account.evaluate(()=>location.hash='profile');await account.locator('#login-page').waitFor({state:'visible'});
-  assert.deepEqual(errors,[]);console.log('PASS: guest flows, filters, auth modes, disconnected errors, mobile overflow, mock integration, save return, moderation, profile, admin and logout.');
+  await account.locator('#language-toggle').click();
+  await account.waitForFunction(()=>document.querySelector('#google-login').textContent==='Continue with Google');
+  assert.deepEqual(errors,[]);console.log('PASS: guest flows, filters, auth modes, disconnected errors, mobile overflow, mock integration, save return, moderation, profile, admin translations and logout.');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
