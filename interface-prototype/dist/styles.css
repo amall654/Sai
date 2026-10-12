@@ -1274,6 +1274,9 @@ button:disabled{opacity:.6;cursor:wait}
 .experience-card>p{background:var(--green-soft);padding:20px;border-radius:14px;color:var(--ink);line-height:2;overflow-wrap:anywhere}
 
 .owner-section{margin-block:32px}.owner-section>h2{margin-bottom:16px}
+.owner-section>label{display:grid;gap:10px;width:100%;max-width:300px;font-size:15px;font-weight:700;color:var(--ink)}
+#owner-story-filter{width:100%;min-height:48px;padding:10px 14px;font:inherit;font-size:16px;font-weight:400;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+#owner-story-filter:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 .owner-list{display:grid;gap:12px;margin-top:18px}
 .owner-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;border:1px solid var(--line);border-radius:14px;background:white}
 .owner-row>div{min-width:0}.owner-row h3{font-size:17px;overflow-wrap:anywhere;margin-bottom:8px}
