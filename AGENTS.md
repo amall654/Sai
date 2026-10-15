@@ -1,6 +1,6 @@
 # Sai project working rules
 
-- Work only on `ux-amal`. Never switch to `main` or another branch unless the user explicitly requests it.
+- Work directly on `main`, as requested by the owner. Do not create or switch to another branch unless the user requests it.
 
 - This repository is the only active project. Edit the website in interface-prototype/dist.
 - Read current files and git status/diff before editing. Never restore older files over current work without comparing and merging.
