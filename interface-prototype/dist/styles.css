@@ -1287,3 +1287,16 @@ button:disabled{opacity:.6;cursor:wait}
 
 .auth-divider{text-align:center;margin:16px 0;font-size:.9rem}
 #google-login{margin-top:8px}
+
+/* Learning providers share the opportunity card/detail hierarchy. */
+.provider-card{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+.provider-card .card-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.provider-card .provider-monogram{width:50px;flex:0 0 50px}
+.provider-card h3,.provider-card p{margin:0}
+.provider-card .provider-copy{background:var(--green-soft);padding:16px;border-radius:14px;overflow-wrap:anywhere}
+.provider-card .provider-copy p{color:var(--ink);line-height:1.9}
+.provider-card .provider-actions{margin-top:auto}
+.provider-detail .detail-facts{margin:0;gap:12px}
+.provider-detail .detail-facts>div{background:var(--green-soft);padding:18px 20px;border-radius:14px;display:grid;gap:8px;overflow-wrap:anywhere}
+.provider-detail .detail-facts dd{line-height:1.9}
+.provider-detail .detail-actions{margin-top:0}
