@@ -1287,5 +1287,3 @@ button:disabled{opacity:.6;cursor:wait}
 
 .auth-divider{text-align:center;margin:16px 0;font-size:.9rem}
 #google-login{margin-top:8px}
-
-.experience-assistant{padding:12px;background:#f3f6ef;border-radius:12px;margin:12px 0}.experience-assistant button{padding:8px 12px;cursor:pointer}.experience-assistant audio{display:block;width:100%;margin:10px 0}.experience-assistant textarea{width:100%}

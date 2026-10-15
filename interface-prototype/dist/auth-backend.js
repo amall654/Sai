@@ -99,17 +99,6 @@
    const result=value?await client.from(table).insert({[column]:id}):await client.from(table).delete().eq(column,id).eq('user_id',u.id);
    if(value&&result.error?.code==='23505')return;fail(result.error,'تعذّر حفظ التغيير.');
   },
-  async assistExperience(action,input){
-   await requireUser();
-   if(!['rewrite','transcribe'].includes(action))throw new Error('طلب غير صالح.');
-   let body;
-   if(action==='transcribe'){body=new FormData();body.append('action',action);body.append('audio',input,'experience');}
-   else body={action,text:input};
-   const {data,error}=await client.functions.invoke('experience-assistant',{body});
-   fail(error,'خدمة المساعدة غير متاحة الآن. لم يتغير نصك؛ يمكنك المتابعة بالكتابة.');
-   if(data?.error)throw new Error('تعذّر معالجة الطلب. حاول لاحقًا.');
-   return data?.text;
-  },
   async submitExperience({title,body,field}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||''});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
   async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,status').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
   async ownerCatalog(){await requireUser();const {data,error}=await client.rpc('sai_owner_catalog');fail(error,'تعذّر تحميل إدارة المحتوى.');return data;},

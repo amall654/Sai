@@ -1,6 +1,15 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"كورسيرا | Coursera":"Coursera",
+"منصة تعلّم عبر الإنترنت تقدم دورات وتخصصات وشهادات مهنية من جامعات وشركات في مجالات متنوعة.":"An online learning platform offering courses, specializations and professional certificates from universities and companies across many fields.",
+"يمكنك استكشاف دورات منفردة أو مسارات تضم عدة دورات، واختيار ما يناسب هدفك ومستواك في مجالات مثل التقنية والأعمال والصحة.":"Explore individual courses or multi-course programs suited to your goals and level in areas such as technology, business and health.",
+"ابدأ بالبحث عن موضوع يهمك، ثم راجع وصف الدورة والمتطلبات واللغة والوقت المتوقع لإكمالها قبل التسجيل. التعلم والتسجيل يتمان على موقع كورسيرا.":"Search for a topic, then check the course description, prerequisites, language and estimated study time. Enrollment and learning take place on Coursera.",
+"تختلف لغة التدريس والترجمة بحسب الدورة؛ تحقق من صفحة الدورة.":"Teaching languages and translations vary by course. Check the course page.",
+"تختلف التكلفة حسب البرنامج. قد تتاح معاينة أو خيارات مجانية لبعض المحتوى؛ لا يعني التسجيل المجاني أن الدورة كاملة أو الشهادة مجانية.":"Costs vary by program. Some content may offer previews or free options; free enrollment does not mean the full course or certificate is free.",
+"دورات":"Courses",
+"تخصصات":"Specializations",
+"شهادات مهنية":"Professional certificates",
  'لا تقف عند ما تعرفه.':'Go beyond what you know.',
  'امنح نفسك مساحة لتكون مبتدئًا من جديد؛ تسأل، وتحاول، وتكتشف ما يستحق أن تواصل فيه.':'Give yourself room to be a beginner again: to ask, to try, and to discover what is worth pursuing.',
  'الموعد':'Deadline','تفاصيل المشاركة':'Participation details','حضوري وعن بُعد':'Hybrid',

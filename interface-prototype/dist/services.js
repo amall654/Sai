@@ -16,7 +16,6 @@ window.SaiServices = (() => {
   changePassword: password => call('changePassword',password),
   profile: () => call('profile'), updateProfile: values => call('updateProfile', values),
   saved: () => call('saved'), setSaved: (kind,id,value) => call('setSaved', {kind,id,value}),
-  assistExperience:(action,input)=>call('assistExperience',action,input),
   submitExperience: values => call('submitExperience', values),
   myExperiences: () => call('myExperiences'),
   ownerCatalog:()=>call('ownerCatalog'),
