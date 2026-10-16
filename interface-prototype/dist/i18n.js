@@ -1,6 +1,19 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"منصة متخصصة في تعليم الذكاء الاصطناعي، تقدم دورات ومسارات تجمع المفاهيم الأساسية والتطبيق العملي.":"An AI education platform offering courses and learning paths that combine foundational concepts with practical work.",
+"تقدم DeepLearning.AI محتوى تعليميًا لبناء المعرفة بالذكاء الاصطناعي وتطبيقاته، من المفاهيم التمهيدية إلى المهارات التقنية المتخصصة.":"DeepLearning.AI teaches AI concepts and applications, from introductory material to specialized technical skills.",
+"تشمل مجالات التعلم:\n• تعلم الآلة والتعلم العميق.\n• الذكاء الاصطناعي التوليدي والنماذج اللغوية.\n• بناء تطبيقات ووكلاء الذكاء الاصطناعي.\n• هندسة الأوامر وتطوير النماذج وتقييمها.":"Learning areas include:\n• Machine learning and deep learning.\n• Generative AI and language models.\n• Building AI applications and agents.\n• Prompt engineering, model development and evaluation.",
+"تفيد الطالب التقني في فهم كيفية عمل النماذج وتطبيقها في مشروعات عملية. تختلف المتطلبات بين الدورات؛ تحقق من مستوى البرمجة والرياضيات المطلوب قبل البدء.":"Students can understand models and apply them in practical projects. Check the programming and mathematics prerequisites before starting.",
+"الإنجليزية هي اللغة الأساسية؛ تختلف إتاحة الترجمة حسب الدورة ومنصة تقديمها.":"English is the primary language; translation availability varies by course and delivery platform.",
+"يتوفر محتوى للمشاهدة مجانًا، بينما تتطلب بعض الأدوات والتقييمات والشهادات اشتراكًا مدفوعًا. تحقق من شروط كل برنامج.":"Some videos can be watched for free; certain tools, assessments and certificates require a paid subscription. Check each program.",
+"منصة تعليمية غير ربحية لتعلم البرمجة مجانًا، عبر دروس تفاعلية وتمارين ومشروعات تطبيقية.":"A nonprofit platform for learning programming for free through interactive lessons, exercises and practical projects.",
+"تتيح freeCodeCamp التعلم الذاتي من خلال كتابة الشيفرة وحل التمارين وبناء المشروعات، مع مسارات وشهادات مجانية عند استكمال متطلباتها.":"freeCodeCamp supports self-paced learning through coding exercises and projects, with free learning paths and certificates upon completing their requirements.",
+"تشمل مجالات التعلم:\n• تطوير الويب والواجهات الأمامية.\n• تطوير الخلفيات وواجهات برمجة التطبيقات.\n• الخوارزميات وهياكل البيانات.\n• قواعد البيانات والبرمجة بلغة بايثون.\n• تحليل البيانات وتعلم الآلة.":"Learning areas include:\n• Web and front-end development.\n• Back-end development and APIs.\n• Algorithms and data structures.\n• Databases and Python programming.\n• Data analysis and machine learning.",
+"تفيد الطالب التقني في ممارسة البرمجة بصورة منتظمة وبناء مشروعات تثبت مهاراته. يمكنه البدء بالأساسيات ثم الانتقال بين المسارات بحسب معرفته واهتمامه.":"Students can practice regularly and build projects that demonstrate their skills, starting with fundamentals and choosing paths based on their interests and experience.",
+"المحتوى الأساسي بالإنجليزية، وتتوفر ترجمات لبعض المحتوى بلغات أخرى؛ تحقق من لغة المسار.":"The core content is in English, with some content translated into other languages; check each path.",
+"الدروس والمشروعات والشهادات ضمن المنهج مجانية؛ التبرع اختياري.":"Curriculum lessons, projects and certifications are free; donations are optional.",
+
 "هاش بلس":"Hash Plus",
 "منصة تعليمية تقدم دورات ومسارات ومعسكرات تقنية تساعد على تطوير المهارات من خلال التعلم والتطبيق.":"A learning platform offering technology courses, paths and bootcamps to develop skills through learning and practice.",
 "تجمع هاش بلس دورات ومسارات تعليمية ومعسكرات في مجالات تقنية متنوعة، مع محتوى يساعد على التعلم بالوتيرة المناسبة للطالب.":"Hash Plus offers technology courses, learning paths and bootcamps with content students can explore at their own pace.",
