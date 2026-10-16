@@ -1,6 +1,14 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"هاش بلس":"Hash Plus",
+"منصة تعليمية تقدم دورات ومسارات ومعسكرات تقنية تساعد على تطوير المهارات من خلال التعلم والتطبيق.":"A learning platform offering technology courses, paths and bootcamps to develop skills through learning and practice.",
+"تجمع هاش بلس دورات ومسارات تعليمية ومعسكرات في مجالات تقنية متنوعة، مع محتوى يساعد على التعلم بالوتيرة المناسبة للطالب.":"Hash Plus offers technology courses, learning paths and bootcamps with content students can explore at their own pace.",
+"تشمل مجالات التعلم:\n• البرمجة وتطوير تطبيقات الجوال.\n• تصميم تجربة المستخدم وواجهاته.\n• الذكاء الاصطناعي والرؤية الحاسوبية وهندسة الأوامر.\n• قواعد البيانات وإدارة إصدارات المشاريع البرمجية.":"Learning areas include:\n• Programming and mobile app development.\n• User experience and interface design.\n• AI, computer vision and prompt engineering.\n• Databases and software version control.",
+"تفيد الطالب التقني في اكتساب مهارات عملية وتوسيع معرفته بأدوات تطوير التطبيقات والمنتجات الرقمية. راجع محتوى المسار ومستواه ومتطلباته قبل التسجيل.":"Students can develop practical skills and explore tools for building applications and digital products. Check the content, level and prerequisites before enrolling.",
+"الموقع والمحتوى التعريفي بالعربية؛ تحقق من لغة الشرح والمواد لكل دورة.":"The website and introductory content are in Arabic; check teaching languages and materials for each course.",
+"تقدم المنصة باقات اشتراك؛ تحقق من السعر وما تشمله الباقة ورسوم المعسكرات من الموقع الرسمي.":"Subscription plans are available; check current prices, included content and bootcamp fees on the official website.",
+
 "أكاديمية طويق":"Tuwaiq Academy",
 "أكاديمية سعودية تقدم معسكرات وبرامج تقنية احترافية تركز على التطبيق العملي وتطوير المهارات.":"A Saudi academy offering professional technology bootcamps and programs focused on practical skills.",
 "تقدم أكاديمية طويق معسكرات وبرامج بالشراكة مع جهات تقنية وتعليمية، بمنهجية تركز على المشروعات والتطبيق العملي. كما توفر محتوى للتعلم الذاتي عبر منصة سطر التابعة لها.":"Tuwaiq Academy offers bootcamps and programs with technology and education partners, emphasizing projects and practical learning. Its Satr platform also provides self-paced content.",
