@@ -1,6 +1,22 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"أكاديمية طويق":"Tuwaiq Academy",
+"أكاديمية سعودية تقدم معسكرات وبرامج تقنية احترافية تركز على التطبيق العملي وتطوير المهارات.":"A Saudi academy offering professional technology bootcamps and programs focused on practical skills.",
+"تقدم أكاديمية طويق معسكرات وبرامج بالشراكة مع جهات تقنية وتعليمية، بمنهجية تركز على المشروعات والتطبيق العملي. كما توفر محتوى للتعلم الذاتي عبر منصة سطر التابعة لها.":"Tuwaiq Academy offers bootcamps and programs with technology and education partners, emphasizing projects and practical learning. Its Satr platform also provides self-paced content.",
+"تشمل مجالات التعلم بحسب البرنامج:\n• البرمجة وهندسة البرمجيات وتطوير التطبيقات.\n• البيانات والذكاء الاصطناعي.\n• الأمن السيبراني.\n• الحوسبة السحابية.\n• تطوير الألعاب والواقع الافتراضي والمعزز.\n• الروبوتات والطائرات دون طيار.":"Depending on the program, learning areas include:\n\u2022 Programming, software engineering and application development.\n\u2022 Data and artificial intelligence.\n\u2022 Cybersecurity.\n\u2022 Cloud computing.\n\u2022 Game development, virtual and augmented reality.\n\u2022 Robotics and drones.",
+"تفيد الطالب التقني في ممارسة المهارات وبناء المشروعات واستكشاف مسار تخصصي. تختلف الفئة المستهدفة والمتطلبات والمواعيد ونمط الحضور؛ راجع تفاصيل البرنامج قبل التقديم.":"Students can practice skills, build projects and explore a technical specialization. Audiences, prerequisites, dates and attendance modes vary; check each program before applying.",
+"تختلف لغة التدريب والمتطلبات اللغوية حسب البرنامج؛ تحقق من تفاصيله.":"Teaching languages and language requirements vary by program.",
+"توجد برامج تختلف في الرسوم وشروط الإتاحة؛ راجع إعلان البرنامج قبل التسجيل.":"Fees and access conditions vary; check the program announcement before enrolling.",
+"نمكّن":"Nmkkn",
+"منصة تعليمية تقدم معسكرات ودورات وورشًا في التصميم الرقمي وتجربة المستخدم وتوظيف أدوات الذكاء الاصطناعي.":"A learning platform offering bootcamps, courses and workshops in digital design, user experience and AI tools.",
+"تقدم نمكّن معسكرات تطبيقية وورشًا ومسارات للتعلم الذاتي، مع تركيز على مهارات التصميم وصناعة المنتجات الرقمية واستخدام الأدوات الحديثة.":"Nmkkn offers practical bootcamps, workshops and self-paced learning, focusing on design, digital products and modern tools.",
+"تشمل مجالات التعلم المتاحة:\n• تصميم تجربة المستخدم وواجهات المستخدم.\n• التصميم البصري والعروض التقديمية.\n• النماذج الأولية التفاعلية وأدوات التصميم.\n• توظيف الذكاء الاصطناعي في التصميم والإنتاجية.\n• بناء نماذج المنتجات الرقمية بأدوات دون كود أو بمساعدة الذكاء الاصطناعي.":"Learning areas include:\n\u2022 User experience and user interface design.\n\u2022 Visual design and presentations.\n\u2022 Interactive prototypes and design tools.\n\u2022 AI for design and productivity.\n\u2022 Digital product prototyping with no-code and AI-assisted tools.",
+"تفيد الطالب المهتم بتصميم التطبيقات والمواقع في تحويل أفكاره إلى واجهات ونماذج قابلة للتجربة وتطوير مهاراته العملية. اختر البرنامج بحسب مستواك، وراجع المواعيد وطريقة التقديم والمخرجات المتوقعة.":"Students interested in app and website design can turn ideas into interfaces and testable prototypes while developing practical skills. Choose a program suited to your level and check its dates, delivery format and expected outcomes.",
+"المحتوى التعريفي عربي؛ تحقق من لغة الشرح والمواد في صفحة كل برنامج.":"The introductory content is Arabic; check the teaching and material languages for each program.",
+"تتوفر ورش مجانية ومعسكرات ومسارات مدفوعة. تحقق من السعر وشروط التسجيل في صفحة البرنامج.":"Free workshops and paid bootcamps and learning paths are available. Check each program for prices and enrollment conditions.",
+"تعلم ذاتي":"Self-paced learning",
+"ورش":"Workshops",
 "أكاديمية سدايا":"SDAIA Academy",
 "جهة سعودية تقدم برامج ومعسكرات تدريبية في البيانات والذكاء الاصطناعي لتطوير المعرفة والمهارات التقنية والتطبيقية.":"A Saudi academy offering training programs and bootcamps in data and artificial intelligence to develop technical knowledge and practical skills.",
 "أكاديمية سدايا مبادرة تابعة للهيئة السعودية للبيانات والذكاء الاصطناعي، تقدم برامج ومعسكرات تدريبية بالتعاون مع جامعات ومؤسسات متخصصة لتطوير المهارات في البيانات والذكاء الاصطناعي.":"SDAIA Academy is an initiative of the Saudi Data and Artificial Intelligence Authority. It offers training programs and bootcamps with universities and specialist institutions to develop data and AI skills.",
