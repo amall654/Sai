@@ -1,6 +1,14 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"أكاديمية الزيرو":"Elzero Academy",
+"منصة عربية لتعلم البرمجة وتطوير الويب، تقدم مسارات منظمة وخطط دراسة وتكليفات وتحديات تطبيقية.":"An Arabic platform for programming and web development, with structured paths, study plans, assignments and practical challenges.",
+"تقدم أكاديمية الزيرو شروحات باللغة العربية ومسارات تساعد على تنظيم التعلم الذاتي، مع خطط دراسة وتمارين وتطبيقات لتحويل المفاهيم إلى مهارات عملية.":"Elzero Academy offers Arabic explanations and structured self-paced learning paths, with study plans, exercises and practical applications.",
+"تشمل مجالات التعلم:\n• أساسيات البرمجة وحل المشكلات.\n• تطوير الويب والواجهات الأمامية.\n• تطوير الخلفيات باستخدام PHP.\n• البرمجة باستخدام Python وC++.\n• تطبيقات الويب وتطوير قوالب WordPress.":"Learning areas include:\n• Programming fundamentals and problem solving.\n• Web and front-end development.\n• Back-end development with PHP.\n• Programming with Python and C++.\n• Web applications and WordPress theme development.",
+"تفيد الطالب التقني في بناء أساس برمجي واتباع خطة واضحة ثم ممارسة ما تعلمه من خلال التكليفات والمشروعات. اختر المسار المناسب لمستواك وراجع متطلباته قبل البدء.":"Students can build programming foundations, follow a clear plan and practice through assignments and projects. Choose a path appropriate to your level and review its prerequisites.",
+"الشرح باللغة العربية، مع استخدام المصطلحات البرمجية وأسماء الأدوات بالإنجليزية.":"Teaching is in Arabic, with English programming terminology and tool names.",
+"تتوفر شروحات ومسارات مجانية، بالإضافة إلى دورات مدفوعة منفصلة؛ تحقق من صفحة الدورة قبل التسجيل.":"Free tutorials and learning paths are available alongside separate paid courses; check the course page before enrolling.",
+
 "منصة متخصصة في تعليم الذكاء الاصطناعي، تقدم دورات ومسارات تجمع المفاهيم الأساسية والتطبيق العملي.":"An AI education platform offering courses and learning paths that combine foundational concepts with practical work.",
 "تقدم DeepLearning.AI محتوى تعليميًا لبناء المعرفة بالذكاء الاصطناعي وتطبيقاته، من المفاهيم التمهيدية إلى المهارات التقنية المتخصصة.":"DeepLearning.AI teaches AI concepts and applications, from introductory material to specialized technical skills.",
 "تشمل مجالات التعلم:\n• تعلم الآلة والتعلم العميق.\n• الذكاء الاصطناعي التوليدي والنماذج اللغوية.\n• بناء تطبيقات ووكلاء الذكاء الاصطناعي.\n• هندسة الأوامر وتطوير النماذج وتقييمها.":"Learning areas include:\n• Machine learning and deep learning.\n• Generative AI and language models.\n• Building AI applications and agents.\n• Prompt engineering, model development and evaluation.",
