@@ -1,6 +1,20 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"هاكثون الطفولة":"Childhood Hackathon",
+"جمعية إنماء لرعاية الطفولة":"Inma Association for Childhood Care",
+"التسجيل حتى 23 أكتوبر 2026؛ ساعة الإغلاق غير معلنة.":"Registration closes on 23 October 2026; the closing time is not announced.",
+"تطوير حلول تقنية مبتكرة تخدم الأطفال والأسر، من خلال العمل الجماعي والتدريب والإرشاد.":"Develop innovative technical solutions for children and families through teamwork, training and mentoring.",
+"المكان والمواعيد:\nالخبر، المنطقة الشرقية. ورش العمل من 8 إلى 11 نوفمبر 2026، والعرض النهائي في 19 نوفمبر 2026. التسجيل من 4 إلى 23 أكتوبر 2026.":"Location and dates:\nAl Khobar, Eastern Province. Workshops run from 8 to 11 November 2026, with final presentations on 19 November. Registration runs from 4 to 23 October 2026.",
+"شروط المشاركة:\n• طالب جامعي أو ممارس في مجالات الطفولة أو التقنية أو تصميم الحلول.\n• سعودي الجنسية أو مقيم إقامة نظامية في المملكة.\n• فريق من شخصين إلى 5 أشخاص.\n• الالتزام بحضور جميع الفعاليات وتقديم فكرة أصيلة قابلة للتطبيق.":"Participation requirements:\n• University students or practitioners in childhood, technology or solution design.\n• Saudi citizens or legal residents of Saudi Arabia.\n• Teams of 2–5 people.\n• Attendance at all activities and an original, feasible idea.",
+"الجوائز:\n30 ألف ريال للمركز الأول، و20 ألفًا للثاني، و10 آلاف للثالث. راجع الموقع الرسمي للتسجيل والشروط التفصيلية.":"Prizes:\nSAR 30,000 for first place, SAR 20,000 for second and SAR 10,000 for third. Check the official website for registration and detailed terms.",
+"هاكاثونات السياحة — النسخة الافتراضية":"Tourism Hackathons — Virtual Edition",
+"صندوق التنمية السياحي — مركز نمو السياحة":"Tourism Development Fund — TDF Grow",
+"المواعيد تحتاج تأكيدًا من المنظم؛ استمرار قبول التسجيل غير مؤكد.":"Dates require organizer confirmation; continued acceptance of registrations is unconfirmed.",
+"تطوير حلول رقمية تحسن التجارب والخدمات السياحية في المملكة، وتحويل الأفكار إلى نماذج أولية قابلة للتطبيق.":"Develop digital solutions that improve tourism experiences and services in Saudi Arabia, turning ideas into practical prototypes.",
+"المسارات:\n• الإرشاد السياحي والجولات الافتراضية والواقع المعزز.\n• حلول الإقامة والفنادق.\n• التجارب الثقافية والتاريخية والدينية.\n• الخدمات الرقمية والنقل والسفر والحجوزات.":"Tracks:\n• Tour guiding, virtual tours and augmented reality.\n• Accommodation and hotel solutions.\n• Cultural, historical and religious experiences.\n• Digital services, transport, travel and bookings.",
+"شروط المشاركة:\n• العمر 18 سنة فأكثر، وسعودي الجنسية أو مقيم في المملكة.\n• فريق من شخصين إلى 5 أشخاص.\n• حل مبتكر يعالج مشكلة سياحية محددة، مع الاهتمام بتحويله إلى نشاط تجاري.\n• التفرغ والالتزام بأنشطة البرنامج. المشاركة مجانية وعن بُعد.":"Participation requirements:\n• Age 18 or older; Saudi citizens or residents of Saudi Arabia.\n• Teams of 2–5 people.\n• An innovative solution to a specific tourism problem, with interest in turning it into a business.\n• Commitment to program activities. Participation is free and remote.",
+"تنبيه المواعيد — تحقق بتاريخ 19 أكتوبر 2026:\nصفحة البرنامج تعرض 12–24 أكتوبر 2026 ومدة 5 أيام، بينما الإعلان المصور يذكر 25–29 أكتوبر 2026. يظهر البرنامج بحالة «قائم» وزر الانضمام، دون موعد واضح لإغلاق التسجيل. تأكد من المنظم قبل التخطيط للمشاركة؛ لا نؤكد استمرار قبول الطلبات.":"Date notice — checked on 19 October 2026:\nThe program page lists 12–24 October 2026 and a duration of 5 days, while the supplied promotional image lists 25–29 October 2026. The page shows an active program and a join button without a clear registration deadline. Confirm with the organizer before planning participation; continued acceptance of applications is unconfirmed.",
 "مختبرات تفاعلية":"Interactive labs",
 "منصة لتعلم الأمن السيبراني بالتطبيق، تقدم مسارات موجهة ومختبرات تفاعلية تناسب مستويات مختلفة.":"A hands-on cybersecurity learning platform with guided paths and interactive labs for different skill levels.",
 "المحتوى الأساسي باللغة الإنجليزية.":"The main learning content is in English.",
