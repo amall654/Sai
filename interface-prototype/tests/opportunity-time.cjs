@@ -1,0 +1,18 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const path=require('node:path');
+const context={window:{},Intl,Date};
+vm.createContext(context);
+vm.runInContext(fs.readFileSync(path.join(__dirname,'../dist/features/opportunities/service.js'),'utf8'),context);
+const format=context.saudiOpportunityDeadline;
+const midnight=format('2026-10-26T23:59:00Z','UTC');
+assert.match(midnight,/27 أكتوبر 2026/);
+assert.match(midnight,/2:59 ص/);
+assert.match(midnight,/بتوقيت السعودية/);
+assert.doesNotMatch(midnight,/UTC/);
+assert.match(format('2026-12-31T23:59:00Z'),/1 يناير 2027/);
+assert.match(format('2026-11-15T23:59:00+03:00'),/15 نوفمبر 2026/);
+assert.match(format('2026-11-15T23:59:00+03:00'),/11:59 م/);
+for(const value of [null,'','invalid','2026-11-05','2026-11-05T00:00:00'])assert.equal(format(value,'ساعة الإغلاق غير معلنة'),'ساعة الإغلاق غير معلنة');
+console.log('PASS: Saudi timezone, next-day/year rollover, explicit offset and date-only preservation.');
