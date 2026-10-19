@@ -1,6 +1,18 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"مختبرات تفاعلية":"Interactive labs",
+"منصة لتعلم الأمن السيبراني بالتطبيق، تقدم مسارات موجهة ومختبرات تفاعلية تناسب مستويات مختلفة.":"A hands-on cybersecurity learning platform with guided paths and interactive labs for different skill levels.",
+"المحتوى الأساسي باللغة الإنجليزية.":"The main learning content is in English.",
+"تتوفر غرف تدريب مجانية بوصول محدود، مع اشتراكات مدفوعة تتيح محتوى وميزات إضافية حسب الخطة.":"Free training rooms offer limited access, with paid subscriptions providing additional content and features depending on the plan.",
+"تجمع TryHackMe الشرح والتدريب العملي في بيئات محاكاة، مع مسارات تبدأ بالأساسيات وتتدرج نحو المهارات الهجومية والدفاعية.":"TryHackMe combines explanations and practical training in simulated environments, with paths progressing from fundamentals to offensive and defensive skills.",
+"تشمل مجالات التعلم:\n• أساسيات الأمن السيبراني والشبكات.\n• اختبار الاختراق وأمن تطبيقات الويب.\n• تحليل التهديدات والعمليات الأمنية.\n• الدفاع عن الأنظمة والشبكات.\n• التحقيقات الرقمية وأمن السحابة.":"Learning areas include:\n• Cybersecurity and networking fundamentals.\n• Penetration testing and web application security.\n• Threat analysis and security operations.\n• System and network defense.\n• Digital investigations and cloud security.",
+"تفيد الطالب التقني في ممارسة ما يتعلمه خطوة بخطوة واختبار مهاراته داخل مختبرات تدريبية. اختر المسار المناسب لمستواك وراجع متطلباته وما تتضمنه خطة الاشتراك.":"Students can practice step by step and test their skills in training labs. Choose a suitable path and review its prerequisites and subscription coverage.",
+"أكاديمية مجانية متخصصة في أمن تطبيقات الويب، تجمع الدروس ومختبرات التدريب التفاعلية لفهم الثغرات واختبارها.":"A free academy specializing in web application security, combining lessons and interactive labs to understand and test vulnerabilities.",
+"المواد التعليمية ومختبرات الأكاديمية مجانية؛ الشهادات المهنية ومنتجات Burp Suite المدفوعة منفصلة عن المحتوى المجاني.":"Academy learning materials and labs are free; professional certifications and paid Burp Suite products are separate from the free content.",
+"تقدم Web Security Academy من PortSwigger مواد تعليمية ومسارات عملية تشرح ثغرات تطبيقات الويب، مع مختبرات لتطبيق المفاهيم وتتبع التقدم.":"PortSwigger’s Web Security Academy offers learning materials and practical paths explaining web application vulnerabilities, with labs for applying concepts and tracking progress.",
+"تشمل مجالات التعلم:\n• أمن تطبيقات الويب واختبارها.\n• ثغرات الحقن وقواعد البيانات.\n• أمن المصادقة والتحكم في الوصول.\n• ثغرات المتصفح والبرمجة النصية.\n• أمن واجهات برمجة التطبيقات (API).":"Learning areas include:\n• Web application security and testing.\n• Injection and database vulnerabilities.\n• Authentication and access control security.\n• Browser and scripting vulnerabilities.\n• Application programming interface (API) security.",
+"تفيد الطالب التقني في فهم أسباب الثغرات وتطوير مهارات اختبار أمن الويب من خلال التطبيق. ابدأ بالموضوعات الأساسية ثم انتقل إلى المختبرات المتقدمة حسب مستواك.":"Students can understand the causes of vulnerabilities and develop web security testing skills through practice. Start with foundational topics, then progress to more advanced labs.",
 "مهارة تك":"Mahara-Tech",
 "منصة تعليمية من معهد تكنولوجيا المعلومات المصري، تقدم تعلمًا ذاتيًا ومسارات تقنية تشمل الأمن السيبراني.":"A learning platform from Egypt’s Information Technology Institute offering self-paced technical learning, including cybersecurity.",
 "تتوفر مقررات بالعربية والإنجليزية؛ تحقق من لغة كل مقرر.":"Courses are available in Arabic and English; check the language of each course.",
