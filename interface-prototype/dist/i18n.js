@@ -1,6 +1,7 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"© 2026 سعي. جميع الحقوق محفوظة.":"© 2026 Sai. All rights reserved.",
 "هاكثون الطفولة":"Childhood Hackathon",
 "جمعية إنماء لرعاية الطفولة":"Inma Association for Childhood Care",
 "التسجيل حتى 23 أكتوبر 2026؛ ساعة الإغلاق غير معلنة.":"Registration closes on 23 October 2026; the closing time is not announced.",
