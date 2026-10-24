@@ -1,6 +1,25 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"موضوع التجربة":"Story topic",
+"تعلّم ذاتي أو دورة":"Self-learning or course",
+"مشروع تطبيقي":"Practical project",
+"تدريب عملي":"Practical training",
+"تجربة أخرى":"Other story",
+"تجربة عامة":"General experience",
+"كل المجالات":"All fields",
+"كل المواضيع":"All topics",
+"اختر موضوع التجربة":"Choose a story topic",
+"البحث في تجارب الطلاب":"Search student experiences",
+"ابحث في عنوان التجربة أو نصها":"Search story titles or text",
+"ابحث في التجارب…":"Search experiences\u2026",
+"التجارب المعروضة":"Experiences shown",
+"الأحدث أولًا":"Newest first",
+"لا توجد تجارب مطابقة. غيّر التصنيف أو امسح البحث.":"No matching experiences. Change the filters or clear the search.",
+"لم تُنشر تجارب بعد. يمكنك مشاركة تجربتك.":"No published experiences yet. You can share yours.",
+"حفظ التصنيف":"Save classification",
+"اختر موضوع التجربة والمجال.":"Choose a story topic and field.",
+
 "في أي مجال تحب تتعلّم؟":"What would you like to learn?",
 "مسح البحث والتصفية":"Clear search and filters",
 "الجهات المعروضة":"Providers shown",

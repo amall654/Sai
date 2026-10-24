@@ -53,12 +53,12 @@ window.SaiOwnerConsole = (() => {
  }
  function review(id){
   const e=snapshot?.experiences.find(x=>x.id===id);if(!e||!canUse())return;
-  show(e.title||'تجربة طالب',`<div class="experience-detail-copy">${paragraphs(e.body)}</div><p>الحالة الحالية: ${labels[e.status]}</p><p id="owner-review-feedback" class="form-feedback" role="status" hidden></p><div class="owner-actions">${[['published','اعتماد ونشر'],['rejected','تحتاج تعديلًا'],['pending','إعادة للمراجعة / إخفاء']].filter(([s])=>s!==e.status).map(([s,l])=>`<button class="button ${s==='published'?'':'outline'}" data-owner-decision="${s}">${l}</button>`).join('')}</div>`,true);
+  show(e.title||'تجربة طالب',`<div class="experience-detail-copy">${paragraphs(e.body)}</div><div class="platform-form"><label>موضوع التجربة<select id="owner-story-topic">${experienceOptions(experienceTopics,e.topic||'تجربة أخرى','اختر موضوع التجربة')}</select></label><label>المجال<select id="owner-story-field">${experienceOptions(experienceFields(),e.field||'تجربة عامة','اختر المجال')}</select></label></div><p>الحالة الحالية: ${labels[e.status]}</p><p id="owner-review-feedback" class="form-feedback" role="status" hidden></p><div class="owner-actions"><button class="button outline" data-owner-decision="${e.status}">حفظ التصنيف</button>${[['published','اعتماد ونشر'],['rejected','تحتاج تعديلًا'],['pending','إعادة للمراجعة / إخفاء']].filter(([s])=>s!==e.status).map(([s,l])=>`<button class="button ${s==='published'?'':'outline'}" data-owner-decision="${s}">${l}</button>`).join('')}</div>`,true);
   dialog.classList.add('experience-detail-dialog');
   dialog.querySelectorAll('[data-owner-decision]').forEach(button=>button.onclick=async()=>{
    if(!canUse())return;
    const buttons=[...dialog.querySelectorAll('[data-owner-decision]')];buttons.forEach(b=>b.disabled=true);
-   try{await api.ownerReviewExperience(e.id,button.dataset.ownerDecision,e.status);dialog.close();await render();status('#owner-feedback','تم حفظ قرار المراجعة.');await loadCatalog();}
+   try{const topic=$('#owner-story-topic').value,field=$('#owner-story-field').value;if(!topic||!field)throw new Error('اختر موضوع التجربة والمجال.');await api.ownerReviewExperience(e.id,button.dataset.ownerDecision,e.status,{topic,field,expected_topic:e.topic||'تجربة أخرى',expected_field:e.field||''});dialog.close();await render();status('#owner-feedback','تم حفظ قرار المراجعة.');await loadCatalog();}
    catch(error){status('#owner-review-feedback',error.message,true);}finally{buttons.forEach(b=>b.disabled=false);}
   });
  }

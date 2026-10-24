@@ -44,7 +44,7 @@
   },
   async catalog(){
    const base=await window.SAI_CATALOG.catalog();
-   const {data,error}=await client.rpc('sai_published_experiences');
+   const {data,error}=await client.rpc('sai_published_experiences_v2');
    fail(error,'تعذّر تحميل تجارب الطلاب. حاول مرة أخرى.');
    return {...base,experiences:data.map(e=>({...e,publishedAt:e.published_at?new Date(e.published_at).toLocaleDateString('ar-SA'):''}))};
   },
@@ -99,11 +99,11 @@
    const result=value?await client.from(table).insert({[column]:id}):await client.from(table).delete().eq(column,id).eq('user_id',u.id);
    if(value&&result.error?.code==='23505')return;fail(result.error,'تعذّر حفظ التغيير.');
   },
-  async submitExperience({title,body,field}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||''});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
-  async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,status').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
+  async submitExperience({title,body,field,topic}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||'',topic:topic||'تجربة أخرى'});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
+  async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,field,topic,status').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
   async ownerCatalog(){await requireUser();const {data,error}=await client.rpc('sai_owner_catalog');fail(error,'تعذّر تحميل إدارة المحتوى.');return data;},
   async ownerSaveOpportunity(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_opportunity',{payload});fail(error,error?.code==='40001'?'تم تعديل الفرصة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ الفرصة. تحقق من الحقول وصلاحية الحساب.');return data;},
-  async ownerReviewExperience(target,decision,expected_status){await requireUser();const {error}=await client.rpc('sai_owner_review_experience',{target,decision,expected_status});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}
+  async ownerReviewExperience(target,decision,expected_status,classification){await requireUser();const {error}=await client.rpc('sai_owner_review_classified_experience',{target,decision,expected_status,classification});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}
 
  };
 })();

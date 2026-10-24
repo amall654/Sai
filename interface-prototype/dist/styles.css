@@ -1309,3 +1309,7 @@ button:disabled{opacity:.6;cursor:wait}
 .provider-card .provider-logo{background:#fff}.provider-logo img{display:block;width:50px;height:50px;object-fit:contain}
 
 .provider-card .provider-logo-dark{background:#191919;padding:5px}.provider-logo-dark img{width:40px;height:40px}
+
+/* Experience directory shares the learning directory rhythm. */
+.experience-filter-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.experience-filters label{display:block;font-weight:700;font-size:14px}.experience-filters select,.experience-filters input{display:block;width:100%;min-width:0;min-height:48px;margin-top:8px;padding:12px 14px;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px}.experience-filters :is(input,select):focus-visible{outline:2px solid var(--green);outline-offset:3px}.experience-filters>label{margin-top:20px}.experience-filters #experience-reset{margin-top:12px}.experience-card .opportunity-tags{margin:12px 0}.experience-card .badge{font-size:12px}.experience-filter-row label{min-width:0}
+@media(max-width:600px){.experience-filter-row{grid-template-columns:1fr;gap:12px}}

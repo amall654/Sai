@@ -20,6 +20,6 @@ window.SaiServices = (() => {
   myExperiences: () => call('myExperiences'),
   ownerCatalog:()=>call('ownerCatalog'),
   ownerSaveOpportunity:payload=>call('ownerSaveOpportunity',payload),
-  ownerReviewExperience:(id,decision,expected)=>call('ownerReviewExperience',id,decision,expected)
+  ownerReviewExperience:(id,decision,expected,classification)=>call('ownerReviewExperience',id,decision,expected,classification)
  };
 })();
