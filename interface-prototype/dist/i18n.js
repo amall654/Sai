@@ -1,6 +1,11 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"في أي مجال تحب تتعلّم؟":"What would you like to learn?",
+"مسح البحث والتصفية":"Clear search and filters",
+"الجهات المعروضة":"Providers shown",
+"عرض المزيد":"Show more",
+"لا توجد جهات مطابقة. غيّر المجال أو امسح البحث.":"No matching providers. Change the field or clear your search.",
 "© 2026 سعي. جميع الحقوق محفوظة.":"© 2026 Sai. All rights reserved.",
 "هاكثون الطفولة":"Childhood Hackathon",
 "جمعية إنماء لرعاية الطفولة":"Inma Association for Childhood Care",
