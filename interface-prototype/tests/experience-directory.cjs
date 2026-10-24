@@ -19,7 +19,7 @@ const {chromium}=require('playwright');
   await page.locator('#experience-more').click();assert.equal(await page.locator('#experience-grid .card').count(),14);assert.equal(await page.locator('#experience-more').isVisible(),false);
   await page.locator('#experience-filter-topic').selectOption('هاكاثون');assert.equal(await page.locator('#experience-count').textContent(),'6 / 7');
   await page.locator('#experience-filter-field').selectOption('الأمن السيبراني والشبكات');assert.equal(await page.locator('#experience-grid .card').count(),2);
-  await page.locator('#experience-search').fill('لايوجد');assert.equal(await page.locator('#experience-grid .card').count(),0);
+  assert.equal(await page.locator('#experience-search').count(),0);await page.locator('#experience-filter-topic').selectOption('تدريب عملي');assert.equal(await page.locator('#experience-grid .card').count(),0);
   await page.locator('#experience-reset').click();await page.locator('#experience-filter-topic').selectOption('تجربة أخرى');assert.equal(await page.locator('#experience-grid .card').count(),1);
   await page.locator('[data-experience]').click();assert.match(await page.locator('#dialog-body').textContent(),/تجربة عامة/);await page.keyboard.press('Escape');
   await page.locator('#experience-reset').click();await page.locator('[data-action="contribute"]').click();
@@ -35,6 +35,6 @@ const {chromium}=require('playwright');
   await page.locator('#experience-filter-topic').selectOption('هاكاثون');assert.equal(await page.locator('#experience-count').textContent(),'6 / 7');
   await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.locator('#language-toggle').click();await page.locator('#experience-reset').click();await page.screenshot({path:path.join(require('node:os').tmpdir(),'sai-experiences-mobile.png'),fullPage:true});
-  assert.deepEqual(errors,[]);console.log('PASS: newest order, paging, combined filters/search, legacy fallback, required classification, drafts, submission, owner review, English values and mobile.');
+  assert.deepEqual(errors,[]);console.log('PASS: newest order, paging, combined topic/field filters, legacy fallback, required classification, drafts, submission, owner review, English values and mobile.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

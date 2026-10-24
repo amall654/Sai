@@ -21,10 +21,10 @@
 <script defer src="auth-backend.js?v=20261024-classification"></script>
 <script defer src="services.js?v=20261024-classification"></script>
 <script defer src="app.js?v=20261008-password-eye"></script>
-<script defer src="i18n.js?v=20261024-classification"></script>
+<script defer src="i18n.js?v=20261024-filters-only"></script>
 <script defer src="features/opportunities/ui.js?v=20261015-writing"></script>
 <script defer src="features/learning/ui.js?v=20261024-learning-filters"></script>
-<script defer src="features/experiences.js?v=20261024-classification"></script>
+<script defer src="features/experiences.js?v=20261024-filters-only"></script>
 <script defer src="owner-console.js?v=20261024-classification"></script>
 <script defer src="ui.js?v=20261024-classification">
 </script>
@@ -130,10 +130,9 @@
 </span>
 </button>
 </div>
-<section class="learning-filters experience-filters" aria-label="البحث في تجارب الطلاب">
+<section class="learning-filters experience-filters" aria-label="تصفية تجارب الطلاب">
 <div class="experience-filter-row"><label for="experience-filter-topic">موضوع التجربة<select id="experience-filter-topic"></select></label><label for="experience-filter-field">المجال<select id="experience-filter-field"><option value="">كل المجالات</option></select></label></div>
-<label for="experience-search">ابحث في عنوان التجربة أو نصها</label><input id="experience-search" type="search" placeholder="ابحث في التجارب…">
-<button id="experience-reset" class="text-link" hidden>مسح البحث والتصفية</button></section>
+<button id="experience-reset" class="text-link" hidden>مسح التصفية</button></section>
 <p class="learning-count" role="status"><span>التجارب المعروضة</span> <bdi id="experience-count"></bdi><span>الأحدث أولًا</span></p>
 <div id="experience-state" role="status"></div><div class="card-grid" id="experience-grid">
 </div><div class="learning-more"><button id="experience-more" class="button outline" hidden>عرض المزيد</button></div>

@@ -1,6 +1,9 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"تصفية تجارب الطلاب":"Filter student experiences",
+"مسح التصفية":"Clear filters",
+"لا توجد تجارب مطابقة. غيّر الموضوع أو المجال.":"No matching experiences. Change the topic or field.",
 "موضوع التجربة":"Story topic",
 "تعلّم ذاتي أو دورة":"Self-learning or course",
 "مشروع تطبيقي":"Practical project",
