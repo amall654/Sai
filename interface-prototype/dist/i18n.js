@@ -1,6 +1,20 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"إغلاق التسجيل":"Registration closing",
+"حالة موعد التسجيل":"Registration deadline type",
+"غير معلن — تبقى مسودة":"Not announced \u2014 keep as draft",
+"يوم محدد دون ساعة":"Date only",
+"يوم وساعة محددان":"Exact date and time",
+"فرصة مستمرة دون إغلاق":"Ongoing opportunity without a deadline",
+"آخر يوم للتسجيل":"Last registration day",
+"وقت إغلاق التسجيل بتوقيت السعودية":"Registration closes at (Saudi time)",
+"يُثبّت الموعد عند أول نشر. ينتهي اليوم المحدد عند منتصف الليل بتوقيت السعودية، ولا تمدد المنصة التسجيل تلقائيًا.":"The deadline is fixed at first publication. A date-only deadline ends at midnight Saudi time. Registration is not extended automatically.",
+"موعد التسجيل الأصلي مثبت.":"The original registration deadline is fixed.",
+"حددي موعد التسجيل أو اختاري فرصة مستمرة قبل النشر.":"Set a registration deadline or choose ongoing before publishing.",
+"انتهى التسجيل":"Registration closed",
+"فرصة مستمرة":"Ongoing opportunity",
+
 "تصفية تجارب الطلاب":"Filter student experiences",
 "مسح التصفية":"Clear filters",
 "لا توجد تجارب مطابقة. غيّر الموضوع أو المجال.":"No matching experiences. Change the topic or field.",
@@ -258,7 +272,7 @@
  });
  let language='ar';try{if(localStorage.getItem('sai-language')==='en')language='en';}catch{}
  const originals=new WeakMap();const attrs=new WeakMap();
- function translate(text){const trimmed=text.trim();if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}
+ function translate(text){const trimmed=text.trim();if(trimmed.startsWith('آخر يوم للتسجيل: '))return text.replace('آخر يوم للتسجيل: ','Last registration day: ').replace('(بتوقيت السعودية)','(Saudi time)');if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}
  function updateText(node){const current=node.nodeValue;const old=originals.get(node);const source=old&&current===old.rendered?old.source:current;const rendered=language==='en'?translate(source):source;if(node.parentElement?.tagName==='OPTION'&&!node.parentElement.hasAttribute('value'))node.parentElement.value=node.parentElement.textContent;if(current!==rendered)node.nodeValue=rendered;originals.set(node,{source,rendered});}
  function apply(){observer.disconnect();const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode())){if(node.parentElement.closest('script,style,textarea,[contenteditable],#language-toggle'))continue;updateText(node);}document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(el=>{const history=attrs.get(el)||{};for(const name of ['placeholder','aria-label','title']){if(!el.hasAttribute(name)||el.id==='language-toggle')continue;const current=el.getAttribute(name),old=history[name];const source=old&&current===old.rendered?old.source:current;const rendered=language==='en'?translate(source):source;if(current!==rendered)el.setAttribute(name,rendered);history[name]={source,rendered};}attrs.set(el,history);});
   const title=document.querySelector('title').firstChild;if(title)updateText(title);
