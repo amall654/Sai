@@ -28,6 +28,11 @@
   return data.user;
  }
  async function requireUser(){const u=await current();if(!u)throw new Error('سجّل الدخول أولًا.');return u;}
+ async function avatarUrl(u){
+  if(u.user_metadata?.sai_avatar!==true)return '';
+  const {data,error}=await client.storage.from('account-avatars').createSignedUrl(u.id+'/avatar.webp',3600);
+  return error?'':data.signedUrl;
+ }
  client.auth.onAuthStateChange((event)=>{
   if(event==='PASSWORD_RECOVERY')recovering=true;
   if(event==='SIGNED_OUT'){
@@ -40,7 +45,7 @@
    const u=await current();if(!u)return null;
    const {data:owner,error}=await client.rpc('sai_is_owner');
    // A missing owner migration must never break student login or grant authority.
-   return {id:u.id,name:u.user_metadata?.name||'طالب',role:!error&&owner===true?'admin':'student'};
+   return {id:u.id,name:u.user_metadata?.name||'طالب',role:!error&&owner===true?'admin':'student',avatar:await avatarUrl(u)};
   },
   async catalog(){
    const base=await window.SAI_CATALOG.catalog();
@@ -84,7 +89,18 @@
    history.replaceState(null,'',location.pathname+'#login');
   },
   async logout(){const {error}=await client.auth.signOut();fail(error,'تعذّر تسجيل الخروج. تحقق من الاتصال وحاول مجددًا.');},
-  async profile(){const u=await requireUser();const {data,error}=await client.from('profiles').select('name,interests').eq('id',u.id).maybeSingle();fail(error,'تعذّر تحميل الحساب.');return data||{name:u.user_metadata?.name||'طالب',interests:[]};},
+  async profile(){const u=await requireUser();const {data,error}=await client.from('profiles').select('name,interests').eq('id',u.id).maybeSingle();fail(error,'تعذّر تحميل الحساب.');return {...(data||{name:u.user_metadata?.name||'طالب',interests:[]}),avatar:await avatarUrl(u)};},
+  async updateAvatar(blob){
+   const u=await requireUser();
+   if(!blob||blob.type!=='image/webp'||!blob.size||blob.size>262144)throw new Error('تعذّر تجهيز الصورة. اختر صورة أخرى.');
+   const result=await client.storage.from('account-avatars').upload(u.id+'/avatar.webp',blob,{contentType:'image/webp',upsert:true,cacheControl:'0'});
+   fail(result.error,'تعذّر حفظ الصورة. حاول مجددًا.');
+   const updated=await client.auth.updateUser({data:{sai_avatar:true}});
+   fail(updated.error,'تعذّر حفظ الصورة. حاول مجددًا.');
+   const url=await avatarUrl({...u,user_metadata:{...u.user_metadata,sai_avatar:true}});
+   if(!url)throw new Error('تعذّر تحميل الصورة المحفوظة. أعد فتح ملفك.');
+   return url+'&v='+Date.now();
+  },
   async updateProfile({name,interests}){
    const u=await requireUser();
    const existing=await client.from('profiles').select('id').eq('id',u.id).maybeSingle();fail(existing.error,'تعذّر تحميل الحساب.');

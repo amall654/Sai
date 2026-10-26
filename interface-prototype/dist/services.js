@@ -15,6 +15,7 @@ window.SaiServices = (() => {
   recoveryRequired: () => backend?.recoveryRequired ? call('recoveryRequired') : Promise.resolve(false),
   changePassword: password => call('changePassword',password),
   profile: () => call('profile'), updateProfile: values => call('updateProfile', values),
+  updateAvatar: blob => call('updateAvatar',blob),
   saved: () => call('saved'), setSaved: (kind,id,value) => call('setSaved', {kind,id,value}),
   submitExperience: values => call('submitExperience', values),
   myExperiences: () => call('myExperiences'),

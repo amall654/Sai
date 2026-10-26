@@ -47,6 +47,7 @@ const url = pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href;
     signup:async()=>({}),resetPassword:async()=>({}),logout:async()=>{logged=false;},
     saved:async()=>saved,setSaved:async v=>{saved=saved.filter(s=>s.id!==v.id);if(v.value)saved.push({id:v.id,kind:v.kind});},
     profile:async()=>({name:'طالبة',interests:[],skills:[]}),updateProfile:async()=>({}),
+    updateAvatar:async blob=>{if(blob.type!=='image/webp'||blob.size>262144)throw new Error('Invalid image');window.avatarUploaded=true;return '';},
     myExperiences:async()=>experiences,submitExperience:async v=>{experiences.push({...v,status:'pending'});},
     ownerCatalog:async()=>({opportunities:[],experiences:[],fields:[]}),ownerSaveOpportunity:async()=>({}),ownerReviewExperience:async()=>({})
    };
@@ -54,6 +55,13 @@ const url = pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href;
   account.on('pageerror',e=>errors.push(e.message));await account.goto(url+'#opportunities');await account.locator('[data-save]').first().click();await account.locator('#email').fill('test@example.com');await account.locator('#password').fill('password');await account.locator('#auth-submit').click();await account.locator('#opportunities-page').waitFor({state:'visible'});await account.waitForFunction(()=>document.querySelector('#saved-count').textContent==='1');
   await account.evaluate(()=>location.hash='saved');await account.locator('#saved-content .card').waitFor();
   await account.evaluate(()=>location.hash='experiences');await account.locator('[data-action="contribute"]').click();await account.locator('#experience-topic').selectOption('هاكاثون');await account.locator('#experience-field').selectOption('تجربة عامة');await account.locator('#experience-draft').fill('بدأت التجربة بسؤال صغير وتعلمت كيف أبحث وأتعاون مع الآخرين وأستفيد من الأخطاء.');assert.equal(await account.locator('[data-record],[data-rewrite]').count(),0);await account.locator('#experience-form [type="checkbox"]').check();await account.screenshot({path:path.join(require('node:os').tmpdir(),'ux-experience-check.png')});await account.locator('#experience-form [type="submit"]').click();await account.waitForFunction(()=>document.querySelector('#dialog-title').textContent==='وصلتنا تجربتك');await account.locator('#dialog-body a').click();await account.locator('#profile-form').waitFor();assert.ok((await account.locator('#profile-content').innerText()).includes('قيد المراجعة'));
+  await account.locator('#avatar-file').setInputFiles({name:'invalid.txt',mimeType:'text/plain',buffer:Buffer.from('invalid')});
+  await account.waitForFunction(()=>document.querySelector('.avatar-form [role="status"]').textContent.includes('اختر صورة'));
+  assert.equal(await account.locator('.avatar-form button').isDisabled(),true);
+  const png=await account.evaluate(()=>{const c=document.createElement('canvas');c.width=120;c.height=80;c.getContext('2d').fillRect(0,0,120,80);return c.toDataURL('image/png').split(',')[1];});
+  await account.locator('#avatar-file').setInputFiles({name:'avatar.png',mimeType:'image/png',buffer:Buffer.from(png,'base64')});
+  await account.locator('.avatar-preview img').waitFor();await account.locator('.avatar-form button').click();
+  await account.waitForFunction(()=>window.avatarUploaded&&document.querySelector('.avatar-form [role="status"]').textContent==='تم حفظ صورة الحساب.');
   await account.locator('#profile-form [name="name"]').fill('اسمي الجديد');await account.locator('#profile-form [type="submit"]').click();await account.waitForFunction(()=>document.querySelector('#profile-feedback').textContent==='تم حفظ تعديلاتك.');
   await account.evaluate(()=>location.hash='admin');await account.locator('[data-owner-new]').click();await account.locator('#owner-opportunity-form').waitFor();
   await account.locator('[name="title"]').fill('فرصة اختبار');await account.locator('[name="source_name"]').fill('جهة اختبار');await account.locator('textarea[name="description"]').fill('نبذة');await account.locator('[name="original_text"]').fill('نص المنشور الأصلي');await account.locator('[name="source_url"]').fill('https://example.com');await account.locator('#owner-opportunity-form [type="submit"]').click();await account.waitForFunction(()=>document.querySelector('#owner-feedback')?.textContent==='تم حفظ الفرصة.');

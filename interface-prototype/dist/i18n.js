@@ -246,6 +246,16 @@
  'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'The story status changed. Reload the panel.',
  'تعذّر حفظ قرار المراجعة.':'Unable to save the review decision.'
  });
+ Object.assign(en,{
+ 'صورة الحساب':'Account photo','حفظ الصورة':'Save photo','معاينة صورة الحساب':'Account photo preview',
+ 'JPG، PNG، WebP — حتى 5 ميجابايت. تُقص الصورة مربعًا من المنتصف.':'JPG, PNG, WebP — up to 5 MB. The image is cropped to a square from the center.',
+ 'اختر صورة JPG أو PNG أو WebP بحجم لا يتجاوز 5 ميجابايت.':'Choose a JPG, PNG or WebP image up to 5 MB.',
+ 'جارٍ حفظ الصورة…':'Saving photo…','تم حفظ صورة الحساب.':'Account photo saved.',
+ 'تعذّر قراءة الصورة. اختر صورة أخرى.':'Unable to read this image. Choose another.',
+ 'تعذّر تجهيز الصورة. اختر صورة أخرى.':'Unable to prepare this image. Choose another.',
+ 'تعذّر حفظ الصورة. حاول مجددًا.':'Unable to save the photo. Please try again.',
+ 'تعذّر تحميل الصورة المحفوظة. أعد فتح ملفك.':'Unable to load the saved photo. Reopen your account.'
+ });
  let language='ar';try{if(localStorage.getItem('sai-language')==='en')language='en';}catch{}
  const originals=new WeakMap();const attrs=new WeakMap();
  function translate(text){const trimmed=text.trim();if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}

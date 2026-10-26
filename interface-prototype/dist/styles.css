@@ -1075,6 +1075,12 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .profile-summary,.profile-panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:28px}
 .profile-summary{text-align:center}
 .profile-avatar{width:86px;height:86px;font-size:36px;margin:0 auto 16px}
+.profile-avatar img,.profile-mini-avatar img,.avatar-preview img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.avatar-form{display:grid;gap:12px;margin-top:24px;text-align:start;min-width:0}
+.avatar-form label{font-weight:700}.avatar-form input{width:100%;min-width:0;font:inherit;font-size:13px}
+.avatar-form input::file-selector-button{font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);margin-inline-end:8px;cursor:pointer}
+.avatar-form .muted{font-size:12px;line-height:1.8}.avatar-form .button{width:100%}
+.avatar-preview{width:86px;height:86px;margin-inline:auto}
 .profile-summary h2{margin:0;font-size:23px}
 .profile-summary p{font-size:14px}
 .profile-facts{text-align:start;margin:24px 0}
@@ -1091,6 +1097,12 @@ button:disabled{cursor:not-allowed;opacity:.5}
 .profile-tags.subtle li{background:var(--paper);border:1px solid var(--line)}
 .profile-record{padding-block:20px;border-top:1px solid var(--line)}
 .profile-record:last-child{padding-bottom:0}
+.profile-experience{margin-top:12px;min-width:0}
+.profile-experience>summary{display:list-item;box-sizing:border-box;width:100%;padding:14px 20px;border-radius:12px;background:var(--green);color:white;font:inherit;font-weight:700;line-height:1.7;overflow-wrap:anywhere;cursor:pointer}
+.profile-experience>summary:hover{background:var(--green-dark)}
+.profile-experience>summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.profile-experience-body{padding-top:16px}
+
 .profile-record-note,.profile-file p{color:var(--muted);font-size:14px}
 .profile-file{display:flex;align-items:center;gap:14px;border-block:1px solid var(--line);padding-block:14px}
 .profile-file>span{width:26px;flex-shrink:0;color:var(--green)}
