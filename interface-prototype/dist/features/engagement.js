@@ -7,13 +7,15 @@ window.SaiEngagement=(()=>{
  function attach(kind,item){
   $('#dialog-body').insertAdjacentHTML('beforeend',`<div class="engagement-actions">${kind!=='experience'?`<button type="button" class="text-link" data-outcome-kind="${kind}" data-outcome-id="${esc(item.id)}">سجّل استفادتك</button>`:''}${kind==='opportunity'&&item.deadlineAt&&opportunityAvailable(item)?`<button type="button" class="text-link" data-calendar="${esc(item.id)}">أضف الموعد إلى التقويم</button>`:''}<button type="button" class="text-link" data-report-kind="${kind}" data-report-id="${esc(item.id)}">أبلغ عن رابط أو معلومة</button></div>`);
  }
+ // RFC 5545 folds content lines at 75 UTF-8 octets, without splitting Arabic characters.
+ const foldCalendarLine=line=>{let result='',part='',size=0;const encoder=new TextEncoder();for(const char of line){const length=encoder.encode(char).length;if(size+length>75){result+=part+'\r\n';part=' ';size=1;}part+=char;size+=length;}return result+part;};
  const icsEscape=value=>String(value||'').replace(/\\/g,'\\\\').replace(/\r\n|\r|\n/g,'\\n').replace(/;/g,'\\;').replace(/,/g,'\\,');
  function calendarText(item){
   const date=new Date(item.deadlineAt);if(!Number.isFinite(date.getTime()))throw new Error('الموعد غير متاح للتقويم.');
   const utc=value=>value.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
   // Text is escaped so a title cannot inject calendar properties or additional events.
   const title=(item.deadlineEstimated?'إيقاف العرض في سعي: ':'آخر موعد للتسجيل: ')+item.title;
-  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sai//Opportunity reminder//AR','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:'+icsEscape(item.id)+'@sai','DTSTAMP:'+utc(new Date()),'DTSTART:'+utc(date),'DTEND:'+utc(new Date(date.getTime()+15*60000)),'SUMMARY:'+icsEscape(title),'DESCRIPTION:'+icsEscape(item.deadline),'URL:'+icsEscape(safeURL(item.registrationUrl||item.sourceUrl)||''),'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:'+icsEscape(title),'END:VALARM','END:VEVENT','END:VCALENDAR',''].join('\r\n');
+  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sai//Opportunity reminder//AR','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:'+icsEscape(item.id)+'@sai','DTSTAMP:'+utc(new Date()),'DTSTART:'+utc(date),'DTEND:'+utc(new Date(date.getTime()+15*60000)),'SUMMARY:'+icsEscape(title),'DESCRIPTION:'+icsEscape(item.deadline),'URL:'+icsEscape(safeURL(item.registrationUrl||item.sourceUrl)||''),'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:'+icsEscape(title),'END:VALARM','END:VEVENT','END:VCALENDAR',''].map(foldCalendarLine).join('\r\n');
  }
  function downloadCalendar(item){
   if(!opportunityAvailable(item))return notice('انتهت فترة التسجيل أو العرض.');
