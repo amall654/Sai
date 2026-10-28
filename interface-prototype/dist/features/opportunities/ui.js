@@ -11,7 +11,7 @@ function opportunityFacts(o, showDeadline=true){return '<dl class="opportunity-f
 function opportunityAvailable(o){return o.registrationKind!=='unknown'&&(!o.deadlineAt||Date.parse(o.deadlineAt)>Date.now());}
 function opportunityRegistrationState(o){
  if(o.registrationKind==='unknown')return {key:'unknown',label:'موعد التسجيل غير مؤكد'};
- if(o.deadlineAt){const remaining=Date.parse(o.deadlineAt)-Date.now();if(!Number.isFinite(remaining))return {key:'unknown',label:'موعد التسجيل غير مؤكد'};if(remaining<=0)return {key:'closed',label:'انتهى التسجيل'};if(remaining<=72*60*60*1000)return {key:'soon',label:'يغلق خلال 3 أيام'};return {key:'open',label:'التسجيل مفتوح'};}
+ if(o.deadlineAt){const remaining=Date.parse(o.deadlineAt)-Date.now();if(!Number.isFinite(remaining))return {key:'unknown',label:'موعد التسجيل غير مؤكد'};if(remaining<=0)return {key:'closed',label:o.deadlineEstimated?'انتهت فترة العرض في سعي':'انتهى التسجيل'};if(remaining<=72*60*60*1000)return {key:'soon',label:o.deadlineEstimated?'ينتهي عرضها خلال 3 أيام':'يغلق خلال 3 أيام'};return {key:'open',label:o.deadlineEstimated?'التسجيل متاح — الإغلاق الرسمي غير معلن':'التسجيل مفتوح'};}
  return o.registrationKind==='ongoing'?{key:'ongoing',label:'تسجيل مستمر'}:{key:'unknown',label:'موعد التسجيل غير مؤكد'};
 }
 function opportunityStatusBadge(o){const state=opportunityRegistrationState(o);return `<span class="registration-state ${state.key}" data-registration-state="${state.key}">${esc(state.label)}</span>`;}
@@ -47,4 +47,4 @@ function refreshRegistrationAvailability(){
 }
 setInterval(refreshRegistrationAvailability,30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshRegistrationAvailability();});
-document.addEventListener('click',event=>{const link=event.target.closest('.opportunity-actions a');if(!link)return;const id=link.closest('[data-opportunity-id]')?.dataset.opportunityId||dialog.dataset.opportunityId;const item=catalog.opportunities.find(o=>o.id===id);if(item&&!opportunityAvailable(item)){event.preventDefault();refreshRegistrationAvailability();notice('انتهى التسجيل');}},true);
+document.addEventListener('click',event=>{const link=event.target.closest('.opportunity-actions a');if(!link)return;const id=link.closest('[data-opportunity-id]')?.dataset.opportunityId||dialog.dataset.opportunityId;const item=catalog.opportunities.find(o=>o.id===id);if(item&&!opportunityAvailable(item)){event.preventDefault();refreshRegistrationAvailability();notice(opportunityRegistrationState(item).label);}},true);

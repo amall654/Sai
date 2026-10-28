@@ -15,7 +15,8 @@ window.SaiOpportunityService = async function(fields, types) {
  return rows.map(o => ({id:o.id,title:o.title,description:o.description,
   originalText:o.original_text,sourceName:o.source_name,sourceUrl:o.source_url,
   registrationUrl:o.registration_url,type:types.get(o.type)||o.type,mode:o.mode,
-  deadline:o.registration_kind==='date'?'آخر يوم للتسجيل: '+o.registration_date+' (بتوقيت السعودية)':o.registration_kind==='ongoing'?'فرصة مستمرة':saudiOpportunityDeadline(o.deadline_at,o.deadline_text),
+  deadlineEstimated:(o.deadline_text||'').startsWith('موعد افتراضي من سعي:'),
+  deadline:(o.deadline_text||'').startsWith('موعد افتراضي من سعي:')?o.deadline_text:o.registration_kind==='date'?'آخر يوم للتسجيل: '+o.registration_date+' (بتوقيت السعودية)':o.registration_kind==='ongoing'?'فرصة مستمرة':saudiOpportunityDeadline(o.deadline_at,o.deadline_text),
   deadlineAt:o.deadline_at,registrationKind:o.registration_kind,publishedAt:o.published_at,status:o.status,
   fields:(o.opportunity_fields||[]).map(f=>fields.get(f.field_id)).filter(Boolean)}));
 };
