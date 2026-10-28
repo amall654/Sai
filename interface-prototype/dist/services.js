@@ -21,6 +21,8 @@ window.SaiServices = (() => {
   myExperiences: () => call('myExperiences'),
   ownerCatalog:()=>call('ownerCatalog'),
   ownerSaveOpportunity:payload=>call('ownerSaveOpportunity',payload),
+  ownerSaveProvider:payload=>call('ownerSaveProvider',payload),
+  ownerUploadLogo:blob=>call('ownerUploadLogo',blob),
   ownerReviewExperience:(id,decision,expected,classification)=>call('ownerReviewExperience',id,decision,expected,classification)
  };
 })();

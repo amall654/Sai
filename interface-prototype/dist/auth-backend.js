@@ -117,6 +117,12 @@
   },
   async submitExperience({title,body,field,topic}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||'',topic:topic||'تجربة أخرى'});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
   async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,field,topic,status').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
+  async ownerUploadLogo(blob){
+   await requireUser();const owner=await client.rpc('sai_is_owner');if(owner.error||owner.data!==true)throw new Error('هذه المساحة متاحة لمالك المنصة فقط.');
+   if(blob.type!=='image/webp'||blob.size>262144)throw new Error('تعذّر تجهيز الشعار. اختر صورة أخرى.');
+   const path='logos/'+crypto.randomUUID()+'.webp';const result=await client.storage.from('provider-logos').upload(path,blob,{contentType:'image/webp',cacheControl:'31536000',upsert:false});fail(result.error,'تعذّر رفع الشعار. حاول مجددًا.');return path;
+  },
+  async ownerSaveProvider(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_provider',{payload});fail(error,error?.code==='40001'?'تم تعديل الجهة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ جهة التعلم. تحقق من الحقول وصلاحية الحساب.');return data;},
   async ownerCatalog(){await requireUser();const {data,error}=await client.rpc('sai_owner_catalog');fail(error,'تعذّر تحميل إدارة المحتوى.');return data;},
   async ownerSaveOpportunity(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_opportunity',{payload});fail(error,error?.code==='40001'?'تم تعديل الفرصة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ الفرصة. تحقق من الحقول وصلاحية الحساب.');return data;},
   async ownerReviewExperience(target,decision,expected_status,classification){await requireUser();const {error}=await client.rpc('sai_owner_review_classified_experience',{target,decision,expected_status,classification});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}

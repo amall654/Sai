@@ -1,6 +1,59 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"كيف أدير المحتوى؟":"How do I manage content?",
+"أضيفي فرصة أو جهة تعلم، ثم املئي المعلومات وروابط المصدر الرسمي.":"Add an opportunity or learning provider, then fill in its information and official source links.",
+"ارفعي شعار الجهة من جهازك، وحددي المجالات والمستوى واللغة والتكلفة.":"Upload the provider logo from your device and select fields, levels, languages and cost.",
+"احفظي كمسودة للمراجعة، أو اختاري منشورة لعرض المحتوى للجميع.":"Save as Draft for review, or choose Published to display the content to everyone.",
+"استخدمي تعديل لتحديث المعلومات، أو مخفية لإيقاف العرض مع الاحتفاظ بالمحتوى.":"Use Edit to update information, or Hidden to stop displaying it while retaining the content.",
+"راجعي تجارب الطلاب من قراءة ومراجعة، ثم اعتمدي المناسب للنشر.":"Open student submissions with Read and review, then approve suitable experiences for publication.",
+"لإضافة تجربتك الشخصية، استخدمي شارك تجربتك ثم راجعيها من هذه اللوحة.":"To add your own experience, use Share your experience, then review it from this dashboard.",
+
+"تغير الشعار أثناء الرفع. راجعي المعاينة واحفظي مجددًا.":"The logo changed during upload. Review the preview and save again.",
+"إدارة الفرص وجهات التعلم ومراجعة تجارب الطلاب. التعديلات المحفوظة تنعكس على المنصة.":"Manage opportunities, learning providers and student reviews. Saved changes appear on the platform.",
+"تجربة قيد المراجعة":"Experiences awaiting review",
+"فرصة تغلق خلال 3 أيام":"Opportunities closing within 3 days",
+"جهة تحتاج مراجعة معلوماتها":"Providers needing an information review",
+"تصفية الفرص":"Filter opportunities",
+"المفتوحة":"Open",
+"تغلق قريبًا":"Closing soon",
+"المنتهية":"Expired",
+"لا يوجد محتوى مطابق.":"No matching content.",
+"إضافة جهة تعلم":"Add learning provider",
+"البحث عن جهة":"Search providers",
+"اسم الجهة":"Provider name",
+"تصفية الجهات":"Filter providers",
+"جميع الجهات":"All providers",
+"تحتاج مراجعة":"Needs review",
+"راجعي الروابط والمعلومات من الموقع الرسمي، ثم احفظي الجهة لتحديث تاريخ مراجعتها. يظهر تنبيه بعد 90 يومًا من آخر مراجعة.":"Review links and information on the official website, then save the provider to update its review date. A reminder appears after 90 days.",
+"لم تُراجع من اللوحة بعد.":"Not yet reviewed from the dashboard.",
+"تعديل جهة التعلم":"Edit learning provider",
+"الرابط الرسمي":"Official link",
+"ماذا تقدم الجهة؟":"What does the provider offer?",
+"تفاصيل لغة التعلم":"Learning language details",
+"تفاصيل التكلفة":"Cost details",
+"نوع المحتوى — افصلي بفاصلة":"Content types — separate with commas",
+"لغات المحتوى":"Content languages",
+"تصنيف التكلفة":"Cost category",
+"شعار الجهة":"Provider logo",
+"ارفعي صورة من جهازك. يُحافظ على أبعاد الشعار دون قص، ويظهر بالحجم المعتاد في البطاقة.":"Upload an image from your device. The logo keeps its proportions without cropping and appears at the usual card size.",
+"اختيار شعار الجهة":"Choose provider logo",
+"استخدام الرمز الافتراضي":"Use default symbol",
+"اختاري مسودة للمراجعة، أو منشورة لعرض الجهة، أو مخفية لإيقاف ظهورها مع الاحتفاظ بها.":"Choose Draft for review, Published to display the provider, or Hidden to stop displaying it while retaining it.",
+"حفظ جهة التعلم":"Save learning provider",
+"معاينة شعار الجهة":"Provider logo preview",
+"الشعار جاهز للحفظ.":"Logo ready to save.",
+"سيُستخدم الرمز الافتراضي.":"The default symbol will be used.",
+"انتظري تجهيز الشعار ثم احفظي.":"Wait for logo preparation, then save.",
+"اختاري المجال والمستوى ولغة المحتوى، أو بحسب البرنامج.":"Choose a field, level and content language, or select Varies by program.",
+"اكتبي حتى 12 نوع محتوى، وكل نوع لا يتجاوز 80 حرفًا.":"Enter up to 12 content types, each no longer than 80 characters.",
+"تم حفظ جهة التعلم.":"Learning provider saved.",
+"تعذّر تجهيز الشعار. اختر صورة أخرى.":"Unable to prepare the logo. Choose another image.",
+"تعذّر رفع الشعار. حاول مجددًا.":"Logo upload failed. Please try again.",
+"تم تعديل الجهة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.":"The provider was changed elsewhere. Close the form and reload the dashboard before trying again.",
+"تعذّر حفظ جهة التعلم. تحقق من الحقول وصلاحية الحساب.":"Unable to save the provider. Check the fields and account permissions.",
+"مثل: دورات، تعلم ذاتي، مسارات تعليمية.":"For example: courses, self-paced learning, learning paths.",
+
 "المستوى":"Level",
 "كل المستويات":"All levels",
 "مبتدئ":"Beginner",
@@ -344,7 +397,7 @@
  });
  let language='ar';try{if(localStorage.getItem('sai-language')==='en')language='en';}catch{}
  const originals=new WeakMap();const attrs=new WeakMap();
- function translate(text){const trimmed=text.trim();if(trimmed.startsWith('آخر يوم للتسجيل: '))return text.replace('آخر يوم للتسجيل: ','Last registration day: ').replace('(بتوقيت السعودية)','(Saudi time)');if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}
+ function translate(text){const trimmed=text.trim();if(trimmed.startsWith('آخر يوم للتسجيل: '))return text.replace('آخر يوم للتسجيل: ','Last registration day: ').replace('(بتوقيت السعودية)','(Saudi time)');if(en[trimmed])return text.replace(trimmed,en[trimmed]);if(trimmed.startsWith('سعي | '))return 'Sai | '+(en[trimmed.slice(6)]||trimmed.slice(6));for(const [prefix,value] of [['إلغاء حفظ ','Remove saved item: '],['حفظ ','Save '],['تاريخ النشر: ','Published: '],['آخر مراجعة: ','Last reviewed: '],['الموعد: ','Deadline: ']])if(trimmed.startsWith(prefix))return value+(en[trimmed.slice(prefix.length)]||trimmed.slice(prefix.length));return text;}
  function updateText(node){const current=node.nodeValue;const old=originals.get(node);const source=old&&current===old.rendered?old.source:current;const rendered=language==='en'?translate(source):source;if(node.parentElement?.tagName==='OPTION'&&!node.parentElement.hasAttribute('value'))node.parentElement.value=node.parentElement.textContent;if(current!==rendered)node.nodeValue=rendered;originals.set(node,{source,rendered});}
  function apply(){observer.disconnect();const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode())){if(node.parentElement.closest('script,style,textarea,[contenteditable],#language-toggle'))continue;updateText(node);}document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(el=>{const history=attrs.get(el)||{};for(const name of ['placeholder','aria-label','title']){if(!el.hasAttribute(name)||el.id==='language-toggle')continue;const current=el.getAttribute(name),old=history[name];const source=old&&current===old.rendered?old.source:current;const rendered=language==='en'?translate(source):source;if(current!==rendered)el.setAttribute(name,rendered);history[name]={source,rendered};}attrs.set(el,history);});
   const title=document.querySelector('title').firstChild;if(title)updateText(title);
