@@ -1,6 +1,10 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"جهات تساعدك على الاستعداد":"Providers to help you prepare",
+"فرص للتطبيق في المجال":"Opportunities to practice in this field",
+"تجارب مرتبطة بالمجال أو نوع المشاركة":"Experiences related to the field or participation type",
+"محتوى مرتبط":"Related content",
 "انتهت فترة العرض في سعي":"Sai listing period ended",
 "ينتهي عرضها خلال 3 أيام":"Listing ends within 3 days",
 "التسجيل متاح — الإغلاق الرسمي غير معلن":"Registration available — official closing date unannounced",

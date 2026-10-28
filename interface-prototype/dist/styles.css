@@ -1362,3 +1362,5 @@ button:disabled{opacity:.6;cursor:wait}
 .owner-logo-preview{display:flex;align-items:center;min-height:90px;margin:14px 0}.owner-logo-preview>img{width:100px;height:100px;object-fit:contain;border:1px solid var(--line);border-radius:12px}
 .owner-provider-filters :is(input,select):focus-visible,.owner-filter select:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 @media(max-width:650px){.owner-summary,.owner-provider-filters{grid-template-columns:1fr}.owner-row{gap:12px;flex-wrap:wrap}}
+
+.related-content{border-top:1px solid var(--line);margin-top:26px;padding-top:12px}.related-group{margin:18px 0}.related-group h3{font-size:17px}.related-list{display:grid;gap:10px}.related-item{display:grid;gap:7px;text-align:start;font:inherit;color:var(--green);background:var(--green-soft);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}.related-item span{font-size:12px;color:var(--muted)}.related-item:focus-visible{outline:2px solid var(--green);outline-offset:3px}
