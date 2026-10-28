@@ -237,7 +237,7 @@ window.SAI_OPPORTUNITIES = [
     "status": "published"
   },
   {
-    "id": "f0282026-1028-4000-8000-000000000004",
+    "id": "f0082026-1008-4000-8000-000000000005",
     "title": "استدامة ثون — جامعة الملك عبدالعزيز",
     "sourceName": "جامعة الملك عبدالعزيز",
     "sourceUrl": "https://kau.edu.sa/u/8l3rR",
