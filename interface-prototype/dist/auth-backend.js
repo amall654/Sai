@@ -89,7 +89,7 @@
    history.replaceState(null,'',location.pathname+'#login');
   },
   async logout(){const {error}=await client.auth.signOut();fail(error,'تعذّر تسجيل الخروج. تحقق من الاتصال وحاول مجددًا.');},
-  async profile(){const u=await requireUser();const {data,error}=await client.from('profiles').select('name,interests').eq('id',u.id).maybeSingle();fail(error,'تعذّر تحميل الحساب.');return {...(data||{name:u.user_metadata?.name||'طالب',interests:[]}),avatar:await avatarUrl(u)};},
+  async profile(){const u=await requireUser();const {data,error}=await client.from('profiles').select('name,interests,learning_level').eq('id',u.id).maybeSingle();fail(error,'تعذّر تحميل الحساب.');return {...(data||{name:u.user_metadata?.name||'طالب',interests:[]}),avatar:await avatarUrl(u)};},
   async updateAvatar(blob){
    const u=await requireUser();
    if(!blob||blob.type!=='image/webp'||!blob.size||blob.size>262144)throw new Error('تعذّر تجهيز الصورة. اختر صورة أخرى.');
@@ -108,6 +108,14 @@
    const result=existing.data?await client.from('profiles').update(values).eq('id',u.id):await client.from('profiles').insert({id:u.id,...values});
    fail(result.error,'تعذّر حفظ بيانات الحساب.');
   },
+  async outcomes(){await requireUser();const {data,error}=await client.from('student_outcomes').select('kind,target_id,stage,helpful');fail(error,'تعذّر تحميل متابعتك.');return data;},
+  async saveOutcome(kind,target,stage,helpful){await requireUser();const {error}=await client.rpc('sai_save_outcome',{kind,target,stage,helpful});fail(error,'تعذّر حفظ إجابتك. حاول مجددًا.');},
+  async reportContent(kind,target,reason,note){await requireUser();const {data,error}=await client.rpc('sai_submit_content_report',{kind,target,reason,note});fail(error,error?.message?.includes('Daily report limit')?'يمكن إرسال خمسة بلاغات خلال 24 ساعة. حاول لاحقًا.':'تعذّر إرسال البلاغ. حاول مجددًا.');return data;},
+  async ownerEngagement(){await requireUser();const {data,error}=await client.rpc('sai_owner_engagement');fail(error,'تعذّر تحميل البلاغات وملخص الاستفادة.');return data;},
+  async ownerReviewReport(target,decision,expected_updated){await requireUser();const {error}=await client.rpc('sai_owner_review_report',{target,decision,expected_updated});fail(error,error?.code==='40001'?'تغير البلاغ. أعيدي تحميل القائمة.':'تعذّر حفظ حالة البلاغ.');},
+  async learningProgress(){await requireUser();const {data,error}=await client.from('learning_progress').select('path_id,step_key,state,updated_at');fail(error,'تعذّر تحميل تقدم التعلم.');return data;},
+  async saveLearningProgress(path,step,state){await requireUser();const {error}=await client.rpc('sai_save_learning_progress',{path,step,new_state:state});fail(error,'تعذّر حفظ التقدم. حاول مجددًا.');},
+  async saveLearningPreferences(level,interests){await requireUser();const {error}=await client.rpc('sai_save_learning_preferences',{level,interests});fail(error,'تعذّر حفظ تفضيلات التعلم.');},
   async saved(){await requireUser();const [o,p]=await Promise.all([client.from('saved_opportunities').select('opportunity_id'),client.from('saved_providers').select('provider_id')]);fail(o.error||p.error,'تعذّر تحميل المحفوظات.');return [...o.data.map(x=>({kind:'opportunity',id:x.opportunity_id})),...p.data.map(x=>({kind:'provider',id:x.provider_id}))];},
   async setSaved({kind,id,value}){
    const u=await requireUser();if(!['opportunity','provider'].includes(kind))throw new Error('عنصر غير صالح.');

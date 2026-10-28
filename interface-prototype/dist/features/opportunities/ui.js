@@ -41,6 +41,7 @@ document.querySelector('#opportunity-search').addEventListener('input',renderOpp
 function refreshRegistrationAvailability(){
  if(typeof catalogReady==='undefined'||!catalogReady)return;
  renderOpportunities();
+ window.SaiEngagement?.refreshReminders();
  if(location.hash==='#saved')renderSaved();
  const id=dialog.dataset.opportunityId;
  if(id&&dialog.open&&dialog.querySelector('.opportunity-detail')){const item=catalog.opportunities.find(o=>o.id===id);if(item&&dialog.querySelector('[data-registration-state]')?.dataset.registrationState!==opportunityRegistrationState(item).key)openOpportunity(id);}
