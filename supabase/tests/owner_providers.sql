@@ -37,7 +37,7 @@ reset role;
 select public.sai_owner_save_provider(current_setting('sai.test_payload')::jsonb||'{"status":"published"}');
 set local role anon;
 do $$ begin
- if not exists(select 1 from public.providers where id=current_setting('sai.test_provider')::uuid) then raise exception 'Published provider unavailable'; end if;
+ if not exists(select 1 from public.providers where id=current_setting('sai.test_provider')::uuid and guidance->>'cost'='free' and logo_path is null and reviewed_at is not null) then raise exception 'Published provider unavailable'; end if;
 end;$$;
 reset role;
 select public.sai_owner_save_provider(current_setting('sai.test_payload')::jsonb||'{"status":"hidden"}');
