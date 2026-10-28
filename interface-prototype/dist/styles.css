@@ -1335,3 +1335,24 @@ button:disabled{opacity:.6;cursor:wait}
 /* Experience directory shares the learning directory rhythm. */
 .experience-filter-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.experience-filters label{display:block;font-weight:700;font-size:14px}.experience-filters select,.experience-filters input{display:block;width:100%;min-width:0;min-height:48px;margin-top:8px;padding:12px 14px;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px}.experience-filters :is(input,select):focus-visible{outline:2px solid var(--green);outline-offset:3px}.experience-filters>label{margin-top:20px}.experience-filters #experience-reset{margin-top:12px}.experience-card .opportunity-tags{margin:12px 0}.experience-card .badge{font-size:12px}.experience-filter-row label{min-width:0}
 @media(max-width:600px){.experience-filter-row{grid-template-columns:1fr;gap:12px}}
+
+/* Learning directory guidance and starting paths. */
+.provider-filter-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:18px 0}
+.provider-filter-row label{font-weight:700;font-size:14px;min-width:0}
+.provider-filter-row select{display:block;width:100%;min-height:48px;margin-top:8px;padding:12px;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.provider-filter-row select:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.guidance-note{font-size:13px;color:var(--muted);line-height:1.8}
+.provider-guidance .badge{background:var(--green-soft);color:var(--green)}
+.learning-paths{margin:28px 0 36px}
+.learning-paths h2{font-size:21px;color:var(--green)}
+.learning-paths>p{color:var(--muted);line-height:1.8}
+.learning-path-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.learning-path{display:flex;flex-direction:column;align-items:flex-start;border:1px solid var(--line);border-radius:18px;background:var(--green-soft);padding:22px}
+.learning-path h3{font-size:17px;margin:0 0 10px}.learning-path p{font-size:14px;line-height:1.9;margin:0 0 16px}.learning-path button{margin-top:auto}
+.learning-path-steps{padding-inline-start:26px}.learning-path-steps li{padding:15px;margin:16px 0;background:var(--green-soft);border-radius:14px}.learning-path-steps h3{font-size:17px;margin:0}.learning-path-steps p{line-height:1.9}
+.registration-state{display:inline-block;font-size:13px;font-weight:700;border-radius:8px;padding:6px 10px;background:var(--green-soft);color:var(--green);margin:8px 0}
+.registration-state.soon{background:#fff1d6;color:#704d17}.registration-state.closed{background:#f1efed;color:#625e59}
+.opportunity-eligibility{font-size:13px;line-height:1.8;margin:12px 0}.opportunity-eligibility strong{display:block;margin-bottom:6px}.opportunity-eligibility p{margin:0;color:var(--muted)}
+@media(max-width:800px){.learning-path-list{grid-template-columns:1fr}.provider-filter-row{grid-template-columns:1fr}}
+
+.learning-paths{border:1px solid var(--line);border-radius:16px;padding:18px 22px;background:#fff}.learning-paths summary{cursor:pointer;font-size:19px;font-weight:700;color:var(--green)}.learning-paths summary:focus-visible{outline:2px solid var(--green);outline-offset:5px}

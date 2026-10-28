@@ -9,8 +9,20 @@ const opportunitySymbols = {
 function opportunityIcon(name){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+opportunitySymbols[name]+'</svg>';}
 function opportunityFacts(o, showDeadline=true){return '<dl class="opportunity-facts">'+(o.mode?'<div><dt>'+opportunityIcon(/حضوري/.test(o.mode)?'pin':'screen')+'<span>طريقة المشاركة</span></dt><dd>'+esc(o.mode)+'</dd></div>':'')+(showDeadline&&o.deadline?'<div><dt>'+opportunityIcon('calendar')+'<span>الموعد</span></dt><dd>'+esc(o.deadline)+'</dd></div>':'')+'</dl>';}
 function opportunityAvailable(o){return o.registrationKind!=='unknown'&&(!o.deadlineAt||Date.parse(o.deadlineAt)>Date.now());}
-function opportunityRegistration(o){return opportunityAvailable(o)?external(o.registrationUrl||o.sourceUrl,o.registrationUrl?'زيارة التسجيل':'فتح المصدر الأصلي'):'<span class="badge">انتهى التسجيل</span>';}
-function opportunityCard(o){return `<article class="card opportunity-card" data-opportunity-id="${esc(o.id)}"><div class="card-top"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><span>${esc(o.type||'')}</span></div>${saveButton('opportunity',o)}</div><h3>${esc(o.title)}</h3>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}${opportunityFacts(o)}<div class="opportunity-actions">${opportunityRegistration(o)}<button class="button outline" data-detail="${esc(o.id)}">عرض التفاصيل</button></div></article>`;}
+function opportunityRegistrationState(o){
+ if(o.registrationKind==='unknown')return {key:'unknown',label:'موعد التسجيل غير مؤكد'};
+ if(o.deadlineAt){const remaining=Date.parse(o.deadlineAt)-Date.now();if(!Number.isFinite(remaining))return {key:'unknown',label:'موعد التسجيل غير مؤكد'};if(remaining<=0)return {key:'closed',label:'انتهى التسجيل'};if(remaining<=72*60*60*1000)return {key:'soon',label:'يغلق خلال 3 أيام'};return {key:'open',label:'التسجيل مفتوح'};}
+ return o.registrationKind==='ongoing'?{key:'ongoing',label:'تسجيل مستمر'}:{key:'unknown',label:'موعد التسجيل غير مؤكد'};
+}
+function opportunityStatusBadge(o){const state=opportunityRegistrationState(o);return `<span class="registration-state ${state.key}" data-registration-state="${state.key}">${esc(state.label)}</span>`;}
+function opportunityEligibility(o){
+ const text=String(o.originalText||o.details||'').replace(/\r\n/g,'\n');
+ const sentences=text.split(/(?<=[.؟!])\s+|\n+/).map(s=>s.trim()).filter(s=>s&&/يشترط|يلزم|يجب|العمر|شروطه|شروط المشاركة/.test(s));
+ const copy=sentences.slice(0,2).join(' ')||o.audience||'راجع شروط الجهة المنظمة لمعرفة الأهلية ومتطلبات المشاركة.';
+ return `<div class="opportunity-eligibility"><strong>متطلبات المشاركة</strong><p>${esc(copy)}</p></div>`;
+}
+function opportunityRegistration(o){return opportunityAvailable(o)?external(o.registrationUrl||o.sourceUrl,o.registrationUrl?'زيارة التسجيل':'فتح المصدر الأصلي'):'';}
+function opportunityCard(o){return `<article class="card opportunity-card" data-opportunity-id="${esc(o.id)}"><div class="card-top"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><span>${esc(o.type||'')}</span></div>${saveButton('opportunity',o)}</div><h3>${esc(o.title)}</h3>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}${opportunityStatusBadge(o)}${opportunityFacts(o)}${opportunityEligibility(o)}<div class="opportunity-actions">${opportunityRegistration(o)}<button class="button outline" data-detail="${esc(o.id)}">عرض التفاصيل</button></div></article>`;}
 
 function renderOpportunities(){
  const words=normal($('#opportunity-search').value).trim().split(/\s+/).filter(Boolean);
@@ -20,7 +32,7 @@ function renderOpportunities(){
  document.querySelectorAll('[data-interest]').forEach(el=>{el.classList.toggle('active',el.dataset.interest===activeInterest);el.setAttribute('aria-pressed',String(el.dataset.interest===activeInterest));});
 }
 
-function openOpportunity(id){const o=catalog.opportunities.find(x=>x.id===id);if(!o)return;show(o.title,`<div class="opportunity-detail"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><div><strong>${esc(o.type||'')}</strong>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}</div></div><div class="opportunity-tags">${tags(o.fields)}</div><div class="opportunity-copy">${paragraphs(o.description)}${(o.originalText||o.details)&&((o.originalText||o.details)!==o.description)?paragraphs(o.originalText||o.details):''}</div>${(o.attachments||[]).map(a=>external(a.url,a.name||'فتح المرفق')).join('')}<div class="opportunity-actions">${opportunityRegistration(o)}</div></div>`);dialog.dataset.opportunityId=o.id;}
+function openOpportunity(id){const o=catalog.opportunities.find(x=>x.id===id);if(!o)return;show(o.title,`<div class="opportunity-detail"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><div><strong>${esc(o.type||'')}</strong>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}</div></div>${opportunityStatusBadge(o)}${opportunityFacts(o)}<div class="opportunity-tags">${tags(o.fields)}</div>${opportunityEligibility(o)}<div class="opportunity-copy">${paragraphs(o.description)}${(o.originalText||o.details)&&((o.originalText||o.details)!==o.description)?paragraphs(o.originalText||o.details):''}</div>${(o.attachments||[]).map(a=>external(a.url,a.name||'فتح المرفق')).join('')}<div class="opportunity-actions">${opportunityRegistration(o)}</div></div>`);dialog.dataset.opportunityId=o.id;}
 
 document.querySelector('#opportunity-search').addEventListener('input',renderOpportunities);
 ['opportunity-type','opportunity-mode'].forEach(id=>document.querySelector('#'+id).addEventListener('change',renderOpportunities));
@@ -31,7 +43,7 @@ function refreshRegistrationAvailability(){
  renderOpportunities();
  if(location.hash==='#saved')renderSaved();
  const id=dialog.dataset.opportunityId;
- if(id&&dialog.open&&dialog.querySelector('.opportunity-detail')){const item=catalog.opportunities.find(o=>o.id===id);if(item&&!opportunityAvailable(item))openOpportunity(id);}
+ if(id&&dialog.open&&dialog.querySelector('.opportunity-detail')){const item=catalog.opportunities.find(o=>o.id===id);if(item&&dialog.querySelector('[data-registration-state]')?.dataset.registrationState!==opportunityRegistrationState(item).key)openOpportunity(id);}
 }
 setInterval(refreshRegistrationAvailability,30000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshRegistrationAvailability();});

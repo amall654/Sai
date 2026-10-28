@@ -8,7 +8,7 @@
 <title>سعي | مساحة لخطوتك القادمة</title>
 <link rel="icon" type="image/png" href="assets/sai-gateway.png">
 <link rel="stylesheet" href="theme.css">
-<link rel="stylesheet" href="styles.css?v=20261027-profile-cards">
+<link rel="stylesheet" href="styles.css?v=20261028-learning-guidance">
 <script defer src="features/opportunities/data.js?v=20261019-new-hackathons"></script>
 <script defer src="features/learning/data.js?v=20261028-learning-providers"></script>
 <script defer src="content.js?v=20261006-split">
@@ -21,9 +21,10 @@
 <script defer src="auth-backend.js?v=20261026-avatar"></script>
 <script defer src="services.js?v=20261026-avatar"></script>
 <script defer src="app.js?v=20261008-password-eye"></script>
-<script defer src="i18n.js?v=20261028-learning-providers"></script>
-<script defer src="features/opportunities/ui.js?v=20261027-profile-cards"></script>
-<script defer src="features/learning/ui.js?v=20261028-learning-providers"></script>
+<script defer src="i18n.js?v=20261028-learning-guidance"></script>
+<script defer src="features/opportunities/ui.js?v=20261028-learning-guidance"></script>
+<script defer src="features/learning/guidance.js?v=20261028-learning-guidance"></script>
+<script defer src="features/learning/ui.js?v=20261028-learning-guidance"></script>
 <script defer src="features/experiences.js?v=20261024-filters-only"></script>
 <script defer src="owner-console.js?v=20261026-deadlines"></script>
 <script defer src="features/avatar.js?v=20261026"></script>
@@ -112,8 +113,17 @@
 <h2 id="learning-field-title">في أي مجال تحب تتعلّم؟</h2>
 <div id="provider-fields" class="chips" role="group" aria-labelledby="learning-field-title"></div>
 <div class="directory-search"><label for="provider-search">ابحث عن جهة تعلّم</label><input id="provider-search" type="search" placeholder="اسم الجهة، المجال أو نوع المحتوى"></div>
+<div class="provider-filter-row">
+<label for="provider-level">المستوى<select id="provider-level"><option value="">كل المستويات</option><option value="beginner">مبتدئ</option><option value="intermediate">متوسط</option><option value="advanced">متقدم</option><option value="variable">بحسب البرنامج</option></select></label>
+<label for="provider-cost">التكلفة<select id="provider-cost"><option value="">كل التكاليف</option><option value="free">محتوى مجاني</option><option value="mixed">مجاني ومدفوع</option><option value="paid">مدفوع</option><option value="variable">بحسب البرنامج</option></select></label>
+<label for="provider-language">لغة التعلم<select id="provider-language"><option value="">كل اللغات</option><option value="ar">العربية</option><option value="en">الإنجليزية</option><option value="variable">بحسب البرنامج</option></select></label>
+</div>
+<p class="guidance-note">التصنيف يوضح الخيارات المتاحة لدى الجهة؛ راجع تفاصيل الدورة لمستواها ولغتها وتكلفتها الدقيقة، ورسوم الشهادة إن وجدت.</p>
 <button id="provider-reset" type="button" class="text-link" hidden>مسح البحث والتصفية</button>
 </section>
+<details id="learning-paths" class="learning-paths" hidden>
+<summary>مسارات بداية مقترحة</summary><p>اختر مجالًا واستكشف خطوات تساعدك على الانتقال من الأساسيات إلى التطبيق.</p>
+<div id="learning-path-list" class="learning-path-list"></div></details>
 <p class="learning-count" role="status"><span>الجهات المعروضة</span> <bdi id="provider-count"></bdi></p>
 <div id="provider-state" role="status"></div>
 <div class="provider-grid" id="provider-grid">
