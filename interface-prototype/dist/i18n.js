@@ -1,6 +1,7 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"روابط الحساب":"Account links",
 "شروط المشاركة: طلاب الجامعات والخريجون والمبتكرون، فرديًا أو بفريق حتى 4 أعضاء.":"Eligibility: university students, graduates and innovators, individually or in teams of up to 4.",
 "خطوتك القادمة":"Your next step",
 "أتعلم":"Learning",
