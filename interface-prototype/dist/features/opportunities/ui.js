@@ -22,7 +22,7 @@ function opportunityEligibility(o){
  return `<div class="opportunity-eligibility"><strong>متطلبات المشاركة</strong><p>${esc(copy)}</p></div>`;
 }
 function opportunityRegistration(o){return opportunityAvailable(o)?external(o.registrationUrl||o.sourceUrl,o.registrationUrl?'زيارة التسجيل':'فتح المصدر الأصلي'):'';}
-function opportunityCard(o){return `<article class="card opportunity-card" data-opportunity-id="${esc(o.id)}"><div class="card-top"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><span>${esc(o.type||'')}</span></div>${saveButton('opportunity',o)}</div><h3>${esc(o.title)}</h3>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}${opportunityStatusBadge(o)}${opportunityFacts(o)}${opportunityEligibility(o)}<div class="opportunity-actions">${opportunityRegistration(o)}<button class="button outline" data-detail="${esc(o.id)}">عرض التفاصيل</button></div></article>`;}
+function opportunityCard(o){return `<article class="card opportunity-card" data-opportunity-id="${esc(o.id)}"><div class="card-top"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><span>${esc(o.type||'')}</span></div>${saveButton('opportunity',o)}</div><h3><a href="#opportunities/${encodeURIComponent(o.id)}">${esc(o.title)}</a></h3>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}${opportunityStatusBadge(o)}${opportunityFacts(o)}${opportunityEligibility(o)}<div class="opportunity-actions">${opportunityRegistration(o)}<button class="button outline" data-detail="${esc(o.id)}">عرض التفاصيل</button></div></article>`;}
 
 function renderOpportunities(){
  const words=normal($('#opportunity-search').value).trim().split(/\s+/).filter(Boolean);
@@ -32,7 +32,9 @@ function renderOpportunities(){
  document.querySelectorAll('[data-interest]').forEach(el=>{el.classList.toggle('active',el.dataset.interest===activeInterest);el.setAttribute('aria-pressed',String(el.dataset.interest===activeInterest));});
 }
 
-function openOpportunity(id){const o=catalog.opportunities.find(x=>x.id===id);if(!o)return;show(o.title,`<div class="opportunity-detail"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><div><strong>${esc(o.type||'')}</strong>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}</div></div>${opportunityStatusBadge(o)}${opportunityFacts(o)}<div class="opportunity-tags">${tags(o.fields)}</div>${opportunityEligibility(o)}<div class="opportunity-copy">${paragraphs(o.description)}${(o.originalText||o.details)&&((o.originalText||o.details)!==o.description)?paragraphs(o.originalText||o.details):''}</div>${(o.attachments||[]).map(a=>external(a.url,a.name||'فتح المرفق')).join('')}<div class="opportunity-actions">${opportunityRegistration(o)}</div></div>`);dialog.dataset.opportunityId=o.id;window.SaiStudentJourney.attach('opportunity',o);}
+function opportunityDetail(o){return `<div class="opportunity-detail"><div class="opportunity-kind"><span class="category-icon">${opportunityIcon(/هاكاثون|hackathon/i.test(o.type)?'code':'trophy')}</span><div><strong>${esc(o.type||'')}</strong>${o.sourceName?`<p class="opportunity-source">${esc(o.sourceName)}</p>`:''}</div></div>${opportunityStatusBadge(o)}${opportunityFacts(o)}<div class="opportunity-tags">${tags(o.fields)}</div>${opportunityEligibility(o)}<div class="opportunity-copy">${paragraphs(o.description)}${(o.originalText||o.details)&&((o.originalText||o.details)!==o.description)?paragraphs(o.originalText||o.details):''}</div>${(o.attachments||[]).map(a=>external(a.url,a.name||'فتح المرفق')).join('')}<div class="opportunity-actions">${opportunityRegistration(o)}</div></div>`;}
+function openOpportunity(id){const o=catalog.opportunities.find(x=>x.id===id);if(!o)return;show(o.title,opportunityDetail(o));dialog.dataset.opportunityId=o.id;window.SaiStudentJourney.attach('opportunity',o);}
+
 
 document.querySelector('#opportunity-search').addEventListener('input',renderOpportunities);
 ['opportunity-type','opportunity-mode'].forEach(id=>document.querySelector('#'+id).addEventListener('change',renderOpportunities));
@@ -42,6 +44,7 @@ function refreshRegistrationAvailability(){
  if(typeof catalogReady==='undefined'||!catalogReady)return;
  renderOpportunities();
  window.SaiEngagement?.refreshReminders();
+ window.SaiContentPages?.refresh();
  if(location.hash==='#saved')renderSaved();
  const id=dialog.dataset.opportunityId;
  if(id&&dialog.open&&dialog.querySelector('.opportunity-detail')){const item=catalog.opportunities.find(o=>o.id===id);if(item&&dialog.querySelector('[data-registration-state]')?.dataset.registrationState!==opportunityRegistrationState(item).key)openOpportunity(id);}

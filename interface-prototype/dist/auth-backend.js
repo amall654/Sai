@@ -131,6 +131,7 @@
    const path='logos/'+crypto.randomUUID()+'.webp';const result=await client.storage.from('provider-logos').upload(path,blob,{contentType:'image/webp',cacheControl:'31536000',upsert:false});fail(result.error,'تعذّر رفع الشعار. حاول مجددًا.');return path;
   },
   async ownerSaveProvider(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_provider',{payload});fail(error,error?.code==='40001'?'تم تعديل الجهة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ جهة التعلم. تحقق من الحقول وصلاحية الحساب.');return data;},
+  async ownerHistory(){await requireUser();const {data,error}=await client.rpc('sai_owner_history');fail(error,'تعذّر تحميل السجل.');return data;} ,
   async ownerCatalog(){await requireUser();const {data,error}=await client.rpc('sai_owner_catalog');fail(error,'تعذّر تحميل إدارة المحتوى.');return data;},
   async ownerSaveOpportunity(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_opportunity',{payload});fail(error,error?.code==='40001'?'تم تعديل الفرصة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ الفرصة. تحقق من الحقول وصلاحية الحساب.');return data;},
   async ownerReviewExperience(target,decision,expected_status,classification){await requireUser();const {error}=await client.rpc('sai_owner_review_classified_experience',{target,decision,expected_status,classification});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}

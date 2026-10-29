@@ -4,9 +4,9 @@ window.SaiEngagement=(()=>{
  const reasons={broken_link:'الرابط لا يعمل',incorrect:'معلومة غير صحيحة',expired:'التسجيل مغلق أو الفرصة منتهية',other:'ملاحظة أخرى'};
  let followup=null;
  const lookup=(kind,id)=>(kind==='opportunity'?catalog.opportunities:kind==='provider'?catalog.providers:catalog.experiences).find(x=>x.id===id);
- function attach(kind,item){
-  $('#dialog-body').insertAdjacentHTML('beforeend',`<div class="engagement-actions">${kind!=='experience'?`<button type="button" class="text-link" data-outcome-kind="${kind}" data-outcome-id="${esc(item.id)}">سجّل استفادتك</button>`:''}${kind==='opportunity'&&item.deadlineAt&&opportunityAvailable(item)?`<button type="button" class="text-link" data-calendar="${esc(item.id)}">أضف الموعد إلى التقويم</button>`:''}<button type="button" class="text-link" data-report-kind="${kind}" data-report-id="${esc(item.id)}">أبلغ عن رابط أو معلومة</button></div>`);
- }
+ function actions(kind,item){return `<div class="engagement-actions">${kind!=='experience'?`<button type="button" class="text-link" data-outcome-kind="${kind}" data-outcome-id="${esc(item.id)}">سجّل استفادتك</button>`:''}${kind==='opportunity'&&item.deadlineAt&&opportunityAvailable(item)?`<button type="button" class="text-link" data-calendar="${esc(item.id)}">أضف الموعد إلى التقويم</button>`:''}<button type="button" class="text-link" data-report-kind="${kind}" data-report-id="${esc(item.id)}">أبلغ عن رابط أو معلومة</button></div>`;}
+ function attach(kind,item){$('#dialog-body').insertAdjacentHTML('beforeend',actions(kind,item));}
+
  // RFC 5545 folds content lines at 75 UTF-8 octets, without splitting Arabic characters.
  const foldCalendarLine=line=>{let result='',part='',size=0;const encoder=new TextEncoder();for(const char of line){const length=encoder.encode(char).length;if(size+length>75){result+=part+'\r\n';part=' ';size=1;}part+=char;size+=length;}return result+part;};
  const icsEscape=value=>String(value||'').replace(/\\/g,'\\\\').replace(/\r\n|\r|\n/g,'\\n').replace(/;/g,'\\;').replace(/,/g,'\\,');
@@ -53,13 +53,13 @@ window.SaiEngagement=(()=>{
  }
  document.addEventListener('click',event=>{
   const button=event.target.closest('button');if(button){if(button.dataset.calendar){const item=lookup('opportunity',button.dataset.calendar);if(item)downloadCalendar(item);}if(button.dataset.outcomeId)outcome(button.dataset.outcomeKind,button.dataset.outcomeId);if(button.dataset.reportId)report(button.dataset.reportKind,button.dataset.reportId);if(button.hasAttribute('data-engagement-retry'))renderPersonal(savedItems);if(button.hasAttribute('data-dismiss-followup')){followup=null;$('#activity-followup').hidden=true;}return;}
-  const link=event.target.closest('#dialog-body .opportunity-actions a,#dialog-body .detail-actions a');
-  if(!event.defaultPrevented&&link&&user&&['provider','opportunity'].includes(dialog.dataset.contentKind))followup={kind:dialog.dataset.contentKind,id:dialog.dataset.contentId,owner:user.id};
+  const link=event.target.closest('#dialog-body .opportunity-actions a,#dialog-body .detail-actions a,#content-page .opportunity-actions a,#content-page .detail-actions a');
+  const context=link?.closest('#content-page')?.dataset||dialog.dataset;if(!event.defaultPrevented&&link&&user&&['provider','opportunity'].includes(context.contentKind))followup={kind:context.contentKind,id:context.contentId,owner:user.id};
  });
  document.addEventListener('visibilitychange',()=>{
   if(document.hidden||!followup||user?.id!==followup.owner)return;
   const host=$('#activity-followup');host.innerHTML=`<p>هل بدأت التعلم أو سجلت في الفرصة؟ يمكنك تحديث متابعتك اختياريًا.</p><button type="button" class="text-link" data-outcome-kind="${followup.kind}" data-outcome-id="${esc(followup.id)}">تحديث متابعتي</button><button type="button" class="text-link" data-dismiss-followup>إغلاق</button>`;host.hidden=false;followup=null;
  });
  window.addEventListener('sai:signout',()=>{followup=null;const host=$('#activity-followup');if(host){host.replaceChildren();host.hidden=true;}});
- return {attach,calendarText,refreshReminders,renderPersonal,stages,reasons};
+ return {attach,actions,calendarText,refreshReminders,renderPersonal,stages,reasons};
 })();

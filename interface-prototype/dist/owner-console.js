@@ -46,6 +46,7 @@ window.SaiOwnerConsole = (() => {
    <p id="owner-edit-feedback" class="form-feedback" role="status" hidden></p><button type="submit" class="button">حفظ الفرصة</button></form>`,true);
   const updateRegistrationInputs=()=>{const kind=$('#owner-opportunity-form [name="registration_kind"]').value;$('#registration-date-row').hidden=kind!=='date';$('#registration-time-row').hidden=kind!=='exact';$('#owner-opportunity-form [name="registration_date"]').required=kind==='date';$('#owner-opportunity-form [name="deadline_at"]').required=kind==='exact';};
   $('#owner-opportunity-form [name="registration_kind"]').onchange=updateRegistrationInputs;updateRegistrationInputs();
+  window.SaiOwnerWorkflow.mountEditor($('#owner-opportunity-form'),'opportunity',o,snapshot);
   $('#owner-opportunity-form').onsubmit=async event=>{
    event.preventDefault();const form=event.currentTarget;if(!form.reportValidity()||!canUse())return;
    await formRequest(form,'#owner-edit-feedback',async()=>{

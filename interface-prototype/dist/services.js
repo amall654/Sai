@@ -27,6 +27,7 @@ window.SaiServices = (() => {
   saved: () => call('saved'), setSaved: (kind,id,value) => call('setSaved', {kind,id,value}),
   submitExperience: values => call('submitExperience', values),
   myExperiences: () => call('myExperiences'),
+  ownerHistory:()=>call('ownerHistory'),
   ownerCatalog:()=>call('ownerCatalog'),
   ownerSaveOpportunity:payload=>call('ownerSaveOpportunity',payload),
   ownerSaveProvider:payload=>call('ownerSaveProvider',payload),

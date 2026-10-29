@@ -17,7 +17,7 @@ window.SaiOwnerProviders=(()=>{
   const updateOpportunities=()=>{const state=$('#owner-opportunity-filter').value;opportunityList.innerHTML=data.opportunities.filter(o=>{const remaining=o.deadline_at?Date.parse(o.deadline_at)-Date.now():Infinity;return state==='all'||(state==='active'&&o.status==='published'&&remaining>0)||(state==='soon'&&o.status==='published'&&remaining>0&&remaining<=72*3600000)||(state==='expired'&&remaining<=0)||o.status===state;}).map(o=>`<article class="owner-row"><div><h3>${esc(o.title)}</h3><span class="badge">${o.deadline_at&&Date.parse(o.deadline_at)<=Date.now()?((o.deadline_text||'').startsWith('موعد افتراضي من سعي:')?'انتهت فترة العرض في سعي':'انتهى التسجيل'):labels[o.status]}</span></div><button class="button outline" data-owner-edit="${esc(o.id)}">تعديل</button></article>`).join('')||'<p class="empty">لا يوجد محتوى مطابق.</p>';};
   $('#owner-opportunity-filter').onchange=updateOpportunities;
   $('#owner-stories').closest('section').insertAdjacentHTML('beforebegin',`<section class="owner-section" id="owner-provider-section"><div class="section-heading"><h2>جهات التعلم</h2><button class="button" data-owner-provider-new>إضافة جهة تعلم</button></div><div class="owner-provider-filters"><label>البحث عن جهة<input id="owner-provider-search" type="search" placeholder="اسم الجهة"></label><label>تصفية الجهات<select id="owner-provider-filter"><option value="all">جميع الجهات</option><option value="review">تحتاج مراجعة</option><option value="published">منشورة</option><option value="draft">مسودة</option><option value="hidden">مخفية</option></select></label></div><p class="muted">راجعي الروابط والمعلومات من الموقع الرسمي، ثم احفظي الجهة لتحديث تاريخ مراجعتها. يظهر تنبيه بعد 90 يومًا من آخر مراجعة.</p><div id="owner-provider-list" class="owner-list"></div></section>`);
-  $('#owner-provider-search').oninput=renderList;$('#owner-provider-filter').onchange=renderList;renderList();window.SaiOwnerEngagement?.mount();
+  $('#owner-provider-search').oninput=renderList;$('#owner-provider-filter').onchange=renderList;renderList();window.SaiOwnerEngagement?.mount();window.SaiOwnerWorkflow.dashboard(data);
  }
  function renderList(){
   if(!allowed()||!data)return;
@@ -59,6 +59,7 @@ window.SaiOwnerProviders=(()=>{
    finally{if(version===selection)preparing=false;}
   };
   $('#owner-logo-default').onclick=()=>{selection++;preparing=false;blob=null;logoPath=null;revoke();$('#owner-logo-file').value='';$('#owner-logo-preview').innerHTML=providerMark({name:p.name||'ج',url:p.official_url});status('#owner-logo-feedback','سيُستخدم الرمز الافتراضي.');};
+  window.SaiOwnerWorkflow.mountEditor(form,'provider',p,data);
   form.onsubmit=async event=>{event.preventDefault();if(!allowed()||!form.reportValidity())return;
    await formRequest(form,'#owner-provider-feedback',async()=>{
     if(preparing)throw new Error('انتظري تجهيز الشعار ثم احفظي.');

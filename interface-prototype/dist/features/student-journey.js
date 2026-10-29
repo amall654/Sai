@@ -19,6 +19,7 @@ window.SaiStudentJourney=(()=>{
   const html=related(kind,item);
   if(html)$('#dialog-body').insertAdjacentHTML('beforeend',`<aside class="related-content" aria-label="محتوى مرتبط">${html}</aside>`);
   window.SaiEngagement?.attach(kind,item);
+  window.SaiContentPages?.modalLink(kind,item);
  }
  let renderGeneration=0;
  const states={not_started:'لم أبدأ',in_progress:'أتعلم',completed:'أنجزت'};
@@ -54,5 +55,5 @@ window.SaiStudentJourney=(()=>{
  }
  document.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;if(button.dataset.trackLogin)requireUser(()=>openLearningPath(button.dataset.trackLogin));if(button.hasAttribute('data-journey-retry'))render();});
  window.addEventListener('sai:signout',()=>{renderGeneration++;$('#journey-content')?.replaceChildren();});
- return {attach,common,mountPath,render};
+ return {attach,related,common,mountPath,render};
 })();
