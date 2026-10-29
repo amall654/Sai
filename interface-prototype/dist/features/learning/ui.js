@@ -35,12 +35,12 @@ document.querySelector('#provider-more').addEventListener('click',()=>{const pre
 providerFilterIds.forEach(id=>document.querySelector('#'+id).addEventListener('change',()=>{providerLimit=9;renderProviders();}));
 function renderLearningPaths(){
  const available=window.SaiLearningGuidance.paths.filter(path=>(!providerField||path.field===providerField)&&path.steps.some(([host])=>catalog.providers.some(p=>providerHost(p)===host)));
- $('#learning-path-list').innerHTML=available.map(path=>`<article class="learning-path"><h3>${esc(path.title)}</h3><p>${esc(path.intro)}</p><button type="button" class="text-link" data-learning-path="${path.id}">عرض خطوات المسار ${icon('arrow')}</button></article>`).join('');
+ $('#learning-path-list').innerHTML=available.map(path=>`<article class="learning-path"><h3>${esc(path.title)}</h3><p>${esc(path.intro)}</p><button type="button" class="text-link" data-learning-path="${path.id}">خطوات المسار ${icon('arrow')}</button></article>`).join('');
  $('#learning-paths').hidden=!available.length;
 }
 function openLearningPath(id){const path=window.SaiLearningGuidance.paths.find(x=>x.id===id);if(!path)return;
  const steps=path.steps.map(([host,title,copy])=>{const provider=catalog.providers.find(p=>providerHost(p)===host);return provider?`<li data-path-step="${esc(host)}"><h3>${esc(title)}</h3><p>${esc(copy)}</p><button type="button" class="text-link" data-provider="${esc(provider.id)}">${esc(provider.name)} ${icon('arrow')}</button></li>`:'';}).join('');
- show(path.title,`<p>${esc(path.intro)}</p><ol class="learning-path-steps">${steps}</ol><p class="muted">يمكنك اختيار جهة بديلة لكل خطوة بحسب مستواك ولغتك وميزانيتك؛ إكمال الجهات كلها غير مطلوب.</p><button type="button" class="button outline" data-path-opportunities="${path.id}">استكشف فرص التطبيق</button>`);window.SaiStudentJourney.mountPath(path);
+ show(path.title,`<ol class="learning-path-steps">${steps}</ol><p class="muted">المسار مقترح؛ يمكنك اختيار جهات بديلة.</p><button type="button" class="button outline" data-path-opportunities="${path.id}">استكشف فرص التطبيق</button>`);window.SaiStudentJourney.mountPath(path);
 }
 document.addEventListener('click',event=>{
  const pathButton=event.target.closest('button[data-learning-path]');if(pathButton){openLearningPath(pathButton.dataset.learningPath);return;}

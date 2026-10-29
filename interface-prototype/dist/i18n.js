@@ -1,6 +1,12 @@
 /* Local interface translations. Original content, form values and IDs stay unchanged. */
 (() => {
  const en = {
+"أساسيات البرمجة والويب، ثم بناء مشروع وتطوير المهارات.":"Programming and web basics, followed by a project and further practice.",
+"مفاهيم البيانات والذكاء الاصطناعي، ثم التعلم والتطبيق العملي.":"Data and AI concepts, followed by learning and practical application.",
+"أساسيات الشبكات والأمن، ثم التدريب في مختبرات تفاعلية.":"Networking and security basics, followed by interactive labs.",
+"خطوات المسار":"Path steps",
+"المسار مقترح؛ يمكنك اختيار جهات بديلة.":"This is a suggested path; you can choose alternative providers.",
+
 "راجعي المحتوى الموجود قبل إضافة نسخة أخرى.":"Review the existing content before adding another entry.",
 "فتح صفحة التفاصيل":"Open full details",
 "نسخ الرابط":"Copy link",
