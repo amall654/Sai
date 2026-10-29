@@ -124,7 +124,14 @@
    if(value&&result.error?.code==='23505')return;fail(result.error,'تعذّر حفظ التغيير.');
   },
   async submitExperience({title,body,field,topic}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||'',topic:topic||'تجربة أخرى'});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
-  async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,field,topic,status').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
+  async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,field,topic,status,review_note,revision').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
+  async resubmitExperience(target,expected_revision,payload){await requireUser();const {error}=await client.rpc('sai_resubmit_experience',{target,expected_revision,payload:{title:payload.title,body:payload.body,field:payload.field,topic:payload.topic}});fail(error,error?.code==='40001'?'تغيرت التجربة. أعد فتح ملفك قبل المحاولة.':'تعذّر إعادة إرسال التجربة. احتفظ بنصك وحاول مجددًا.');},
+  async notifications(){await requireUser();const {data,error}=await client.rpc('sai_my_notifications');fail(error,'تعذّر تحميل التنبيهات.');return data;},
+  async readNotifications(target,through){await requireUser();const {error}=await client.rpc('sai_read_notifications',{target,through});fail(error,'تعذّر تحديث التنبيهات.');},
+  async accountRequests(){await requireUser();const {data,error}=await client.from('account_requests').select('id,kind,message,status,response,created_at,revision').order('created_at',{ascending:false});fail(error,'تعذّر تحميل طلباتك.');return data;},
+  async submitAccountRequest(kind,message){await requireUser();const {error}=await client.rpc('sai_submit_account_request',{kind,message});fail(error,error?.message?.includes('Daily request limit')?'يمكن إرسال ثلاثة طلبات خلال 24 ساعة.':'تعذّر إرسال الطلب. حاول مجددًا.');},
+  async ownerAccountRequests(){await requireUser();const {data,error}=await client.rpc('sai_owner_account_requests');fail(error,'تعذّر تحميل طلبات الحسابات.');return data;},
+  async ownerReplyAccountRequest(target,expected_revision,response,decision){await requireUser();const {error}=await client.rpc('sai_owner_reply_account_request',{target,expected_revision,response,decision});fail(error,error?.code==='40001'?'تغير الطلب. أعد تحميل القائمة.':'تعذّر حفظ الرد.');},
   async ownerUploadLogo(blob){
    await requireUser();const owner=await client.rpc('sai_is_owner');if(owner.error||owner.data!==true)throw new Error('هذه المساحة متاحة لمالك المنصة فقط.');
    if(blob.type!=='image/webp'||blob.size>262144)throw new Error('تعذّر تجهيز الشعار. اختر صورة أخرى.');
@@ -134,7 +141,7 @@
   async ownerHistory(){await requireUser();const {data,error}=await client.rpc('sai_owner_history');fail(error,'تعذّر تحميل السجل.');return data;} ,
   async ownerCatalog(){await requireUser();const {data,error}=await client.rpc('sai_owner_catalog');fail(error,'تعذّر تحميل إدارة المحتوى.');return data;},
   async ownerSaveOpportunity(payload){await requireUser();const {data,error}=await client.rpc('sai_owner_save_opportunity',{payload});fail(error,error?.code==='40001'?'تم تعديل الفرصة من مكان آخر. أغلقي النموذج وأعيدي تحميل اللوحة قبل المحاولة.':'تعذّر حفظ الفرصة. تحقق من الحقول وصلاحية الحساب.');return data;},
-  async ownerReviewExperience(target,decision,expected_status,classification){await requireUser();const {error}=await client.rpc('sai_owner_review_classified_experience',{target,decision,expected_status,classification});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}
+  async ownerReviewExperience(target,decision,expected_status,classification){await requireUser();const {error}=await client.rpc('sai_owner_review_experience_v2',{target,decision,expected_revision:classification.revision,classification,review_note:classification.review_note||''});fail(error,error?.code==='40001'?'تغيرت حالة التجربة. أعيدي تحميل اللوحة.':'تعذّر حفظ قرار المراجعة.');}
 
  };
 })();

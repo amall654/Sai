@@ -3,9 +3,9 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const source=fs.readFileSync(require('node:path').join(__dirname,'../dist/auth-backend.js'),'utf8');
 function storage(){const m=new Map();return {getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)};}
-let session=null,options,authHandler,inserted,failInsert=false,owner=false,oauthOptions;
+let session=null,options,authHandler,inserted,failInsert=false,owner=false,oauthOptions,lastRPC;
 const verified={id:'student-a',email_confirmed_at:'2026-10-08',user_metadata:{name:'طالب',role:'admin'}};
-const client={rpc:async()=>({data:owner,error:null}),auth:{
+const client={rpc:async(name,args)=>{lastRPC={name,args};return {data:owner,error:null};},auth:{
  signInWithOAuth:async values=>{oauthOptions=values;return {data:{url:'https://xzdhyccemkndxabwbrpe.supabase.co/auth/v1/authorize?provider=google'},error:null};},
  getSession:async()=>({data:{session}}),getUser:async()=>({data:{user:session?.user},error:null}),
  onAuthStateChange:fn=>{authHandler=fn;},
@@ -27,6 +27,8 @@ vm.runInNewContext(source,context);
  owner=true;assert.equal((await api.session()).role,'admin');owner=false;
  await api.submitExperience({title:'تجربة',body:'x'.repeat(30),field:'تقنية',topic:'هاكاثون',status:'published',user_id:'student-b'});
  assert.deepEqual(Object.keys(inserted.values).sort(),['body','field','title','topic']);
+ await api.resubmitExperience('story',2,{title:'تجربة',body:'x'.repeat(30),field:'تجربة عامة',topic:'هاكاثون',status:'published',user_id:'another'});assert.equal(lastRPC.name,'sai_resubmit_experience');assert.equal(lastRPC.args.expected_revision,2);assert.deepEqual(Object.keys(lastRPC.args.payload).sort(),['body','field','title','topic']);
+ await api.ownerReviewExperience('story','rejected','pending',{revision:3,review_note:'ملاحظة'});assert.equal(lastRPC.name,'sai_owner_review_experience_v2');assert.equal(lastRPC.args.expected_revision,3);assert.equal(lastRPC.args.review_note,'ملاحظة');
  assert.equal(inserted.table,'experiences');assert.equal(inserted.values.topic,'هاكاثون');
  failInsert=true;
  await assert.rejects(()=>api.submitExperience({title:'',body:'x'.repeat(30),field:''}),/تعذّر/);
