@@ -13,13 +13,13 @@ window.SaiOwnerConsole = (() => {
    const data=await api.ownerCatalog();
    if(token!==generation||!canUse())return;
    snapshot=data;
-   $('#admin-content').innerHTML=`<p class="muted">إدارة الفرص وجهات التعلم ومراجعة تجارب الطلاب. التعديلات المحفوظة تنعكس على المنصة.</p><p id="owner-feedback" class="form-feedback" role="status" hidden></p><section class="owner-section"><div class="section-heading"><h2>الفرص</h2><button class="button" data-owner-new>إضافة فرصة</button></div><div class="owner-list">${data.opportunities.map(o=>`<article class="owner-row"><div><h3>${esc(o.title)}</h3><span class="badge">${o.deadline_at&&Date.parse(o.deadline_at)<=Date.now()?((o.deadline_text||'').startsWith('موعد افتراضي من سعي:')?'انتهت فترة العرض في سعي':'انتهى التسجيل'):labels[o.status]}</span></div><button class="button outline" data-owner-edit="${esc(o.id)}">تعديل</button></article>`).join('')||'<p>لا توجد فرص بعد.</p>'}</div></section><section class="owner-section"><h2>تجارب الطلاب</h2><label>حالة التجربة<select id="owner-story-filter"><option value="pending">قيد المراجعة</option><option value="all">جميع التجارب</option><option value="published">منشورة</option><option value="rejected">تحتاج تعديلًا</option></select></label><div id="owner-stories" class="owner-list"></div></section>`;
-   renderStories();$('#owner-story-filter').onchange=renderStories;window.SaiOwnerProviders.mount(data);
+   $('#admin-content').innerHTML=`<p class="muted">إدارة الفرص وجهات التعلم ومراجعة تجارب الطلاب. التعديلات المحفوظة تنعكس على المنصة.</p><p id="owner-feedback" class="form-feedback" role="status" hidden></p><section class="owner-section"><div class="section-heading"><h2>الفرص</h2><button class="button" data-owner-new>إضافة فرصة</button></div><div class="owner-list">${data.opportunities.map(o=>`<article class="owner-row"><div><h3>${esc(o.title)}</h3><span class="badge">${o.deadline_at&&Date.parse(o.deadline_at)<=Date.now()?((o.deadline_text||'').startsWith('موعد افتراضي من سعي:')?'انتهت فترة العرض في سعي':'انتهى التسجيل'):labels[o.status]}</span></div><button class="button outline" data-owner-edit="${esc(o.id)}">تعديل</button></article>`).join('')||'<p>لا توجد فرص بعد.</p>'}</div></section><section class="owner-section"><h2>تجارب الطلاب</h2><label class="owner-search">البحث في التجارب<input type="search" id="owner-story-search" placeholder="العنوان أو الموضوع"></label><label>حالة التجربة<select id="owner-story-filter"><option value="pending">قيد المراجعة</option><option value="all">جميع التجارب</option><option value="published">منشورة</option><option value="rejected">تحتاج تعديلًا</option></select></label><div id="owner-stories" class="owner-list"></div></section>`;
+   renderStories();$('#owner-story-filter').onchange=renderStories;$('#owner-story-search').oninput=renderStories;window.SaiOwnerProviders.mount(data);
   }catch{if(token===generation&&canUse())$('#admin-content').innerHTML='<p class="empty">تعذّر تحميل لوحة المالك. تحقق من صلاحية الحساب والاتصال.</p><button class="button outline" data-owner-reload>إعادة المحاولة</button>';}
  }
  function renderStories(){
   const state=$('#owner-story-filter').value;
-  $('#owner-stories').innerHTML=snapshot.experiences.filter(e=>state==='all'||e.status===state).map(e=>`<article class="owner-row"><div><h3>${esc(e.title||'تجربة طالب')}</h3><span class="badge">${labels[e.status]}</span></div><button class="button outline" data-owner-story="${esc(e.id)}">قراءة ومراجعة</button></article>`).join('')||'<p class="empty">لا توجد تجارب بهذه الحالة.</p>';
+  $('#owner-stories').innerHTML=snapshot.experiences.filter(e=>(state==='all'||e.status===state)&&normal([e.title,e.topic,e.field].join(' ')).includes(normal($('#owner-story-search').value).trim())).map(e=>`<article class="owner-row"><div><h3>${esc(e.title||'تجربة طالب')}</h3><span class="badge">${labels[e.status]}</span></div><button class="button outline" data-owner-story="${esc(e.id)}">قراءة ومراجعة</button></article>`).join('')||'<p class="empty">لا توجد تجارب بهذه الحالة.</p>';window.SaiOwnerLists.limit($('#owner-stories'));
  }
  function edit(id){
   if(!canUse()||!snapshot)return;
@@ -49,14 +49,14 @@ window.SaiOwnerConsole = (() => {
   window.SaiOwnerWorkflow.mountEditor($('#owner-opportunity-form'),'opportunity',o,snapshot);
   $('#owner-opportunity-form').onsubmit=async event=>{
    event.preventDefault();const form=event.currentTarget;if(!form.reportValidity()||!canUse())return;
-   await formRequest(form,'#owner-edit-feedback',async()=>{
+   await formRequest(form,'#owner-edit-feedback',async current=>{
     const fd=new FormData(form),values=Object.fromEntries(fd);values.fields=fd.getAll('fields');
     if(!safeURL(values.source_url)||(values.registration_url&&!safeURL(values.registration_url)))throw new Error('استخدم روابط تبدأ بـ https:// أو http://.');
     values.id=o.id||null;values.updated_at=o.updated_at||null;
     if(o.registration_locked){values.registration_kind=o.registration_kind;values.registration_date=o.registration_date;values.deadline_at=o.deadline_at;}
     else {values.registration_date=values.registration_kind==='date'?values.registration_date:null;values.deadline_at=values.registration_kind==='exact'&&values.deadline_at?new Date(values.deadline_at+':00+03:00').toISOString():null;}
     if(values.status==='published'&&values.registration_kind==='unknown')throw new Error('حددي موعد التسجيل أو اختاري فرصة مستمرة قبل النشر.');
-    await api.ownerSaveOpportunity(values);dialog.close();await render();status('#owner-feedback','تم حفظ الفرصة.');await loadCatalog();
+    await api.ownerSaveOpportunity(values);if(!current())return;dialog.close();await render();status('#owner-feedback','تم حفظ الفرصة.');await loadCatalog();
    });
   };
  }
@@ -66,9 +66,9 @@ window.SaiOwnerConsole = (() => {
   dialog.classList.add('experience-detail-dialog');
   dialog.querySelectorAll('[data-owner-decision]').forEach(button=>button.onclick=async()=>{
    if(!canUse())return;
-   const buttons=[...dialog.querySelectorAll('[data-owner-decision]')];buttons.forEach(b=>b.disabled=true);
-   try{const topic=$('#owner-story-topic').value,field=$('#owner-story-field').value;if(!topic||!field)throw new Error('اختر موضوع التجربة والمجال.');await api.ownerReviewExperience(e.id,button.dataset.ownerDecision,e.status,{topic,field,expected_topic:e.topic||'تجربة أخرى',expected_field:e.field||''});dialog.close();await render();status('#owner-feedback','تم حفظ قرار المراجعة.');await loadCatalog();}
-   catch(error){status('#owner-review-feedback',error.message,true);}finally{buttons.forEach(b=>b.disabled=false);}
+   const revision=dialog.dataset.revision,version=accountVersion;const buttons=[...dialog.querySelectorAll('[data-owner-decision]')];buttons.forEach(b=>b.disabled=true);
+   try{const topic=$('#owner-story-topic').value,field=$('#owner-story-field').value;if(!topic||!field)throw new Error('اختر موضوع التجربة والمجال.');await api.ownerReviewExperience(e.id,button.dataset.ownerDecision,e.status,{topic,field,expected_topic:e.topic||'تجربة أخرى',expected_field:e.field||''});if(version!==accountVersion||revision!==dialog.dataset.revision||!dialog.open)return;dialog.close();await render();status('#owner-feedback','تم حفظ قرار المراجعة.');await loadCatalog();}
+   catch(error){if(version===accountVersion&&revision===dialog.dataset.revision&&dialog.open)status('#owner-review-feedback',error.message,true);}finally{buttons.forEach(b=>b.disabled=false);}
   });
  }
  function clear(){generation++;snapshot=null;}
