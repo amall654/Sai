@@ -9,7 +9,8 @@
 <link rel="icon" type="image/png" href="assets/sai-gateway.png">
 <link rel="stylesheet" href="theme.css">
 <link rel="stylesheet" href="styles.css?v=20261028-layout">
-<link rel="stylesheet" href="design-system.css?v=20261029-care">
+<link rel="stylesheet" href="design-system.css?v=20261029-discovery">
+<link rel="stylesheet" href="features/provider-comparison.css?v=20261029-discovery">
 <script defer src="features/opportunities/data.js?v=20261028-saudi-opportunities-2"></script>
 <script defer src="features/learning/data.js?v=20261028-learning-providers"></script>
 <script defer src="content.js?v=20261006-split">
@@ -19,25 +20,28 @@
 <script defer src="features/learning/service.js?v=20261028-owner-content"></script>
 <script defer src="catalog-service.js?v=20261006"></script>
 <script defer src="vendor/supabase-2.117.3.js"></script>
-<script defer src="auth-backend.js?v=20261029-care"></script>
-<script defer src="services.js?v=20261029-care"></script>
+<script defer src="auth-backend.js?v=20261029-discovery"></script>
+<script defer src="services.js?v=20261029-discovery"></script>
 <script defer src="app.js?v=20261029-care"></script>
-<script defer src="i18n.js?v=20261029-care"></script>
-<script defer src="features/opportunities/ui.js?v=20261029-care"></script>
+<script defer src="i18n.js?v=20261029-discovery"></script>
+<script defer src="features/opportunities/ui.js?v=20261029-discovery"></script>
 <script defer src="features/learning/guidance.js?v=20261029-readiness"></script>
-<script defer src="features/learning/ui.js?v=20261029-care"></script>
-<script defer src="features/experiences.js?v=20261028-layout"></script>
+<script defer src="features/learning/ui.js?v=20261029-discovery"></script>
+<script defer src="features/experiences.js?v=20261029-discovery"></script>
 <script defer src="features/owner-lists.js?v=20261029-readiness"></script>
-<script defer src="features/owner-providers.js?v=20261029-care"></script>
+<script defer src="features/owner-providers.js?v=20261029-discovery"></script>
 <script defer src="features/owner-workflow.js?v=20261029-readiness"></script>
-<script defer src="owner-console.js?v=20261029-care"></script>
+<script defer src="owner-console.js?v=20261029-discovery"></script>
 <script defer src="features/avatar.js?v=20261028-profile-controls"></script>
 <script defer src="features/engagement.js?v=20261028-layout"></script>
 <script defer src="features/owner-engagement.js?v=20261028-growth"></script>
-<script defer src="features/student-journey.js?v=20261028-layout"></script>
+<script defer src="features/student-journey.js?v=20261029-discovery"></script>
 <script defer src="features/content-pages.js?v=20261028-layout"></script>
-<script defer src="features/student-care.js?v=20261029-care"></script>
-<script defer src="ui.js?v=20261029-care">
+<script defer src="features/student-care.js?v=20261029-discovery"></script>
+<script defer src="features/provider-comparison.js?v=20261029-discovery"></script>
+<script defer src="features/experience-links.js?v=20261029-discovery"></script>
+<script defer src="features/content-suggestions.js?v=20261029-discovery"></script>
+<script defer src="ui.js?v=20261029-discovery">
 </script>
 </head>
 <body data-booting>
@@ -111,7 +115,7 @@
 <section class="interests" aria-label="تصفية حسب المجال">
 <span>المجال</span><div id="interest-chips" class="chips"></div>
 </section>
-<div id="opportunity-state" role="status"></div><div class="card-grid" id="opportunity-grid"></div>
+<div id="opportunity-state" role="status"></div><div class="directory-contribute"><button type="button" class="text-link" data-suggestion-open data-suggestion-kind="opportunity">اقترح فرصة</button></div><div class="card-grid" id="opportunity-grid"></div>
 <p class="empty" id="empty-opportunities" hidden>لا توجد فرص تطابق بحثك والفلاتر المختارة. جرّب كلمات أخرى أو غيّر خيارات التصفية.</p>
 </section>
 </div>
@@ -139,7 +143,7 @@
 <div id="learning-path-list" class="learning-path-list"></div></details>
 <p class="learning-count" role="status"><span>الجهات المعروضة</span> <bdi id="provider-count"></bdi></p>
 <div id="provider-state" role="status"></div>
-<div class="provider-grid" id="provider-grid">
+<div class="directory-contribute"><button type="button" class="text-link" data-suggestion-open data-suggestion-kind="provider">اقترح جهة تعلم</button></div><div id="provider-comparison-bar"></div><div class="provider-grid" id="provider-grid">
 </div>
 <div class="learning-more"><button id="provider-more" class="button outline" type="button" hidden>عرض المزيد</button></div>
 </section>
@@ -196,7 +200,8 @@
 <p class="signup"><button class="text-link" data-action="signup" id="auth-mode-link">جديد في سعي؟ أنشئ حسابك</button></p>
 </div>
 </section>
-<section id="notifications-page" data-page="notifications" class="container section" hidden><h1>التنبيهات</h1><div id="notifications-content"></div></section><section id="support-page" data-page="support" class="container section" hidden><h1>مساعدة وطلبات البيانات</h1><div id="support-content"></div></section><section data-page="help" class="container section care-reading" hidden><h1>المساعدة</h1><div class="help-questions"><details><summary>كيف أحفظ فرصة أو جهة تعلم؟</summary><p>سجّل دخولك واضغط علامة الحفظ أعلى البطاقة. افتح علامة المحفوظات في الشريط العلوي للرجوع إلى ما حفظته.</p></details><details><summary>هل أسجل في الفرص من داخل سعي؟</summary><p>سعي يعرض المعلومات ويربطك بالمصدر الرسمي. التسجيل وشروط القبول لدى الجهة المنظمة، وقد تحتاج حسابًا منفصلًا لديها.</p></details><details><summary>كيف أشارك تجربتي؟</summary><p>افتح تجارب الطلاب واختر «شارك تجربتك»، وحدد الموضوع والمجال واكتب تجربتك. لا تظهر للعامة إلا بعد مراجعة المالك واعتمادها.</p></details><details><summary>كيف أعدل تجربة تحتاج مراجعة؟</summary><p>من ملفك افتح تجربتك واقرأ ملاحظة المراجعة، ثم اختر «تعديل وإعادة إرسال». تعود التجربة للمراجعة قبل النشر.</p></details><details><summary>أين أجد نتيجة مراجعة تجربتي؟</summary><p>تظهر الحالة في «تجاربي» داخل الملف، ويصلك تنبيه داخل الحساب عند تغيّرها. التنبيهات لا تُرسل بالبريد الإلكتروني.</p></details><details><summary>كيف أتابع تعلمي؟</summary><p>افتح «خطوتك القادمة» من ملفك، وحدد اهتماماتك ومستواك. داخل المسار حدّث حالة كل خطوة؛ هذا تقدم تسجله بنفسك.</p></details><details><summary>ماذا أفعل إذا تعذّر الدخول؟</summary><p>جرّب الدخول بجوجل، أو تأكد من بريدك وكلمة المرور وتفعيل الحساب. لاستعادة كلمة المرور استخدم الرابط الموجود في شاشة الدخول. افتح رسائل التأكيد في المتصفح نفسه الذي بدأت منه.</p></details><details><summary>كيف أطلب المساعدة أو حذف بياناتي؟</summary><p>بعد الدخول افتح «مساعدة وطلبات البيانات» من ملفك. يتلقى المالك الطلب بشكل خاص، وتتابع الرد في الصفحة نفسها.</p></details></div><a class="button outline" href="#support">إرسال طلب خاص</a></section><section data-page="privacy" class="container section care-reading" hidden><h1>الخصوصية واستخدام البيانات</h1><p class="muted">آخر تحديث: 29 أكتوبر 2026</p><section class="care-card"><h2>ما البيانات التي نحفظها؟</h2><p>بيانات الحساب مثل الاسم والبريد وصورة الحساب إن أضفتها، واهتماماتك ومحفوظاتك وتقدمك الذي تسجله، وتجاربك وطلباتك وبلاغاتك. نستخدمها لتقديم وظائف المنصة ومراجعة المحتوى والرد على الطلبات.</p></section><section class="care-card"><h2>ما الذي يظهر للزوار؟</h2><p>الفرص وجهات التعلم والتجارب المعتمدة عامة. تظهر التجربة بعنوانها ونصها وتصنيفها وتاريخها، ولا نعرض بريد صاحبها ضمنها. تجنب كتابة بيانات شخصية لا تريد نشرها في نص تجربتك.</p></section><section class="care-card"><h2>من يرى بياناتي الخاصة؟</h2><p>ملفك ومحفوظاتك وتقدمك وتنبيهاتك وطلباتك مخصصة لحسابك. يطّلع المالك على التجارب المرسلة وبلاغات المحتوى وطلبات المساعدة والبيانات لمعالجتها. ملاحظة المراجعة خاصة بصاحب التجربة والمالك.</p></section><section class="care-card"><h2>الخدمات المرتبطة بالمنصة</h2><p>تُستضاف الواجهة على GitHub Pages، وتدير Supabase الحسابات والبيانات والصور. عند اختيار الدخول بجوجل تُستخدم معلومات الملف الأساسية والبريد للتعريف بحسابك. الروابط الخارجية تنقلك إلى خدمات الجهات وفق إعداداتها الخاصة.</p></section><section class="care-card"><h2>التخزين في المتصفح</h2><p>تُحفظ جلسة الدخول في تبويب المتصفح، ويُحفظ مؤقتًا رمز إتمام التحقق بين التبويبات وتفضيل اللغة في المتصفح. لا نخزن كلمة مرورك في واجهة سعي.</p></section><section class="care-card"><h2>التصحيح والحذف</h2><p>يمكنك تعديل اسمك واهتماماتك من الملف وإزالة المحفوظات بنفسك. لتصحيح بيانات أخرى أو طلب حذف الحساب والبيانات المرتبطة به، أرسل طلبًا خاصًا للمالك. الحذف يُراجع وينفذ يدويًا؛ إرسال الطلب لا يحذف الحساب تلقائيًا.</p></section><a class="button outline" href="#support">طلب مساعدة أو تصحيح أو حذف</a></section>
+<section id="notifications-page" data-page="notifications" class="container section" hidden><h1>التنبيهات</h1><div id="notifications-content"></div></section><section id="support-page" data-page="support" class="container section" hidden><h1>مساعدة وطلبات البيانات</h1><div id="support-content"></div></section><section data-page="help" class="container section care-reading" hidden><h1>المساعدة</h1><div class="help-questions"><details><summary>كيف أحفظ فرصة أو جهة تعلم؟</summary><p>سجّل دخولك واضغط علامة الحفظ أعلى البطاقة. افتح علامة المحفوظات في الشريط العلوي للرجوع إلى ما حفظته.</p></details><details><summary>هل أسجل في الفرص من داخل سعي؟</summary><p>سعي يعرض المعلومات ويربطك بالمصدر الرسمي. التسجيل وشروط القبول لدى الجهة المنظمة، وقد تحتاج حسابًا منفصلًا لديها.</p></details><details><summary>كيف أشارك تجربتي؟</summary><p>افتح تجارب الطلاب واختر «شارك تجربتك»، وحدد الموضوع والمجال واكتب تجربتك. لا تظهر للعامة إلا بعد مراجعة المالك واعتمادها.</p></details><details><summary>كيف أعدل تجربة تحتاج مراجعة؟</summary><p>من ملفك افتح تجربتك واقرأ ملاحظة المراجعة، ثم اختر «تعديل وإعادة إرسال». تعود التجربة للمراجعة قبل النشر.</p></details><details><summary>أين أجد نتيجة مراجعة تجربتي؟</summary><p>تظهر الحالة في «تجاربي» داخل الملف، ويصلك تنبيه داخل الحساب عند تغيّرها. التنبيهات لا تُرسل بالبريد الإلكتروني.</p></details><details><summary>كيف أتابع تعلمي؟</summary><p>افتح «خطوتك القادمة» من ملفك، وحدد اهتماماتك ومستواك. داخل المسار حدّث حالة كل خطوة؛ هذا تقدم تسجله بنفسك.</p></details><details><summary>ماذا أفعل إذا تعذّر الدخول؟</summary><p>جرّب الدخول بجوجل، أو تأكد من بريدك وكلمة المرور وتفعيل الحساب. لاستعادة كلمة المرور استخدم الرابط الموجود في شاشة الدخول. افتح رسائل التأكيد في المتصفح نفسه الذي بدأت منه.</p></details><details><summary>كيف أطلب المساعدة أو حذف بياناتي؟</summary><p>بعد الدخول افتح «مساعدة وطلبات البيانات» من ملفك. يتلقى المالك الطلب بشكل خاص، وتتابع الرد في الصفحة نفسها.</p></details></div><a class="button outline" href="#support">إرسال طلب خاص</a></section><section data-page="privacy" class="container section care-reading" hidden><h1>الخصوصية واستخدام البيانات</h1><p class="muted">آخر تحديث: 29 أكتوبر 2026</p><section class="care-card"><h2>ما البيانات التي نحفظها؟</h2><p>بيانات الحساب مثل الاسم والبريد وصورة الحساب إن أضفتها، واهتماماتك ومحفوظاتك وتقدمك الذي تسجله، وتجاربك واقتراحاتك وطلباتك وبلاغاتك. نستخدمها لتقديم وظائف المنصة ومراجعة المحتوى والرد على الطلبات.</p></section><section class="care-card"><h2>ما الذي يظهر للزوار؟</h2><p>الفرص وجهات التعلم والتجارب المعتمدة عامة. تظهر التجربة بعنوانها ونصها وتصنيفها وتاريخها، ولا نعرض بريد صاحبها ضمنها. تجنب كتابة بيانات شخصية لا تريد نشرها في نص تجربتك.</p></section><section class="care-card"><h2>من يرى بياناتي الخاصة؟</h2><p>ملفك ومحفوظاتك وتقدمك وتنبيهاتك وطلباتك مخصصة لحسابك. يطّلع المالك على التجارب المرسلة واقتراحات المحتوى وبلاغات المحتوى وطلبات المساعدة والبيانات لمعالجتها. ملاحظة المراجعة خاصة بصاحب التجربة والمالك.</p></section><section class="care-card"><h2>الخدمات المرتبطة بالمنصة</h2><p>تُستضاف الواجهة على GitHub Pages، وتدير Supabase الحسابات والبيانات والصور. عند اختيار الدخول بجوجل تُستخدم معلومات الملف الأساسية والبريد للتعريف بحسابك. الروابط الخارجية تنقلك إلى خدمات الجهات وفق إعداداتها الخاصة.</p></section><section class="care-card"><h2>التخزين في المتصفح</h2><p>تُحفظ جلسة الدخول في تبويب المتصفح، ويُحفظ مؤقتًا رمز إتمام التحقق بين التبويبات وتفضيل اللغة في المتصفح. لا نخزن كلمة مرورك في واجهة سعي.</p></section><section class="care-card"><h2>التصحيح والحذف</h2><p>يمكنك تعديل اسمك واهتماماتك من الملف وإزالة المحفوظات بنفسك. لتصحيح بيانات أخرى أو طلب حذف الحساب والبيانات المرتبطة به، أرسل طلبًا خاصًا للمالك. الحذف يُراجع وينفذ يدويًا؛ إرسال الطلب لا يحذف الحساب تلقائيًا.</p></section><a class="button outline" href="#support">طلب مساعدة أو تصحيح أو حذف</a></section>
+<section data-page="suggestions" class="container section" hidden><h1>اقتراحاتي</h1><div id="suggestions-content"></div></section>
 </main>
 <footer class="footer">
 <div class="container footer-inner">

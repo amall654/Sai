@@ -10,9 +10,12 @@ window.SaiStudentJourney=(()=>{
   let stories=[];
   if(kind!=='experience'){
    const topic=kind==='opportunity'?item.type:'تعلّم ذاتي أو دورة';
-   stories=catalog.experiences.filter(e=>common(item,e)>0||((!e.field||e.field==='تجربة عامة')&&e.topic===topic)).sort((a,b)=>common(item,b)-common(item,a)).slice(0,3);
+   const exact=catalog.experiences.filter(e=>e.related_kind===kind&&e.related_id===item.id);
+   stories=(exact.length?exact:catalog.experiences.filter(e=>!e.related_id&&(common(item,e)>0||((!e.field||e.field==='تجربة عامة')&&e.topic===topic)))).sort((a,b)=>common(item,b)-common(item,a)).slice(0,3);
   }
-  return group('جهات تساعدك على الاستعداد',providers,'data-provider')+group('فرص للتطبيق في المجال',opportunities,'data-detail')+group('تجارب مرتبطة بالمجال أو نوع المشاركة',stories,'data-experience');
+  const specific=kind==='experience'?window.SaiExperienceLinks.find(item):null;
+  const direct=specific?group(item.related_kind==='provider'?'الجهة المرتبطة بالتجربة':'الفرصة المرتبطة بالتجربة',[specific],item.related_kind==='provider'?'data-provider':'data-detail'):'';
+  return direct+group('جهات تساعدك على الاستعداد',providers.filter(x=>x.id!==specific?.id),'data-provider')+group('فرص للتطبيق في المجال',opportunities.filter(x=>x.id!==specific?.id),'data-detail')+group(stories.some(e=>e.related_kind===kind&&e.related_id===item.id)?(kind==='provider'?'تجارب عن هذه الجهة':'تجارب عن هذه الفرصة'):'تجارب مرتبطة بالمجال أو نوع المشاركة',stories,'data-experience');
  }
  function attach(kind,item){
   dialog.dataset.contentKind=kind;dialog.dataset.contentId=item.id;

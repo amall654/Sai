@@ -20,4 +20,4 @@ document.querySelector('#experience-filter-topic').innerHTML=experienceOptions(e
 document.querySelector('#experience-reset').addEventListener('click',()=>{['experience-filter-topic','experience-filter-field'].forEach(id=>document.getElementById(id).value='');experienceLimit=6;renderExperiences();$('#experience-filter-topic').focus();});
 document.querySelector('#experience-more').addEventListener('click',()=>{const previous=experienceLimit;experienceLimit+=6;renderExperiences();$('#experience-grid').querySelectorAll('[data-experience]')[previous]?.focus();});
 
-function experienceDetail(e){return `${experienceClassification(e)}<div class="experience-detail-copy">${paragraphs(e.body)}</div>`;}
+function experienceDetail(e){return `${window.SaiExperienceLinks.summary(e)}${experienceClassification(e)}<div class="experience-detail-copy">${paragraphs(e.body)}</div>`;}

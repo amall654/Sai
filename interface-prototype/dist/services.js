@@ -30,6 +30,8 @@ window.SaiServices = (() => {
   notifications:()=>call('notifications'),readNotifications:(id,through)=>call('readNotifications',id,through),
   accountRequests:()=>call('accountRequests'),submitAccountRequest:(kind,message)=>call('submitAccountRequest',kind,message),
   ownerAccountRequests:()=>call('ownerAccountRequests'),ownerReplyAccountRequest:(id,revision,response,decision)=>call('ownerReplyAccountRequest',id,revision,response,decision),
+  suggestions:()=>call('suggestions'),submitSuggestion:(kind,name,url,note)=>call('submitSuggestion',kind,name,url,note),
+  ownerSuggestions:()=>call('ownerSuggestions'),ownerReviewSuggestion:(id,revision,status,note)=>call('ownerReviewSuggestion',id,revision,status,note),
   myExperiences: () => call('myExperiences'),
   ownerHistory:()=>call('ownerHistory'),
   ownerCatalog:()=>call('ownerCatalog'),

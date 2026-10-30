@@ -49,7 +49,7 @@
   },
   async catalog(){
    const base=await window.SAI_CATALOG.catalog();
-   const {data,error}=await client.rpc('sai_published_experiences_v2');
+   const {data,error}=await client.rpc('sai_published_experiences_v3');
    fail(error,'تعذّر تحميل تجارب الطلاب. حاول مرة أخرى.');
    return {...base,experiences:data.map(e=>({...e,publishedAt:e.published_at?new Date(e.published_at).toLocaleDateString('ar-SA'):''}))};
   },
@@ -123,15 +123,19 @@
    const result=value?await client.from(table).insert({[column]:id}):await client.from(table).delete().eq(column,id).eq('user_id',u.id);
    if(value&&result.error?.code==='23505')return;fail(result.error,'تعذّر حفظ التغيير.');
   },
-  async submitExperience({title,body,field,topic}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||'',topic:topic||'تجربة أخرى'});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
-  async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,field,topic,status,review_note,revision').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
-  async resubmitExperience(target,expected_revision,payload){await requireUser();const {error}=await client.rpc('sai_resubmit_experience',{target,expected_revision,payload:{title:payload.title,body:payload.body,field:payload.field,topic:payload.topic}});fail(error,error?.code==='40001'?'تغيرت التجربة. أعد فتح ملفك قبل المحاولة.':'تعذّر إعادة إرسال التجربة. احتفظ بنصك وحاول مجددًا.');},
+  async submitExperience({title,body,field,topic,related_kind,related_id}){await requireUser();const {error}=await client.from('experiences').insert({title:title.trim(),body:body.trim(),field:field||'',topic:topic||'تجربة أخرى',related_kind:related_kind||null,related_id:related_id||null});fail(error,'تعذّر إرسال التجربة. لم يتم تأكيد حفظها؛ حاول مجددًا.');},
+  async myExperiences(){const u=await requireUser();const {data,error}=await client.from('experiences').select('id,title,body,field,topic,status,review_note,revision,related_kind,related_id').eq('user_id',u.id).order('created_at',{ascending:false});fail(error,'تعذّر تحميل تجاربك.');return data;},
+  async resubmitExperience(target,expected_revision,payload){await requireUser();const {error}=await client.rpc('sai_resubmit_experience',{target,expected_revision,payload:{title:payload.title,body:payload.body,field:payload.field,topic:payload.topic,related_kind:payload.related_kind||null,related_id:payload.related_id||null}});fail(error,error?.code==='40001'?'تغيرت التجربة. أعد فتح ملفك قبل المحاولة.':'تعذّر إعادة إرسال التجربة. احتفظ بنصك وحاول مجددًا.');},
   async notifications(){await requireUser();const {data,error}=await client.rpc('sai_my_notifications');fail(error,'تعذّر تحميل التنبيهات.');return data;},
   async readNotifications(target,through){await requireUser();const {error}=await client.rpc('sai_read_notifications',{target,through});fail(error,'تعذّر تحديث التنبيهات.');},
   async accountRequests(){await requireUser();const {data,error}=await client.from('account_requests').select('id,kind,message,status,response,created_at,revision').order('created_at',{ascending:false});fail(error,'تعذّر تحميل طلباتك.');return data;},
   async submitAccountRequest(kind,message){await requireUser();const {error}=await client.rpc('sai_submit_account_request',{kind,message});fail(error,error?.message?.includes('Daily request limit')?'يمكن إرسال ثلاثة طلبات خلال 24 ساعة.':'تعذّر إرسال الطلب. حاول مجددًا.');},
   async ownerAccountRequests(){await requireUser();const {data,error}=await client.rpc('sai_owner_account_requests');fail(error,'تعذّر تحميل طلبات الحسابات.');return data;},
   async ownerReplyAccountRequest(target,expected_revision,response,decision){await requireUser();const {error}=await client.rpc('sai_owner_reply_account_request',{target,expected_revision,response,decision});fail(error,error?.code==='40001'?'تغير الطلب. أعد تحميل القائمة.':'تعذّر حفظ الرد.');},
+  async suggestions(){await requireUser();const {data,error}=await client.from('content_suggestions').select('id,kind,name,url,note,status,owner_note,created_at,revision').order('created_at',{ascending:false});fail(error,'تعذّر تحميل اقتراحاتك.');return data;},
+  async submitSuggestion(kind,name,url,note){await requireUser();const {error}=await client.rpc('sai_submit_suggestion',{kind,name,url,note});fail(error,error?.message?.includes('Daily suggestion limit')?'يمكن إرسال ثلاثة اقتراحات خلال 24 ساعة.':error?.message?.includes('Duplicate suggestion')?'هذا الرابط موجود في اقتراحاتك قيد المراجعة.':'تعذّر إرسال الاقتراح. حاول مجددًا.');},
+  async ownerSuggestions(){await requireUser();const {data,error}=await client.rpc('sai_owner_suggestions');fail(error,'تعذّر تحميل اقتراحات المحتوى.');return data;},
+  async ownerReviewSuggestion(target,expected_revision,decision,owner_note){await requireUser();const {error}=await client.rpc('sai_owner_review_suggestion',{target,expected_revision,decision,owner_note});fail(error,error?.code==='40001'?'تغير الاقتراح. أعد تحميل القائمة.':'تعذّر حفظ قرار المراجعة.');},
   async ownerUploadLogo(blob){
    await requireUser();const owner=await client.rpc('sai_is_owner');if(owner.error||owner.data!==true)throw new Error('هذه المساحة متاحة لمالك المنصة فقط.');
    if(blob.type!=='image/webp'||blob.size>262144)throw new Error('تعذّر تجهيز الشعار. اختر صورة أخرى.');

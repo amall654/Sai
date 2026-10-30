@@ -1,0 +1,7 @@
+/* Optional, explicit association between a student story and published content. */
+window.SaiExperienceLinks={
+ values(value){const match=/^(provider|opportunity):(.+)$/.exec(value||'');return {related_kind:match?.[1]||null,related_id:match?.[2]||null};},
+ field(value='',record=null){const groups=[['provider','جهات التعلم',catalog.providers],['opportunity','الفرص',catalog.opportunities.filter(opportunityAvailable)]];const known=groups.some(([kind,,items])=>items.some(x=>kind+':'+x.id===value));return `<label>تجربتك مرتبطة بجهة أو فرصة؟ (اختياري)<select name="related_content"><option value="">بدون ربط محدد</option>${value&&!known?`<option value="${esc(value)}" selected>المحتوى المرتبط سابقًا</option>`:''}${groups.map(([kind,label,items])=>`<optgroup label="${label}">${items.map(x=>`<option value="${kind}:${esc(x.id)}" ${value===kind+':'+x.id?'selected':''}>${esc(x.name||x.title)}</option>`).join('')}</optgroup>`).join('')}</select></label>`;},
+ find(row,source=catalog){return(row.related_kind==='provider'?source.providers:row.related_kind==='opportunity'?source.opportunities:[])?.find(x=>x.id===row.related_id);},
+ summary(row,source=catalog){const linked=this.find(row,source);if(!linked)return '';return `<p class="experience-linked"><span>تجربة عن</span> <a class="text-link" href="#${row.related_kind==='provider'?'learning':'opportunities'}/${encodeURIComponent(linked.id)}">${esc(linked.name||linked.title)}</a></p>`;}
+};
