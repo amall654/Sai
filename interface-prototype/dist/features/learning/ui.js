@@ -4,7 +4,7 @@ function providerMark(p){const uploaded=providerLogoURL(p.logoPath);if(uploaded)
 function providerHost(p){try{return new URL(p.url).hostname.replace(/^www\./,'');}catch{return '';}}
 function providerGuidance(p){return p.guidance||window.SaiLearningGuidance.providers[providerHost(p)]||{levels:['variable'],cost:'variable',languages:['variable']};}
 function providerGuideTags(p){const g=providerGuidance(p),l=window.SaiLearningGuidance.labels;return tags([...new Set([...g.levels.map(x=>l.levels[x]),l.costs[g.cost]])]);}
-function providerCard(p){return `<article class="provider-card"><div class="card-top">${providerMark(p)}${saveButton('provider',p)}</div><h3><a href="#learning/${encodeURIComponent(p.id)}">${esc(p.name)}</a></h3><div class="opportunity-tags">${tags(p.fields)}</div><div class="provider-guidance opportunity-tags">${providerGuideTags(p)}</div><div class="provider-copy">${paragraphs(p.description||'')}</div><div class="provider-actions"><button class="text-link" data-provider="${esc(p.id)}">استكشف الجهة ${icon('arrow')}</button>${window.SaiProviderComparison.button(p)}</div></article>`;}
+function providerCard(p){return `<article class="provider-card"><div class="card-top">${providerMark(p)}${saveButton('provider',p)}</div><h3><a href="#learning/${encodeURIComponent(p.id)}">${esc(p.name)}</a></h3><div class="opportunity-tags">${tags(p.fields)}</div><div class="provider-guidance opportunity-tags">${providerGuideTags(p)}</div><div class="provider-copy">${paragraphs(p.description||'')}</div><div class="provider-actions"><button class="text-link" data-provider="${esc(p.id)}">استكشف الجهة ${icon('arrow')}</button></div></article>`;}
 
 let providerField='', providerLimit=9;
 const providerFilterIds=['provider-level','provider-cost','provider-language'];
@@ -20,7 +20,7 @@ function renderProviders(){
  $('#provider-reset').hidden=!providerField&&!q&&!level&&!cost&&!language;
  $('#provider-count').textContent=`${Math.min(providerLimit,items.length)} / ${items.length}`;
  status('#provider-state',items.length?'':'لا توجد جهات مطابقة. غيّر المجال أو امسح البحث.');
- renderLearningPaths();window.SaiProviderComparison.refresh();
+ renderLearningPaths();
 }
 
 function providerDetail(p){return `<div class="opportunity-detail provider-detail"><div class="opportunity-tags">${tags(p.fields)}${tags(p.contentTypes)}</div><div class="opportunity-copy">${paragraphs(p.details||p.description)}</div><dl class="detail-facts"><div><dt>المستويات المتاحة</dt><dd>${tags(providerGuidance(p).levels.map(x=>window.SaiLearningGuidance.labels.levels[x]))}</dd></div><div><dt>اللغة</dt><dd>${esc(p.language||'تحقق من الموقع الرسمي')}</dd></div><div><dt>التكلفة</dt><dd>${esc(p.cost||'تحقق من الموقع الرسمي')}</dd></div></dl><div class="detail-actions">${external(p.url,'زيارة الجهة')}</div></div>`;}
